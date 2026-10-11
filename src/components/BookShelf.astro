@@ -1,0 +1,47 @@
+---
+import { books } from "../data/books";
+---
+<section class="reading-panel" id="lecturas" aria-labelledby="reading-title">
+  <div class="section-heading">
+    <div><p class="eyebrow">Un rincón entre páginas</p><h2 id="reading-title">Entre lecturas</h2><p class="reading-intro">Libros que me acompañan, que guardo con cariño o que esperan su turno.</p></div>
+    <a class="section-link" href="https://github.com/soker90/libros" target="_blank" rel="noreferrer">Mi registro de lecturas ↗</a>
+  </div>
+  <div class="book-grid">
+    {books.map((book) => <article class="book-card">
+      <div class="cover-wrap">
+        {book.cover ? <img src={book.cover} alt={book.coverAlt ?? `Portada de ${book.title}`} loading="lazy" width="240" height="340" /> : <div class="cover-placeholder"><span>{book.title}</span><small>{book.author}</small></div>}
+        <span class:list={["book-status", book.status.toLowerCase()]}>{book.status}</span>
+      </div>
+      <h3>{book.title}</h3><p>{book.author}</p>
+    </article>)}
+    <aside class="book-quote"><span aria-hidden="true" class="quote-mark">“</span><p>Hay libros que llegan justo cuando los necesitamos.</p><span class="quote-rule" aria-hidden="true"></span><small>Mi estantería, en constante cambio</small></aside>
+  </div>
+</section>
+
+<style>
+  .reading-panel { padding: clamp(1.2rem, 3vw, 2.2rem); border-radius: 1rem; background: var(--paper-alt); }
+  .section-heading { align-items: center; }
+  .section-heading h2 { margin-bottom: .5rem; }
+  .reading-intro { min-height: 0; margin: 0; }
+  .book-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(9rem, .9fr); gap: 1rem; }
+  .book-card { min-width: 0; padding: .7rem; border: 1px solid #d8dbd0; border-radius: .65rem; background: #fbfaf5; }
+  .cover-wrap { position: relative; display: grid; place-items: center; overflow: hidden; aspect-ratio: 3/4.2; border-radius: .3rem; background: #dce3d8; }
+  .cover-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-placeholder { display: flex; width: 100%; height: 100%; flex-direction: column; justify-content: space-between; padding: 1rem .65rem; color: #f6f4e9; background: linear-gradient(160deg, #304f40, #172e27); font: 700 clamp(.9rem, 1.5vw, 1.3rem)/1.1 var(--serif); text-align: center; }
+  .book-card:nth-child(2) .cover-placeholder { color: #f8edcf; background: linear-gradient(160deg, #b87535, #633a29); }
+  .book-card:nth-child(3) .cover-placeholder { color: #293b31; background: linear-gradient(160deg, #e4d7b2, #a7b69b); }
+  .book-card:nth-child(4) .cover-placeholder { color: #f4f0e7; background: linear-gradient(160deg, #345875, #1c3149); }
+  .cover-placeholder small { font: 500 .65rem/1.3 var(--sans); }
+  .book-status { position: absolute; right: .35rem; bottom: .35rem; padding: .3rem .45rem; border-radius: .35rem; background: #fffdf2ed; color: var(--green); font-size: .65rem; font-weight: 750; }
+  .book-status.favorito { color: #8e3d32; }
+  .book-status.pendiente { color: #82551b; }
+  .book-card h3 { margin: .65rem 0 .2rem; font-size: 1rem; }
+  .book-card > p { min-height: 0; margin: 0; font-size: .75rem; }
+  .book-quote { display: flex; flex-direction: column; justify-content: center; padding: .7rem; }
+  .quote-mark { color: var(--green); font: 700 3.6rem/.8 var(--serif); }
+  .book-quote p { min-height: 0; margin: .4rem 0 1rem; color: var(--green); font: italic 1.35rem/1.45 var(--serif); }
+  .quote-rule { width: 3rem; height: 2px; margin-bottom: .8rem; background: #7f9980; }
+  .book-quote small { color: var(--muted); line-height: 1.5; }
+  @media (max-width: 950px) { .book-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .book-quote { grid-column: 1/-1; padding: 1rem .2rem .2rem; } .book-quote p { max-width: 34rem; } }
+  @media (max-width: 600px) { .section-heading { align-items: start; flex-direction: column; } .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; } .book-quote { grid-column: 1/-1; } .book-card { padding: .5rem; } }
+</style>
