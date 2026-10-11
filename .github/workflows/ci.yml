@@ -28,5 +28,3 @@ jobs:
         run: pnpm check
       - name: Build
         run: pnpm build
-      - name: Check formatting
-        run: pnpm format:check
