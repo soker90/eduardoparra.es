@@ -1,0 +1,36 @@
+---
+import type { Project } from "../data/projects";
+const { project } = Astro.props as { project: Project };
+---
+<article class="project-card">
+  <div class="project-visual" aria-hidden="true">
+    <span class="project-monogram">{project.name.split(/\s+/).map((part) => part[0]).join("").slice(0, 2)}</span>
+    <span class="project-visual-label">{project.tags[0]}</span>
+  </div>
+  <div class="project-body">
+    <h3>{project.name}</h3>
+    <p>{project.description}</p>
+    <ul class="tag-list" aria-label="Tecnologías y categorías">{project.tags.map((tag) => <li>{tag}</li>)}</ul>
+    <div class="card-links">
+      {project.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border); border-radius: .7rem; background: var(--white); }
+  .project-visual { position: relative; display: grid; place-items: center; min-height: 11rem; background: linear-gradient(135deg, #213a32, #406553); color: #f4f2e9; }
+  .project-card:nth-child(2) .project-visual { background: linear-gradient(135deg, #17242a, #314b55); }
+  .project-card:nth-child(3) .project-visual { background: linear-gradient(135deg, #d9b78b, #74835a); color: #25362d; }
+  .project-card:nth-child(4) .project-visual { background: linear-gradient(135deg, #e5ebdf, #9ebba4); color: #234638; }
+  .project-monogram { font: 700 3.2rem/1 var(--serif); letter-spacing: -.08em; }
+  .project-visual-label { position: absolute; right: .8rem; bottom: .8rem; padding: .35rem .55rem; border: 1px solid #ffffff40; border-radius: 999px; background: #14231e55; color: inherit; font-size: .7rem; }
+  .project-body { display: flex; flex: 1; flex-direction: column; padding: 1rem; }
+  h3 { margin: 0; font: 700 1.35rem/1.2 var(--serif); letter-spacing: -.03em; }
+  p { min-height: 4.1rem; margin: .5rem 0 .9rem; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1.2rem; padding: 0; list-style: none; }
+  .tag-list li { border-radius: .3rem; padding: .35rem .45rem; background: var(--paper-alt); color: var(--green); font-size: .68rem; }
+  .card-links { display: flex; flex-wrap: wrap; gap: .8rem 1rem; margin-top: auto; }
+  .card-links a { font-size: .77rem; font-weight: 700; text-underline-offset: .2em; }
+  @media (max-width: 480px) { .project-visual { min-height: 8rem; } }
+</style>
