@@ -1,32 +1,32 @@
 name: CI
 
 on:
-  pull_request:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   validate:
-    name: Validate Astro site
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
         with:
-          version: 10.5.2
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+          version: 12.7.0
+      - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version-file: .nvmrc
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Check Astro
+      - name: Typecheck and validate Astro
         run: pnpm check
-      - name: Build site
+      - name: Build
         run: pnpm build
+      - name: Check formatting
+        run: pnpm format:check
