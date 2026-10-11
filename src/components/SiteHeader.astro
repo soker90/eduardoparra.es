@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="wordmark" href="/" aria-label="Eduardo Parra, inicio">Eduardo Parra</a>
+    <nav aria-label="Navegación principal">
+      <a href="#inicio" aria-current="page">Inicio</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#recetas">Recetas</a>
+      <a href="#utilidades">Utilidades</a>
+      <a href="#notas">Notas</a>
+      <a href="#lecturas">Lecturas</a>
+    </nav>
+    <a class="header-about" href="#sobre-mi">Sobre mí <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--border); }
+  .header-inner { min-height: 4.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .wordmark { font: 700 1.65rem/1 var(--serif); text-decoration: none; letter-spacing: -.04em; white-space: nowrap; }
+  nav { display: flex; align-items: center; justify-content: center; gap: clamp(.7rem, 2vw, 1.6rem); }
+  nav a, .header-about { color: var(--muted); font-size: .82rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  nav a:hover, .header-about:hover { color: var(--green); }
+  nav a[aria-current="page"] { color: var(--green); }
+  @media (max-width: 850px) { .header-inner { flex-wrap: wrap; padding-block: 1rem; gap: .8rem 1rem; } nav { order: 3; width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: .25rem; } }
+  @media (max-width: 480px) { .wordmark { font-size: 1.4rem; } .header-about { font-size: .78rem; } nav { gap: 1rem; } }
+</style>
