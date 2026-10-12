@@ -89,20 +89,16 @@
           </svg>
         </span>
         <button
+          id="theme-toggle"
           type="button"
-          class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border border-[#d6dad1] bg-[#e8ebe3] p-0.5 transition-colors focus:outline-none"
+          class="relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border border-[#d6dad1] bg-[#e8ebe3] p-0.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d4b3b]"
           role="switch"
           aria-checked="false"
-          aria-label="Alternar modo oscuro"
+          aria-label="Activar modo oscuro"
         >
-          <span class="inline-block h-3.5 w-3.5 transform rounded-full bg-[#1b2622] shadow-xs text-white flex items-center justify-center transition">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-2.5 h-2.5 fill-current"
-              viewBox="0 0 24 24"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
+          <span id="theme-toggle-thumb" class="inline-flex h-3.5 w-3.5 translate-x-0 transform items-center justify-center rounded-full bg-[#1b2622] text-white shadow-xs transition-transform">
+            <svg id="theme-toggle-icon" xmlns="http://www.w3.org/2000/svg" class="h-2.5 w-2.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm9 4a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2h1ZM4 11a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2h1Zm14.36-5.36a1 1 0 0 1 0 1.42l-.7.7a1 1 0 1 1-1.42-1.42l.7-.7a1 1 0 0 1 1.42 0ZM7.76 16.24a1 1 0 0 1 0 1.42l-.7.7a1 1 0 1 1-1.42-1.42l.7-.7a1 1 0 0 1 1.42 0Zm10.6 2.12a1 1 0 0 1-1.42 0l-.7-.7a1 1 0 0 1 1.42-1.42l.7.7a1 1 0 0 1 0 1.42ZM7.76 7.76a1 1 0 0 1-1.42 0l-.7-.7a1 1 0 1 1 1.42-1.42l.7.7a1 1 0 0 1 0 1.42ZM12 19a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Z"/></svg>
           </span>
         </button>
       </div>
@@ -166,5 +162,42 @@
       btn.setAttribute("aria-expanded", String(!isExpanded));
       menu.classList.toggle("hidden");
     });
+  }
+
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeThumb = document.getElementById("theme-toggle-thumb");
+  const themeIcon = document.getElementById("theme-toggle-icon");
+  const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+  if (themeToggle instanceof HTMLButtonElement && themeThumb instanceof HTMLElement) {
+    const syncThemeControl = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      themeToggle.setAttribute("aria-checked", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "Activar modo claro" : "Activar modo oscuro");
+      themeThumb.classList.toggle("translate-x-4", isDark);
+      themeThumb.classList.toggle("translate-x-0", !isDark);
+      themeThumb.classList.toggle("bg-[#f4f1e8]", isDark);
+      themeThumb.classList.toggle("bg-[#1b2622]", !isDark);
+      themeThumb.classList.toggle("text-[#17231e]", isDark);
+      themeThumb.classList.toggle("text-white", !isDark);
+      if (themeIcon) {
+        themeIcon.innerHTML = isDark
+          ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>'
+          : '<path d="M12 2a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm9 4a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2h1ZM4 11a1 1 0 1 1 0 2H3a1 1 0 0 1 0-2h1Z"></path>';
+      }
+      if (themeMeta) themeMeta.content = isDark ? "#111a15" : "#fbf8f1";
+    };
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark");
+      try {
+        localStorage.setItem("eduardoparra-theme", isDark ? "dark" : "light");
+      } catch {
+        // The theme still works for this session when storage is unavailable.
+      }
+      syncThemeControl();
+    });
+
+    syncThemeControl();
   }
 </script>
