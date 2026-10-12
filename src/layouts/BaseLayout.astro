@@ -5,23 +5,33 @@ interface Props {
 }
 
 const {
-  title = "Eduardo Parra — proyectos, recetas y otras ideas",
-  description = "Aplicaciones, webs, recetas, utilidades y notas desde La Mancha.",
+  title = "Eduardo Parra — Tecnología, proyectos y otras curiosidades",
+  description = "Aplicaciones, webs, recetas, utilidades y notas desde La Mancha. Linux, tecnología, buena comida y libros.",
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
+
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f8f6ef" />
+    <meta name="theme-color" content="#fbf8f1" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Google Fonts: Newsreader, Inter & Caveat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap"
+      rel="stylesheet"
+    />
+
     <title>{title}</title>
   </head>
-  <body>
+  <body class="min-h-screen bg-[#fbf8f1] text-[#17231e] antialiased selection:bg-[#d2e4d8] selection:text-[#163524]">
     <slot />
   </body>
 </html>

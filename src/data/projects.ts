@@ -1,44 +1,68 @@
+export type ProjectLink = {
+  label: string;
+  href: string;
+  type?: "web" | "github" | "marketplace" | "repo";
+};
+
 export type Project = {
   name: string;
   description: string;
-  image?: string;
+  image: string;
   imageAlt?: string;
   tags: string[];
-  links: { label: string; href: string }[];
+  links: ProjectLink[];
 };
 
 export const projects: Project[] = [
   {
     name: "Finper",
-    description: "Finanzas personales para organizar cuentas, movimientos, presupuestos y mucho más.",
+    description:
+      "Aplicación de finanzas personales para gestionar cuentas, presupuestos, movimientos y mucho más.",
+    image: "/images/projects/finper.webp",
+    imageAlt: "Vista previa de la interfaz de Finper con estadísticas y movimientos",
     tags: ["React", "TypeScript", "Finanzas"],
     links: [
-      { label: "Ver proyecto", href: "https://github.com/soker90/finper" },
+      { label: "Ver web", href: "https://finper.eduardoparra.es", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90/finper", type: "github" },
     ],
   },
   {
     name: "AUR Maintainer",
-    description: "Una GitHub Action para mantener paquetes de Arch Linux AUR al día.",
+    description:
+      "GitHub Action para mantener paquetes de Arch Linux AUR automatizando actualizaciones.",
+    image: "/images/projects/aur-maintainer.webp",
+    imageAlt: "Terminal y configuración de AUR Maintainer para Arch Linux",
     tags: ["GitHub Actions", "AUR", "Arch Linux"],
     links: [
-      { label: "Ver repositorio", href: "https://github.com/soker90/aur-maintainer" },
-      { label: "Marketplace", href: "https://github.com/marketplace/actions/aur-maintainer" },
+      { label: "Ver repo", href: "https://github.com/soker90/aur-maintainer", type: "repo" },
+      {
+        label: "Marketplace",
+        href: "https://github.com/marketplace/actions/aur-maintainer",
+        type: "marketplace",
+      },
     ],
   },
   {
     name: "Cocinando con Edu",
-    description: "Recetas caseras, sencillas y sabrosas para cocinar cada día.",
+    description:
+      "Recetas caseras, fáciles y con buen sabor. Blog de cocina con recetas de temporada.",
+    image: "/images/projects/cocinando-con-edu.webp",
+    imageAlt: "Plato casero de Cocinando con Edu",
     tags: ["Astro", "Recetas", "Cocina"],
     links: [
-      { label: "Ver recetas", href: "https://recetas.eduardoparra.es" },
+      { label: "Ver web", href: "https://recetas.eduardoparra.es", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90", type: "github" },
     ],
   },
   {
     name: "Cacotas",
-    description: "Una pequeña PWA para llevar un inventario y prever cuándo reponer.",
-    tags: ["PWA", "React", "TypeScript"],
+    description: "PWA para inventario de pañales, registro de consumo y previsión de compras.",
+    image: "/images/projects/cacotas.webp",
+    imageAlt: "Captura de la aplicación móvil PWA Cacotas",
+    tags: ["PWA", "Familia", "Productividad"],
     links: [
-      { label: "Ver proyecto", href: "https://github.com/soker90/cacotas" },
+      { label: "Ver web", href: "https://cacotas.eduardoparra.es", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90/cacotas", type: "github" },
     ],
   },
 ];
