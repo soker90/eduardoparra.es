@@ -213,7 +213,7 @@
     searchStatus instanceof HTMLElement
   ) {
     const normalize = (value: string) =>
-      value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLocaleLowerCase("es");
+      value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
 
     const collectSearchItems = () => {
       const items = new Map<string, { title: string; href: string; context: string }>();
@@ -225,7 +225,7 @@
         if (title && target) items.set(target, { title, href: target, context: "Sección" });
       });
       document.querySelectorAll<HTMLAnchorElement>("main a[href]").forEach((link) => {
-        const title = link.textContent?.replace(/\\s+/g, " ").trim();
+        const title = link.textContent?.replace(/\s+/g, " ").trim();
         const href = link.getAttribute("href");
         if (!title || !href || title.length < 2 || href.startsWith("javascript:")) return;
         const key = `${href}|${title}`;
