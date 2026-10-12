@@ -142,13 +142,28 @@ const recentNotes = [
           </div>
         </div>
 
-        <!-- Right Visual: exact composition from design mockup -->
+        <!-- Right Visual: user photographic composition with Brandon Sanderson and migas con uvas -->
         <div class="relative w-full flex items-end justify-center lg:justify-end overflow-visible">
+          <!-- Handwritten Note -->
+          <div
+            class="absolute -top-3 left-1 sm:left-4 z-20 pointer-events-none transform -rotate-3 select-none"
+            aria-hidden="true"
+          >
+            <p class="font-handwriting text-xl sm:text-2xl text-[#1e3b2b] font-semibold leading-tight tracking-wide drop-shadow-xs">
+              Ideas, código,
+              <br />
+              recetas y un poco
+              <br />
+              de La Mancha.
+            </p>
+            <div class="w-16 h-0.5 bg-[#1e3b2b]/40 rounded-full mt-1 ml-0.5"></div>
+          </div>
+
           <img
             src="/images/hero-desktop.webp"
-            alt="Escritorio con portátil Arch Linux, taza Tux, libros de Tolkien, C.S. Lewis, Dune y cuenco de migas de pastor con uvas blancas"
-            width="1062"
-            height="615"
+            alt="Escritorio con portátil Arch Linux, taza Tux, libros de Tolkien, C.S. Lewis, Brandon Sanderson y cuenco de migas con uvas"
+            width="1100"
+            height="522"
             fetchpriority="high"
             decoding="async"
             class="block w-full h-auto object-contain object-right max-w-none"
