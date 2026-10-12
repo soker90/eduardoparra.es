@@ -25,3 +25,89 @@
     color: #163524;
   }
 }
+
+
+/* Persistent dark theme: keep the site's editorial palette while reducing glare. */
+@layer base {
+  html.dark {
+    color-scheme: dark;
+    background-color: #111a15;
+    color: #e9eee7;
+  }
+
+  html.dark body {
+    background-color: #111a15 !important;
+    color: #e9eee7 !important;
+  }
+
+  html.dark ::selection {
+    background-color: #365b45;
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  html.dark [class*="bg-[#fbf8f1]"],
+  html.dark [class*="bg-white/70"],
+  html.dark [class*="bg-white/80"],
+  html.dark [class*="bg-white"] {
+    background-color: #19241d !important;
+  }
+
+  html.dark [class*="bg-[#f2f0e6]"],
+  html.dark [class*="bg-[#eceee5]"],
+  html.dark [class*="bg-[#e8ebe3]"],
+  html.dark [class*="bg-[#e4e7df]"] {
+    background-color: #202e25 !important;
+  }
+
+  html.dark [class*="border-[#e5e4dc]"],
+  html.dark [class*="border-[#dedcd2]"],
+  html.dark [class*="border-[#d6dad1]"] {
+    border-color: #34463a !important;
+  }
+
+  html.dark [class*="text-[#17231e]"],
+  html.dark [class*="text-[#22352b]"],
+  html.dark [class*="text-[#243e30]"] {
+    color: #e9eee7 !important;
+  }
+
+  html.dark [class*="text-[#505a54]"],
+  html.dark [class*="text-[#555f58]"],
+  html.dark [class*="text-[#5e6660]"],
+  html.dark [class*="text-[#636c65]"],
+  html.dark [class*="text-[#69726b]"],
+  html.dark [class*="text-[#717b74]"] {
+    color: #b8c5ba !important;
+  }
+
+  html.dark header,
+  html.dark #mobile-menu {
+    background-color: #141e17 !important;
+    border-color: #34463a !important;
+  }
+
+  html.dark input,
+  html.dark textarea,
+  html.dark select {
+    background-color: #111a15 !important;
+    color: #e9eee7 !important;
+    border-color: #435849 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
