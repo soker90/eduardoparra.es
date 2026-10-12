@@ -29,6 +29,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
 
+    <script is:inline>
+      try {
+        if (localStorage.getItem("eduardoparra-theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch {
+        // Keep the default light theme when storage is unavailable.
+      }
+    </script>
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-[#fbf8f1] text-[#17231e] antialiased selection:bg-[#d2e4d8] selection:text-[#163524]">
