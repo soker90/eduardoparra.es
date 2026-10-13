@@ -177,5 +177,12 @@ export const utilityProjects: Project[] = [
   },
 ];
 
-// Retrocompatibilidad con la portada (los 4 destacados)
-export const projects: Project[] = mainProjects.slice(0, 4);
+// Proyectos destacados de la portada; el catálogo completo conserva el resto.
+const featuredProjectNames = new Set([
+  "Finper",
+  "AUR Maintainer",
+  "Cocinando con Edu",
+  "Arroyo ERP",
+]);
+
+export const projects: Project[] = mainProjects.filter(({ name }) => featuredProjectNames.has(name));
