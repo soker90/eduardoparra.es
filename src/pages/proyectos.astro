@@ -1,0 +1,179 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { mainProjects, utilityProjects } from "../data/projects";
+import "../styles/global.css";
+---
+
+<BaseLayout
+  title="Proyectos y Utilidades — Eduardo Parra"
+  description="Colección completa de proyectos, aplicaciones web, bots y utilidades de código abierto desarrollados por Eduardo Parra."
+>
+  <!-- Accessible Skip Link -->
+  <a
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white dark:focus:bg-[#1a241e] focus:text-[#17231e] dark:focus:text-white focus:rounded-md focus:shadow-md focus:ring-2 focus:ring-[#2d4b3b]"
+    href="#contenido"
+  >
+    Saltar al contenido
+  </a>
+
+  <!-- Header -->
+  <SiteHeader />
+
+  <!-- Main Container -->
+  <main id="contenido" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 pt-8 pb-16">
+    <!-- Page Intro Header -->
+    <header class="border-b border-[#e5e4dc] dark:border-[#222b25] pb-8 pt-2">
+      <!-- Breadcrumb navigation -->
+      <nav aria-label="Miga de pan" class="mb-4">
+        <a
+          href="/"
+          class="text-xs font-semibold text-[#2c4b3a] dark:text-[#6ec490] hover:underline inline-flex items-center gap-1.5"
+        >
+          <span>← Volver al inicio</span>
+        </a>
+      </nav>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-[11px] sm:text-xs font-bold tracking-widest text-[#2c4b3a] dark:text-[#6ec490] uppercase mb-2">
+            CATÁLOGO DE DESARROLLO
+          </p>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3]">
+            Proyectos y utilidades
+          </h1>
+          <p class="text-base text-[#555f58] dark:text-[#9ea9a1] leading-relaxed mt-3">
+            Aplicaciones web, proyectos de código abierto, bots de automatización y pequeñas
+            herramientas desarrolladas para resolver problemas reales en el día a día.
+          </p>
+        </div>
+
+        <a
+          href="https://github.com/soker90?tab=repositories"
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#d6dad1] dark:border-[#2d3a31] bg-white dark:bg-[#18211b] hover:bg-[#eceee5] dark:hover:bg-[#202c25] text-xs font-semibold text-[#17231e] dark:text-[#e4eae6] transition-colors shrink-0 self-start md:self-end"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+          <span>Ver todos en GitHub ({mainProjects.length + utilityProjects.length}+)</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- SECTION 1: PROYECTOS PRINCIPALES -->
+    <section aria-labelledby="section-main-projects">
+      <div class="flex items-center gap-2 mb-3">
+        <svg
+          class="w-5 h-5 text-[#2d4b3b] dark:text-[#52a578]"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+          />
+        </svg>
+        <h2
+          id="section-main-projects"
+          class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]"
+        >
+          Proyectos principales
+        </h2>
+      </div>
+      <p class="text-xs sm:text-sm text-[#5a645d] dark:text-[#9ea9a1] mb-6 max-w-2xl">
+        Aplicaciones completas, plataformas web y proyectos con arquitecturas frontend y backend
+        integradas.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {mainProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+    <!-- SECTION 2: UTILIDADES Y HERRAMIENTAS -->
+    <section
+      aria-labelledby="section-utilities"
+      class="border-t border-[#e5e4dc] dark:border-[#222b25] pt-12"
+    >
+      <div class="flex items-center gap-2 mb-3">
+        <svg
+          class="w-5 h-5 text-[#2d4b3b] dark:text-[#52a578]"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+          />
+        </svg>
+        <h2
+          id="section-utilities"
+          class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]"
+        >
+          Utilidades y herramientas
+        </h2>
+      </div>
+      <p class="text-xs sm:text-sm text-[#5a645d] dark:text-[#9ea9a1] mb-6 max-w-2xl">
+        Bots, scripts de automatización, APIs abiertas y herramientas especializadas pensadas para
+        ejecutarse con ligereza.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {utilityProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="w-full border-t border-[#e2e2da] dark:border-[#222b25] py-8 sm:py-10 bg-[#fbf8f1] dark:bg-[#121815] transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div>
+        <a
+          href="/"
+          class="font-serif text-xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1] hover:opacity-90"
+        >
+          Eduardo Parra
+        </a>
+        <p class="text-xs text-[#636c66] dark:text-[#8d9890] mt-0.5">
+          Programador · Proyectos · Recetas · Utilidades · Notas
+        </p>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-medium text-[#505b54] dark:text-[#9ea8a0]">
+        <a href="/" class="hover:text-[#17231e] dark:hover:text-white transition-colors">
+          Inicio
+        </a>
+        <a
+          href="https://github.com/soker90"
+          target="_blank"
+          rel="noreferrer"
+          class="hover:text-[#17231e] dark:hover:text-white transition-colors"
+        >
+          GitHub
+        </a>
+        <a
+          href="mailto:hola@eduardoparra.es"
+          class="hover:text-[#17231e] dark:hover:text-white transition-colors"
+        >
+          Contacto
+        </a>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>

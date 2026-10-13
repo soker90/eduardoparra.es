@@ -8,44 +8,44 @@ import "../styles/global.css";
 
 const latestRecipes = [
   {
-    title: "Arroz con setas y parmesano",
-    time: "30 min",
+    title: "Tarta de queso en taza",
+    time: "5 min",
     difficulty: "Fácil",
-    image: "/images/recipes/arroz-setas.webp",
-    href: "https://recetas.eduardoparra.es",
+    image: "/images/recipes/tarta-queso-taza.webp",
+    href: "https://recetas.eduardoparra.es/blog/tarta-de-queso-en-taza",
   },
   {
-    title: "Pollo al horno con limón y hierbas",
-    time: "1 h 15 min",
+    title: "Pudins de dátiles y toffee",
+    time: "1 h",
     difficulty: "Fácil",
-    image: "/images/recipes/pollo-horno.webp",
-    href: "https://recetas.eduardoparra.es",
+    image: "/images/recipes/pudins-datiles-toffee.webp",
+    href: "https://recetas.eduardoparra.es/blog/pudins-datiles-toffee",
   },
   {
-    title: "Bizcocho casero de yogur",
+    title: "Tarta de queso de dinosaurios",
     time: "50 min",
     difficulty: "Fácil",
-    image: "/images/recipes/bizcocho.webp",
-    href: "https://recetas.eduardoparra.es",
+    image: "/images/recipes/cheesecake-dinosaurios-thumb.webp",
+    href: "https://recetas.eduardoparra.es/blog/cheesecake-de-dinosaurios",
   },
 ];
 
 const utilities = [
   {
-    title: "Precio de la luz",
-    description: "Consulta y compara el precio de la electricidad.",
+    title: "Tarifas de la luz",
+    description: "Generador de JSON y comparador con las mejores tarifas eléctricas.",
     icon: "lightning",
     href: "https://github.com/soker90/tarifas-luz",
   },
   {
-    title: "Herramientas que uso",
-    description: "Aplicaciones, servicios y recursos útiles en el día a día.",
+    title: "Alerta Alimentos Bot",
+    description: "Bot de Telegram para alertas de seguridad alimentaria de la AESAN.",
     icon: "wrench",
-    href: "https://github.com/soker90",
+    href: "https://t.me/alertas_aesan",
   },
   {
-    title: "Automatizando paquetes AUR",
-    description: "Cómo mantengo mis paquetes de Arch Linux actualizados.",
+    title: "AUR Maintainer",
+    description: "GitHub Action para mantener paquetes de Arch Linux actualizados.",
     icon: "book",
     href: "https://github.com/soker90/aur-maintainer",
   },
@@ -53,20 +53,20 @@ const utilities = [
 
 const recentNotes = [
   {
-    title: "Configuración de mi entorno de desarrollo en 2026",
-    date: "3 oct 2026",
+    title: "Issue Link: base de enlaces y recursos en Markdown",
+    date: "10 oct 2026",
     image: "/images/notes/entorno-desarrollo.webp",
-    href: "https://github.com/soker90",
+    href: "https://link.eduardoparra.es",
   },
   {
-    title: "Ideas para nuevos proyectos",
-    date: "15 sept 2026",
-    image: "/images/notes/ideas-proyectos.webp",
-    href: "https://github.com/soker90",
-  },
-  {
-    title: "Automatizando actualizaciones de paquetes AUR",
+    title: "Bot de Telegram para el precio de la gasolina",
     date: "28 sept 2026",
+    image: "/images/notes/ideas-proyectos.webp",
+    href: "https://github.com/soker90/precio-gasolina",
+  },
+  {
+    title: "Mantenimiento automatizado de paquetes AUR",
+    date: "15 sept 2026",
     image: "/images/notes/paquetes-aur.webp",
     href: "https://github.com/soker90/aur-maintainer",
   },
@@ -96,16 +96,16 @@ const recentNotes = [
       <div class="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] items-end gap-8 lg:gap-2">
         <!-- Left Copy -->
         <div class="relative z-10 flex flex-col justify-end pt-2 sm:pt-4">
-          <p class="text-[11px] sm:text-xs font-bold tracking-widest text-[#2c4b3a] uppercase mb-3">
+          <p class="text-[11px] sm:text-xs font-bold tracking-widest text-[#2c4b3a] dark:text-[#6ec490] uppercase mb-3">
             PROGRAMADOR Y CREADOR DE PROYECTOS
           </p>
           <h1
             id="hero-title"
-            class="font-serif text-3xl sm:text-5xl lg:text-[3.25rem] font-bold leading-[1.08] tracking-tight text-[#17231e]"
+            class="font-serif text-3xl sm:text-5xl lg:text-[3.25rem] font-bold leading-[1.08] tracking-tight text-[#17231e] dark:text-[#f2f6f3]"
           >
             Tecnología, proyectos y otras curiosidades.
           </h1>
-          <p class="text-base sm:text-lg text-[#555f58] font-normal leading-relaxed mt-4 max-w-xl">
+          <p class="text-base sm:text-lg text-[#555f58] dark:text-[#9ea9a1] font-normal leading-relaxed mt-4 max-w-xl">
             Aplicaciones, webs, recetas, utilidades y notas desde La Mancha. Linux, tecnología,
             buena comida y libros.
           </p>
@@ -113,18 +113,18 @@ const recentNotes = [
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-3.5 mt-6 mb-1">
             <a
-              class="bg-[#284937] hover:bg-[#1d3527] text-white font-medium text-sm px-5 py-3 rounded-lg inline-flex items-center gap-2 shadow-xs transition-colors"
+              class="bg-[#284937] hover:bg-[#1d3527] dark:bg-[#346348] dark:hover:bg-[#284f38] text-white font-medium text-sm px-5 py-3 rounded-lg inline-flex items-center gap-2 shadow-xs transition-colors"
               href="#proyectos"
             >
               <span>Ver mis proyectos</span>
               <span aria-hidden="true">→</span>
             </a>
             <a
-              class="bg-white/70 hover:bg-white border border-[#d6dad1] text-[#22352b] font-medium text-sm px-5 py-3 rounded-lg inline-flex items-center gap-2 transition-colors"
+              class="bg-white/70 hover:bg-white dark:bg-[#1a231d] dark:hover:bg-[#202c25] border border-[#d6dad1] dark:border-[#2d3a31] text-[#22352b] dark:text-[#e0e7e2] font-medium text-sm px-5 py-3 rounded-lg inline-flex items-center gap-2 transition-colors"
               href="#sobre-mi"
             >
               <svg
-                class="w-4 h-4 text-[#4f5c53]"
+                class="w-4 h-4 text-[#4f5c53] dark:text-[#88958c]"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -149,14 +149,14 @@ const recentNotes = [
             class="absolute -top-3 left-1 sm:left-4 z-20 pointer-events-none transform -rotate-3 select-none"
             aria-hidden="true"
           >
-            <p class="font-handwriting text-xl sm:text-2xl text-[#1e3b2b] font-semibold leading-tight tracking-wide drop-shadow-xs">
+            <p class="font-handwriting text-xl sm:text-2xl text-[#1e3b2b] dark:text-[#8bd4a7] font-semibold leading-tight tracking-wide drop-shadow-xs">
               Ideas, código,
               <br />
               recetas y un poco
               <br />
               de La Mancha.
             </p>
-            <div class="w-16 h-0.5 bg-[#1e3b2b]/40 rounded-full mt-1 ml-0.5"></div>
+            <div class="w-16 h-0.5 bg-[#1e3b2b]/40 dark:bg-[#8bd4a7]/40 rounded-full mt-1 ml-0.5"></div>
           </div>
 
           <img
@@ -178,14 +178,14 @@ const recentNotes = [
       >
         <!-- Proyectos (~0% left) -->
         <a href="#proyectos" class="group flex items-center gap-3 text-inherit no-underline">
-          <span class="text-xl font-bold text-[#2b4c3b] font-mono shrink-0 group-hover:scale-110 transition-transform">
+          <span class="text-xl font-bold text-[#2b4c3b] dark:text-[#52a578] font-mono shrink-0 group-hover:scale-110 transition-transform">
             &lt;&gt;
           </span>
           <div>
-            <strong class="block text-xs font-bold text-[#17231e] group-hover:text-[#2b4c3b] transition-colors">
+            <strong class="block text-xs font-bold text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2b4c3b] dark:group-hover:text-[#52a578] transition-colors">
               Proyectos
             </strong>
-            <small class="block text-[11px] text-[#69726b] leading-tight mt-0.5">
+            <small class="block text-[11px] text-[#69726b] dark:text-[#8d9890] leading-tight mt-0.5">
               Aplicaciones y webs
             </small>
           </div>
@@ -194,7 +194,7 @@ const recentNotes = [
         <!-- Recetas (~25%) -->
         <a href="#recetas" class="group flex items-center gap-3 text-inherit no-underline">
           <svg
-            class="w-5 h-5 text-[#2b4c3b] shrink-0 group-hover:scale-110 transition-transform"
+            class="w-5 h-5 text-[#2b4c3b] dark:text-[#52a578] shrink-0 group-hover:scale-110 transition-transform"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -206,10 +206,10 @@ const recentNotes = [
             <line x1="6" y1="17" x2="18" y2="17" />
           </svg>
           <div>
-            <strong class="block text-xs font-bold text-[#17231e] group-hover:text-[#2b4c3b] transition-colors">
+            <strong class="block text-xs font-bold text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2b4c3b] dark:group-hover:text-[#52a578] transition-colors">
               Recetas
             </strong>
-            <small class="block text-[11px] text-[#69726b] leading-tight mt-0.5">
+            <small class="block text-[11px] text-[#69726b] dark:text-[#8d9890] leading-tight mt-0.5">
               Cocina del día a día
             </small>
           </div>
@@ -218,7 +218,7 @@ const recentNotes = [
         <!-- Utilidades (~50%) -->
         <a href="#utilidades" class="group flex items-center gap-3 text-inherit no-underline">
           <svg
-            class="w-5 h-5 text-[#2b4c3b] shrink-0 group-hover:scale-110 transition-transform"
+            class="w-5 h-5 text-[#2b4c3b] dark:text-[#52a578] shrink-0 group-hover:scale-110 transition-transform"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -231,10 +231,10 @@ const recentNotes = [
             />
           </svg>
           <div>
-            <strong class="block text-xs font-bold text-[#17231e] group-hover:text-[#2b4c3b] transition-colors">
+            <strong class="block text-xs font-bold text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2b4c3b] dark:group-hover:text-[#52a578] transition-colors">
               Utilidades
             </strong>
-            <small class="block text-[11px] text-[#69726b] leading-tight mt-0.5">
+            <small class="block text-[11px] text-[#69726b] dark:text-[#8d9890] leading-tight mt-0.5">
               Herramientas y recursos
             </small>
           </div>
@@ -243,7 +243,7 @@ const recentNotes = [
         <!-- Notas (~75% on the right side) -->
         <a href="#notas" class="group flex items-center gap-3 text-inherit no-underline">
           <svg
-            class="w-5 h-5 text-[#2b4c3b] shrink-0 group-hover:scale-110 transition-transform"
+            class="w-5 h-5 text-[#2b4c3b] dark:text-[#52a578] shrink-0 group-hover:scale-110 transition-transform"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -256,10 +256,10 @@ const recentNotes = [
             />
           </svg>
           <div>
-            <strong class="block text-xs font-bold text-[#17231e] group-hover:text-[#2b4c3b] transition-colors">
+            <strong class="block text-xs font-bold text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2b4c3b] dark:group-hover:text-[#52a578] transition-colors">
               Notas
             </strong>
-            <small class="block text-[11px] text-[#69726b] leading-tight mt-0.5">
+            <small class="block text-[11px] text-[#69726b] dark:text-[#8d9890] leading-tight mt-0.5">
               Ideas y aprendizajes
             </small>
           </div>
@@ -272,15 +272,13 @@ const recentNotes = [
       <div class="flex items-baseline justify-between mb-5">
         <h2
           id="projects-title"
-          class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#17231e]"
+          class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]"
         >
           Proyectos destacados
         </h2>
         <a
-          href="https://github.com/soker90?tab=repositories"
-          target="_blank"
-          rel="noreferrer"
-          class="text-xs font-semibold text-[#48534b] hover:text-[#233d2e] inline-flex items-center gap-1 transition-colors"
+          href="/proyectos"
+          class="text-xs font-semibold text-[#48534b] dark:text-[#88c99e] hover:text-[#233d2e] dark:hover:text-[#b0e8c2] inline-flex items-center gap-1 transition-colors"
         >
           Ver todos los proyectos <span>→</span>
         </a>
@@ -297,10 +295,10 @@ const recentNotes = [
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2" aria-label="Contenido reciente">
       <!-- Columna 1: Últimas recetas -->
       <article class="flex flex-col" id="recetas">
-        <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5]">
+        <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5] dark:border-[#27332b]">
           <div class="flex items-center gap-2">
             <svg
-              class="w-5 h-5 text-[#2d4b3b]"
+              class="w-5 h-5 text-[#2d4b3b] dark:text-[#52a578]"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -312,7 +310,7 @@ const recentNotes = [
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e]">
+            <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]">
               Últimas recetas
             </h2>
           </div>
@@ -320,19 +318,19 @@ const recentNotes = [
             href="https://recetas.eduardoparra.es"
             target="_blank"
             rel="noreferrer"
-            class="text-xs font-semibold text-[#48534b] hover:text-[#233d2e] inline-flex items-center gap-1"
+            class="text-xs font-semibold text-[#48534b] dark:text-[#88c99e] hover:text-[#233d2e] dark:hover:text-[#b0e8c2] inline-flex items-center gap-1"
           >
             Ver todas <span>→</span>
           </a>
         </div>
 
-        <div class="divide-y divide-[#e5e6dd]">
+        <div class="divide-y divide-[#e5e6dd] dark:divide-[#243027]">
           {latestRecipes.map((recipe) => (
             <a
               href={recipe.href}
               target="_blank"
               rel="noreferrer"
-              class="group py-3 flex items-center gap-3.5 hover:bg-white/50 px-1 rounded-lg transition-colors"
+              class="group py-3 flex items-center gap-3.5 hover:bg-white/50 dark:hover:bg-[#1a231d]/60 px-1 rounded-lg transition-colors"
             >
               <img
                 src={recipe.image}
@@ -340,13 +338,13 @@ const recentNotes = [
                 width="62"
                 height="38"
                 loading="lazy"
-                class="w-16 h-10 object-cover rounded-md shrink-0 shadow-2xs border border-[#e2e4dc]"
+                class="w-16 h-10 object-cover rounded-md shrink-0 shadow-2xs border border-[#e2e4dc] dark:border-[#2b3930]"
               />
               <div class="min-w-0 flex-1">
-                <h3 class="font-serif font-bold text-xs text-[#17231e] group-hover:text-[#2a4d38] transition-colors truncate">
+                <h3 class="font-serif font-bold text-xs text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2a4d38] dark:group-hover:text-[#52a578] transition-colors truncate">
                   {recipe.title}
                 </h3>
-                <p class="text-[11px] text-[#636c65] mt-0.5 flex items-center gap-1">
+                <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5 flex items-center gap-1">
                   <span>⏱ {recipe.time}</span>
                   <span>·</span>
                   <span>{recipe.difficulty}</span>
@@ -359,10 +357,10 @@ const recentNotes = [
 
       <!-- Columna 2: Últimas utilidades -->
       <article class="flex flex-col" id="utilidades">
-        <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5]">
+        <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5] dark:border-[#27332b]">
           <div class="flex items-center gap-2">
             <svg
-              class="w-5 h-5 text-[#2d4b3b]"
+              class="w-5 h-5 text-[#2d4b3b] dark:text-[#52a578]"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -374,7 +372,7 @@ const recentNotes = [
                 d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
               />
             </svg>
-            <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e]">
+            <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]">
               Últimas utilidades
             </h2>
           </div>
@@ -382,21 +380,21 @@ const recentNotes = [
             href="https://github.com/soker90"
             target="_blank"
             rel="noreferrer"
-            class="text-xs font-semibold text-[#48534b] hover:text-[#233d2e] inline-flex items-center gap-1"
+            class="text-xs font-semibold text-[#48534b] dark:text-[#88c99e] hover:text-[#233d2e] dark:hover:text-[#b0e8c2] inline-flex items-center gap-1"
           >
             Ver todas <span>→</span>
           </a>
         </div>
 
-        <div class="divide-y divide-[#e5e6dd]">
+        <div class="divide-y divide-[#e5e6dd] dark:divide-[#243027]">
           {utilities.map((item) => (
             <a
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              class="group py-3 flex items-center gap-3.5 hover:bg-white/50 px-1 rounded-lg transition-colors"
+              class="group py-3 flex items-center gap-3.5 hover:bg-white/50 dark:hover:bg-[#1a231d]/60 px-1 rounded-lg transition-colors"
             >
-              <span class="w-9 h-9 rounded-full bg-[#dbe5da] text-[#234b35] flex items-center justify-center shrink-0">
+              <span class="w-9 h-9 rounded-full bg-[#dbe5da] dark:bg-[#1d2c22] text-[#234b35] dark:text-[#88c99e] flex items-center justify-center shrink-0">
                 {item.icon === "lightning" && (
                   <svg
                     class="w-4 h-4"
@@ -445,14 +443,14 @@ const recentNotes = [
                 )}
               </span>
               <div class="min-w-0 flex-1">
-                <h3 class="font-serif font-bold text-xs text-[#17231e] group-hover:text-[#2a4d38] transition-colors truncate">
+                <h3 class="font-serif font-bold text-xs text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2a4d38] dark:group-hover:text-[#52a578] transition-colors truncate">
                   {item.title}
                 </h3>
-                <p class="text-[11px] text-[#636c65] mt-0.5 leading-snug line-clamp-1">
+                <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5 leading-snug line-clamp-1">
                   {item.description}
                 </p>
               </div>
-              <span class="text-xs text-[#636c65] group-hover:text-[#234b35] group-hover:translate-x-0.5 transition-all">
+              <span class="text-xs text-[#636c65] dark:text-[#88958c] group-hover:text-[#234b35] dark:group-hover:text-[#52a578] group-hover:translate-x-0.5 transition-all">
                 →
               </span>
             </a>
@@ -462,10 +460,10 @@ const recentNotes = [
 
       <!-- Columna 3: Notas recientes -->
       <article class="flex flex-col" id="notas">
-        <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5]">
+        <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5] dark:border-[#27332b]">
           <div class="flex items-center gap-2">
             <svg
-              class="w-5 h-5 text-[#2d4b3b]"
+              class="w-5 h-5 text-[#2d4b3b] dark:text-[#52a578]"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -477,7 +475,7 @@ const recentNotes = [
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e]">
+            <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]">
               Notas recientes
             </h2>
           </div>
@@ -485,19 +483,19 @@ const recentNotes = [
             href="https://github.com/soker90"
             target="_blank"
             rel="noreferrer"
-            class="text-xs font-semibold text-[#48534b] hover:text-[#233d2e] inline-flex items-center gap-1"
+            class="text-xs font-semibold text-[#48534b] dark:text-[#88c99e] hover:text-[#233d2e] dark:hover:text-[#b0e8c2] inline-flex items-center gap-1"
           >
             Ver todas <span>→</span>
           </a>
         </div>
 
-        <div class="divide-y divide-[#e5e6dd]">
+        <div class="divide-y divide-[#e5e6dd] dark:divide-[#243027]">
           {recentNotes.map((note) => (
             <a
               href={note.href}
               target="_blank"
               rel="noreferrer"
-              class="group py-3 flex items-center gap-3.5 hover:bg-white/50 px-1 rounded-lg transition-colors"
+              class="group py-3 flex items-center gap-3.5 hover:bg-white/50 dark:hover:bg-[#1a231d]/60 px-1 rounded-lg transition-colors"
             >
               <img
                 src={note.image}
@@ -505,13 +503,13 @@ const recentNotes = [
                 width="66"
                 height="38"
                 loading="lazy"
-                class="w-16 h-10 object-cover rounded-md shrink-0 shadow-2xs border border-[#e2e4dc]"
+                class="w-16 h-10 object-cover rounded-md shrink-0 shadow-2xs border border-[#e2e4dc] dark:border-[#2b3930]"
               />
               <div class="min-w-0 flex-1">
-                <h3 class="font-serif font-bold text-xs text-[#17231e] group-hover:text-[#2a4d38] transition-colors line-clamp-1">
+                <h3 class="font-serif font-bold text-xs text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2a4d38] dark:group-hover:text-[#52a578] transition-colors line-clamp-1">
                   {note.title}
                 </h3>
-                <p class="text-[11px] text-[#636c65] mt-0.5">{note.date}</p>
+                <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5">{note.date}</p>
               </div>
             </a>
           ))}
@@ -524,13 +522,13 @@ const recentNotes = [
 
     <!-- Section: AHORA MISMO -->
     <section
-      class="bg-[#edf0e7] rounded-2xl p-6 sm:p-7 border border-[#dbe0d4]"
+      class="bg-[#edf0e7] dark:bg-[#18211b] rounded-2xl p-6 sm:p-7 border border-[#dbe0d4] dark:border-[#27342b]"
       id="sobre-mi"
       aria-labelledby="now-title"
     >
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
         <!-- Photo -->
-        <div class="md:col-span-4 rounded-xl overflow-hidden shadow-xs border border-[#d5dad0] bg-[#e2e6de] aspect-[16/10]">
+        <div class="md:col-span-4 rounded-xl overflow-hidden shadow-xs border border-[#d5dad0] dark:border-[#28362d] bg-[#e2e6de] dark:bg-[#1f2a22] aspect-[16/10]">
           <img
             src="/images/ahora-mismo-desk.webp"
             alt="Espacio de trabajo de Eduardo con portátil Arch Linux, libreta y taza de Tux"
@@ -544,27 +542,28 @@ const recentNotes = [
 
         <!-- Copy -->
         <div class="md:col-span-5 flex flex-col justify-center">
-          <div class="flex items-center gap-1.5 text-[11px] font-bold tracking-wider text-[#264836] uppercase mb-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#27784f]"></span>
+          <div class="flex items-center gap-1.5 text-[11px] font-bold tracking-wider text-[#264836] dark:text-[#6ec490] uppercase mb-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] dark:bg-[#52a578]"></span>
             <span>AHORA MISMO</span>
           </div>
           <h2
             id="now-title"
-            class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#17231e]"
+            class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]"
           >
             Programando, cocinando y aprendiendo.
           </h2>
-          <p class="text-xs sm:text-[13px] text-[#556059] leading-relaxed mt-2.5">
+          <p class="text-xs sm:text-[13px] text-[#556059] dark:text-[#9ea9a1] leading-relaxed mt-2.5">
             Trabajo en mis proyectos, preparo nuevas recetas, exploro herramientas de{" "}
-            <strong class="font-semibold text-[#1f3729]">Linux</strong> y siempre tengo algún libro
-            en la mesa. Aquí comparto lo que voy construyendo y lo que voy descubriendo.
+            <strong class="font-semibold text-[#1f3729] dark:text-[#88c99e]">Linux</strong> y
+            siempre tengo algún libro en la mesa. Aquí comparto lo que voy construyendo y lo que voy
+            descubriendo.
           </p>
           <div class="mt-4">
             <a
               href="https://github.com/soker90"
               target="_blank"
               rel="noreferrer"
-              class="inline-flex items-center gap-1.5 bg-[#284937] hover:bg-[#1d3527] text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xs transition-colors"
+              class="inline-flex items-center gap-1.5 bg-[#284937] hover:bg-[#1d3527] dark:bg-[#346348] dark:hover:bg-[#284f38] text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xs transition-colors"
             >
               <span>Ver en qué estoy ahora</span>
               <span aria-hidden="true">↗</span>
@@ -573,26 +572,26 @@ const recentNotes = [
         </div>
 
         <!-- Bullets list -->
-        <div class="md:col-span-3 border-t md:border-t-0 md:border-l border-[#d3d8cd] pt-4 md:pt-0 md:pl-6">
-          <ul class="space-y-2.5 text-xs text-[#2b3a32] font-medium list-none p-0 m-0">
+        <div class="md:col-span-3 border-t md:border-t-0 md:border-l border-[#d3d8cd] dark:border-[#28362d] pt-4 md:pt-0 md:pl-6">
+          <ul class="space-y-2.5 text-xs text-[#2b3a32] dark:text-[#c4d0c7] font-medium list-none p-0 m-0">
             <li class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] shrink-0"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] dark:bg-[#52a578] shrink-0"></span>
               <span>Mejora de Finper</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] shrink-0"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] dark:bg-[#52a578] shrink-0"></span>
               <span>Nuevas recetas en el blog</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] shrink-0"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] dark:bg-[#52a578] shrink-0"></span>
               <span>Mantenimiento de paquetes AUR</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] shrink-0"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] dark:bg-[#52a578] shrink-0"></span>
               <span>Explorando herramientas de IA</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] shrink-0"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#27784f] dark:bg-[#52a578] shrink-0"></span>
               <span>Ideas y experimentos</span>
             </li>
           </ul>
@@ -602,17 +601,17 @@ const recentNotes = [
   </main>
 
   <!-- Site Footer -->
-  <footer class="w-full border-t border-[#e2e2da] py-8 sm:py-10 bg-[#fbf8f1]">
+  <footer class="w-full border-t border-[#e2e2da] dark:border-[#222b25] py-8 sm:py-10 bg-[#fbf8f1] dark:bg-[#121815] transition-colors">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
       <!-- Left info -->
       <div>
         <a
           href="/"
-          class="font-serif text-xl font-bold tracking-tight text-[#17231e] hover:opacity-90"
+          class="font-serif text-xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1] hover:opacity-90"
         >
           Eduardo Parra
         </a>
-        <p class="text-xs text-[#636c66] mt-0.5">
+        <p class="text-xs text-[#636c66] dark:text-[#8d9890] mt-0.5">
           Programador · Proyectos · Recetas · Utilidades · Notas
         </p>
       </div>
@@ -620,13 +619,13 @@ const recentNotes = [
       <!-- Right: Social icons & Legal/Contact links -->
       <div class="flex flex-wrap items-center gap-6">
         <!-- Social Icons -->
-        <div class="flex items-center gap-3.5 text-[#3e4842]">
+        <div class="flex items-center gap-3.5 text-[#3e4842] dark:text-[#a0aaa2]">
           <!-- GitHub -->
           <a
             href="https://github.com/soker90"
             target="_blank"
             rel="noreferrer"
-            class="hover:text-[#17231e] transition-colors"
+            class="hover:text-[#17231e] dark:hover:text-white transition-colors"
             aria-label="GitHub de Eduardo Parra"
           >
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -639,7 +638,7 @@ const recentNotes = [
             href="https://linkedin.com/in/eduardoparra"
             target="_blank"
             rel="noreferrer"
-            class="hover:text-[#17231e] transition-colors"
+            class="hover:text-[#17231e] dark:hover:text-white transition-colors"
             aria-label="LinkedIn de Eduardo Parra"
           >
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -652,7 +651,7 @@ const recentNotes = [
             href="https://x.com"
             target="_blank"
             rel="noreferrer"
-            class="hover:text-[#17231e] transition-colors"
+            class="hover:text-[#17231e] dark:hover:text-white transition-colors"
             aria-label="X de Eduardo Parra"
           >
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -661,21 +660,31 @@ const recentNotes = [
           </a>
 
           <!-- RSS -->
-          <a href="/rss.xml" class="hover:text-[#17231e] transition-colors" aria-label="Feed RSS">
+          <a
+            href="/rss.xml"
+            class="hover:text-[#17231e] dark:hover:text-white transition-colors"
+            aria-label="Feed RSS"
+          >
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.797 1.456-3.252 3.252-3.252 1.795 0 3.251 1.455 3.251 3.252zm5.992 3.248c-.042-6.892-5.602-12.449-12.495-12.496v4.619c4.343.045 7.834 3.535 7.876 7.877h4.619zm7.505 0c-.033-11.036-8.974-19.974-20-20v4.62c8.487.025 15.356 6.894 15.38 15.38h4.62z" />
             </svg>
           </a>
         </div>
 
-        <div class="h-4 w-px bg-[#d5dad1] hidden sm:block"></div>
+        <div class="h-4 w-px bg-[#d5dad1] dark:bg-[#2d3a31] hidden sm:block"></div>
 
         <!-- Text links -->
-        <div class="flex items-center gap-4 text-xs font-medium text-[#505b54]">
-          <a href="mailto:hola@eduardoparra.es" class="hover:text-[#17231e] transition-colors">
+        <div class="flex items-center gap-4 text-xs font-medium text-[#505b54] dark:text-[#9ea8a0]">
+          <a
+            href="mailto:hola@eduardoparra.es"
+            class="hover:text-[#17231e] dark:hover:text-white transition-colors"
+          >
             Contacto
           </a>
-          <a href="#aviso-legal" class="hover:text-[#17231e] transition-colors">
+          <a
+            href="#aviso-legal"
+            class="hover:text-[#17231e] dark:hover:text-white transition-colors"
+          >
             Aviso legal
           </a>
         </div>

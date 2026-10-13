@@ -7,20 +7,22 @@ export type ProjectLink = {
 export type Project = {
   name: string;
   description: string;
-  image: string;
+  image?: string;
   imageAlt?: string;
   tags: string[];
   links: ProjectLink[];
+  category?: "proyecto" | "utilidad";
 };
 
-export const projects: Project[] = [
+export const mainProjects: Project[] = [
   {
     name: "Finper",
     description:
-      "Aplicación de finanzas personales para gestionar cuentas, presupuestos, movimientos y mucho más.",
+      "Aplicación de finanzas personales para gestionar cuentas bancarias, presupuestos mensuales, gastos recurrentes y analítica financiera.",
     image: "/images/projects/finper.webp",
     imageAlt: "Vista previa de la interfaz de Finper con estadísticas y movimientos",
-    tags: ["React", "TypeScript", "Finanzas"],
+    tags: ["React", "TypeScript", "Tailwind CSS", "Finanzas"],
+    category: "proyecto",
     links: [
       { label: "Ver web", href: "https://finper.eduardoparra.es", type: "web" },
       { label: "GitHub", href: "https://github.com/soker90/finper", type: "github" },
@@ -29,10 +31,11 @@ export const projects: Project[] = [
   {
     name: "AUR Maintainer",
     description:
-      "GitHub Action para mantener paquetes de Arch Linux AUR automatizando actualizaciones.",
+      "GitHub Action para automatizar el ciclo de vida y actualización de paquetes de Arch Linux en el repositorio AUR.",
     image: "/images/projects/aur-maintainer.webp",
     imageAlt: "Terminal y configuración de AUR Maintainer para Arch Linux",
-    tags: ["GitHub Actions", "AUR", "Arch Linux"],
+    tags: ["GitHub Actions", "AUR", "Arch Linux", "CI/CD"],
+    category: "proyecto",
     links: [
       { label: "Ver repo", href: "https://github.com/soker90/aur-maintainer", type: "repo" },
       {
@@ -45,24 +48,134 @@ export const projects: Project[] = [
   {
     name: "Cocinando con Edu",
     description:
-      "Recetas caseras, fáciles y con buen sabor. Blog de cocina con recetas de temporada.",
+      "Blog de cocina casera con buscador, filtrado por categorías, tiempos de preparación y fichas completas de recetas.",
     image: "/images/projects/cocinando-con-edu.webp",
     imageAlt: "Plato casero de Cocinando con Edu",
-    tags: ["Astro", "Recetas", "Cocina"],
+    tags: ["Astro", "Tailwind CSS", "Recetas", "Cocina"],
+    category: "proyecto",
     links: [
       { label: "Ver web", href: "https://recetas.eduardoparra.es", type: "web" },
-      { label: "GitHub", href: "https://github.com/soker90", type: "github" },
+      { label: "GitHub", href: "https://github.com/soker90/cooking-blog", type: "github" },
     ],
   },
   {
     name: "Cacotas",
-    description: "PWA para inventario de pañales, registro de consumo y previsión de compras.",
+    description:
+      "PWA offline-first diseñada para el control de inventario de pañales, registro de consumo diario y previsión de compras familiares.",
     image: "/images/projects/cacotas.webp",
     imageAlt: "Captura de la aplicación móvil PWA Cacotas",
-    tags: ["PWA", "Familia", "Productividad"],
+    tags: ["PWA", "TypeScript", "Productividad", "Familia"],
+    category: "proyecto",
     links: [
       { label: "Ver web", href: "https://cacotas.eduardoparra.es", type: "web" },
       { label: "GitHub", href: "https://github.com/soker90/cacotas", type: "github" },
     ],
   },
+  {
+    name: "Arroyo ERP",
+    description:
+      "Suite y backoffice modular para la gestión integral de pymes: clientes, facturación, proveedores y catálogo comercial.",
+    tags: ["React", "Node.js", "GraphQL", "ERP"],
+    category: "proyecto",
+    links: [
+      { label: "Documentación", href: "https://arroyo.eduardoparra.es", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90/arroyo-erp-project", type: "github" },
+    ],
+  },
+  {
+    name: "Alameda de Cervera",
+    description:
+      "Sitio web informativo dedicado a la historia, eventos, noticias y patrimonio de Alameda de Cervera.",
+    tags: ["Astro", "Tailwind CSS", "Comunidad"],
+    category: "proyecto",
+    links: [
+      { label: "Ver web", href: "https://alamedadecervera.com", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90/alamedadecervera", type: "github" },
+    ],
+  },
 ];
+
+export const utilityProjects: Project[] = [
+  {
+    name: "Tarifas de la luz",
+    description:
+      "Script y generador automático de JSON que monitoriza y compara los precios de las tarifas eléctricas para optimizar el ahorro.",
+    tags: ["TypeScript", "Automatización", "JSON API"],
+    category: "utilidad",
+    links: [
+      {
+        label: "Ver JSON",
+        href: "https://soker90.github.io/tarifas-luz/tarifas.json",
+        type: "web",
+      },
+      { label: "GitHub", href: "https://github.com/soker90/tarifas-luz", type: "github" },
+    ],
+  },
+  {
+    name: "Alerta Alimentos Bot",
+    description:
+      "Scraper y bot de Telegram que difunde alertas oficiales de seguridad alimentaria emitidas por la AESAN y Consumo.",
+    tags: ["Node.js", "Telegram Bot", "Scraping"],
+    category: "utilidad",
+    links: [
+      { label: "Canal Telegram", href: "https://t.me/alertas_aesan", type: "web" },
+      {
+        label: "GitHub",
+        href: "https://github.com/soker90/alerta-alimentos-bot",
+        type: "github",
+      },
+    ],
+  },
+  {
+    name: "Precio de la gasolina",
+    description:
+      "Bot notificador de Telegram que alerta cada vez que cambian los precios en estaciones de servicio seleccionadas.",
+    tags: ["HTML", "JavaScript", "Telegram Bot"],
+    category: "utilidad",
+    links: [
+      { label: "Web", href: "https://soker90.github.io/precio-gasolina/", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90/precio-gasolina", type: "github" },
+    ],
+  },
+  {
+    name: "Issue Link",
+    description:
+      "Herramienta web ágil para enlazar issues y notas técnicas organizadas directamente en archivos Markdown.",
+    tags: ["Astro", "Markdown", "Productividad"],
+    category: "utilidad",
+    links: [
+      { label: "Ver web", href: "https://link.eduardoparra.es", type: "web" },
+      { label: "GitHub", href: "https://github.com/soker90/issue-link", type: "github" },
+    ],
+  },
+  {
+    name: "Modelo 130",
+    description:
+      "Calculadora y asistente ágil para estimar pagos fraccionados trimestrales del IRPF para autónomos.",
+    tags: ["TypeScript", "Finanzas", "Calculadora"],
+    category: "utilidad",
+    links: [{ label: "GitHub", href: "https://github.com/soker90/modelo-130", type: "github" }],
+  },
+  {
+    name: "Medicamentos Peligrosos NIOSH",
+    description:
+      "Buscador rápido para consultar la lista de medicamentos peligrosos según la clasificación técnica del NIOSH.",
+    tags: ["JavaScript", "Buscador", "Salud"],
+    category: "utilidad",
+    links: [
+      {
+        label: "Buscador",
+        href: "https://soker90.github.io/medicamentos-peligrosos-niosh/",
+        type: "web",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/soker90/medicamentos-peligrosos-niosh",
+        type: "github",
+      },
+    ],
+  },
+];
+
+// Retrocompatibilidad con la portada (los 4 destacados)
+export const projects: Project[] = mainProjects.slice(0, 4);

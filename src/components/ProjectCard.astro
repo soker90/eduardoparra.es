@@ -8,9 +8,9 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<article class="group bg-white rounded-xl border border-[#dedfd5] overflow-hidden flex flex-col transition-all duration-200 hover:border-[#b8c7b8] hover:-translate-y-0.5 hover:shadow-md">
+<article class="group bg-white dark:bg-[#161d19] rounded-xl border border-[#dedfd5] dark:border-[#263129] overflow-hidden flex flex-col transition-all duration-200 hover:border-[#b8c7b8] dark:hover:border-[#3e5645] hover:-translate-y-0.5 hover:shadow-md">
   <!-- Visual Preview -->
-  <div class="relative w-full aspect-[16/8.2] bg-[#eef0ea] overflow-hidden border-b border-[#f0f2eb]">
+  <div class="relative w-full aspect-[16/8.2] bg-[#eef0ea] dark:bg-[#1c241f] overflow-hidden border-b border-[#f0f2eb] dark:border-[#222b24]">
     {project.image ? (
       <img
         src={project.image}
@@ -30,28 +30,30 @@ const { project } = Astro.props;
 
   <!-- Body Content -->
   <div class="p-4 sm:p-4.5 flex flex-col flex-1">
-    <h3 class="font-serif text-lg font-bold tracking-tight text-[#17231e] mb-1">{project.name}</h3>
-    <p class="text-[12px] text-[#58625b] leading-relaxed mb-3.5 min-h-[2.75rem]">
+    <h3 class="font-serif text-lg font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1] mb-1">
+      {project.name}
+    </h3>
+    <p class="text-[12px] text-[#58625b] dark:text-[#97a299] leading-relaxed mb-3.5 min-h-[2.75rem]">
       {project.description}
     </p>
 
     <!-- Tags -->
     <ul class="flex flex-wrap gap-1.5 mb-4 list-none p-0" aria-label="Tecnologías utilizadas">
       {project.tags.map((tag) => (
-        <li class="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#edf0eb] text-[#2c4938]">
+        <li class="text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#edf0eb] dark:bg-[#1f2922] text-[#2c4938] dark:text-[#88c99e]">
           {tag}
         </li>
       ))}
     </ul>
 
     <!-- Action Links -->
-    <div class="mt-auto pt-2 flex items-center gap-4 text-xs font-semibold text-[#1e3427]">
+    <div class="mt-auto pt-2 flex items-center gap-4 text-xs font-semibold text-[#1e3427] dark:text-[#90cca5]">
       {project.links.map((link) => (
         <a
           href={link.href}
           target="_blank"
           rel="noreferrer"
-          class="inline-flex items-center gap-1.5 hover:text-[#2d5942] hover:underline underline-offset-2 transition-colors"
+          class="inline-flex items-center gap-1.5 hover:text-[#2d5942] dark:hover:text-[#b4e6c3] hover:underline underline-offset-2 transition-colors"
         >
           {link.type === "github" ? (
             <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">

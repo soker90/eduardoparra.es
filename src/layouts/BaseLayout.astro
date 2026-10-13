@@ -17,10 +17,26 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#fbf8f1" />
+    <meta name="theme-color" content="#fbf8f1" id="theme-color-meta" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const isDark = stored === "dark" || (!stored && prefersDark);
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+            const metaTheme = document.getElementById("theme-color-meta");
+            if (metaTheme) metaTheme.setAttribute("content", "#121815");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (_) {}
+      })();
+    </script>
     <!-- Google Fonts: Newsreader, Inter & Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -31,7 +47,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-[#fbf8f1] text-[#17231e] antialiased selection:bg-[#d2e4d8] selection:text-[#163524]">
+  <body class="min-h-screen bg-[#fbf8f1] text-[#17231e] dark:bg-[#121815] dark:text-[#e6ebe7] antialiased selection:bg-[#d2e4d8] selection:text-[#163524] dark:selection:bg-[#294c39] dark:selection:text-[#edf5f0]">
     <slot />
   </body>
 </html>

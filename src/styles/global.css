@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans:
@@ -13,6 +15,10 @@
     color-scheme: light;
   }
 
+  html.dark {
+    color-scheme: dark;
+  }
+
   html {
     scroll-behavior: smooth;
     background-color: #fbf8f1;
@@ -20,8 +26,18 @@
     font-family: var(--font-sans);
   }
 
+  html.dark {
+    background-color: #121815;
+    color: #e6ebe7;
+  }
+
   ::selection {
     background-color: #d2e4d8;
     color: #163524;
+  }
+
+  html.dark ::selection {
+    background-color: #294c39;
+    color: #edf5f0;
   }
 }
