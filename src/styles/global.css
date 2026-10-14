@@ -41,3 +41,171 @@
     color: #edf5f0;
   }
 }
+
+@layer components {
+  .note-content {
+    color: #38443c;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    overflow-wrap: anywhere;
+  }
+
+  .dark .note-content {
+    color: #c4cdc6;
+  }
+
+  .note-content > * + * {
+    margin-top: 1.35em;
+  }
+
+  .note-content h2,
+  .note-content h3,
+  .note-content h4 {
+    color: #17231e;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.25;
+    scroll-margin-top: 6rem;
+  }
+
+  .note-content h2 {
+    margin-top: 2em;
+    font-size: clamp(1.65rem, 4vw, 2rem);
+  }
+
+  .note-content h3 {
+    margin-top: 1.7em;
+    font-size: 1.45rem;
+  }
+
+  .note-content h4 {
+    margin-top: 1.5em;
+    font-size: 1.2rem;
+  }
+
+  .dark .note-content h2,
+  .dark .note-content h3,
+  .dark .note-content h4 {
+    color: #f2f6f3;
+  }
+
+  .note-content a {
+    color: #2d6545;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .dark .note-content a {
+    color: #8bd4a7;
+  }
+
+  .note-content a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .note-content ul,
+  .note-content ol {
+    padding-left: 1.5rem;
+  }
+
+  .note-content ul {
+    list-style: disc;
+  }
+
+  .note-content ol {
+    list-style: decimal;
+  }
+
+  .note-content li + li {
+    margin-top: 0.45rem;
+  }
+
+  .note-content blockquote {
+    border-left: 3px solid #8ba995;
+    padding-left: 1rem;
+    color: #59665d;
+    font-style: italic;
+  }
+
+  .dark .note-content blockquote {
+    color: #a8b7ac;
+  }
+
+  .note-content :not(pre) > code {
+    border-radius: 0.3rem;
+    background: #e9ece5;
+    padding: 0.15rem 0.35rem;
+    font-size: 0.88em;
+  }
+
+  .dark .note-content :not(pre) > code {
+    background: #26332a;
+  }
+
+  .note-content pre {
+    overflow-x: auto;
+    border: 1px solid #dedcd2;
+    border-radius: 0.8rem;
+    background: #f0eee7;
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .dark .note-content pre {
+    border-color: #27342b;
+    background: #0e130f;
+  }
+
+  .note-content pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  .note-content img {
+    margin-inline: auto;
+    max-height: 42rem;
+    border-radius: 0.8rem;
+    object-fit: contain;
+  }
+
+  .note-content hr {
+    border-color: #dedcd2;
+    margin-block: 2.5rem;
+  }
+
+  .dark .note-content hr {
+    border-color: #27342b;
+  }
+
+  .note-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+
+  .note-content th,
+  .note-content td {
+    border: 1px solid #dedcd2;
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+  }
+
+  .dark .note-content th,
+  .dark .note-content td {
+    border-color: #27342b;
+  }
+
+  .note-content th {
+    background: #edf0e7;
+    color: #17231e;
+    font-weight: 700;
+  }
+
+  .dark .note-content th {
+    background: #202e25;
+    color: #f2f6f3;
+  }
+}
