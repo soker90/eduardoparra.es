@@ -244,7 +244,7 @@ const prefix = isHome ? "" : "/";
         aria-live="polite"
         class="mt-3 px-1 text-xs text-[#69726b] dark:text-[#88928a]"
       >
-        Escribe para buscar en el contenido de esta página.
+        Busca títulos y enlaces de esta página.
       </p>
       <ul
         id="site-search-results"
@@ -326,7 +326,7 @@ const prefix = isHome ? "" : "/";
       const query = normalize(searchInput.value.trim());
       searchResults.replaceChildren();
       if (!query) {
-        searchStatus.textContent = "Escribe para buscar en el contenido de esta página.";
+        searchStatus.textContent = "Busca títulos y enlaces de esta página.";
         return;
       }
 
