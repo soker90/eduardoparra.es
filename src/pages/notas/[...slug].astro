@@ -12,9 +12,32 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const date = new Intl.DateTimeFormat("es-ES", { dateStyle: "long" }).format(entry.data.pubDate);
+const articleUrl = new URL(`/notas/${entry.id}`, Astro.site).href;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.description,
+  datePublished: entry.data.pubDate.toISOString(),
+  ...(entry.data.updatedDate && { dateModified: entry.data.updatedDate.toISOString() }),
+  mainEntityOfPage: articleUrl,
+  author: {
+    "@type": "Person",
+    name: "Eduardo Parra",
+    url: Astro.site?.href,
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Eduardo Parra",
+    url: Astro.site?.href,
+  },
+  ...(entry.data.image && { image: new URL(entry.data.image, Astro.site).href }),
+  ...(entry.data.tags.length > 0 && { keywords: entry.data.tags }),
+};
 ---
 
 <BaseLayout title={`${entry.data.title} — Eduardo Parra`} description={entry.data.description} ogType="article" ogImage={entry.data.image}>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, "\\u003c")}></script>
   <SiteHeader />
   <main class="mx-auto max-w-3xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
     <a href="/notas" class="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">← Todas las notas</a>
