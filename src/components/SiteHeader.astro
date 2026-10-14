@@ -1,7 +1,42 @@
 ---
+import { mainProjects, utilityProjects } from "../data/projects";
+
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/" || pathname === "";
 const prefix = isHome ? "" : "/";
+
+const globalSearchItems = [
+  ...mainProjects.map((project) => ({
+    title: project.name,
+    href: project.links[0]?.href ?? "/proyectos",
+    context: "Proyecto",
+  })),
+  ...utilityProjects.map((project) => ({
+    title: project.name,
+    href: project.links[0]?.href ?? "/proyectos",
+    context: "Utilidad",
+  })),
+  {
+    title: "Tarta de queso en taza",
+    href: "https://recetas.eduardoparra.es/blog/tarta-de-queso-en-taza",
+    context: "Receta · 5 min",
+  },
+  {
+    title: "Pudins de dátiles y toffee",
+    href: "https://recetas.eduardoparra.es/blog/pudins-datiles-toffee",
+    context: "Receta",
+  },
+  {
+    title: "Tarta de queso de dinosaurios",
+    href: "https://recetas.eduardoparra.es/blog/cheesecake-de-dinosaurios",
+    context: "Receta",
+  },
+  {
+    title: "Proyectos y utilidades",
+    href: "/proyectos",
+    context: "Catálogo",
+  },
+];
 ---
 
 <header class="sticky top-0 z-40 w-full border-b border-[#e5e4dc] dark:border-[#222b25] bg-[#fbf8f1]/90 dark:bg-[#121815]/90 backdrop-blur-md transition-colors">
@@ -208,6 +243,7 @@ const prefix = isHome ? "" : "/";
 
 <dialog
   id="site-search-dialog"
+  data-global-search-items={JSON.stringify(globalSearchItems)}
   aria-labelledby="site-search-title"
   class="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none bg-transparent p-4 backdrop:bg-[#17231e]/50 dark:backdrop:bg-black/70 sm:m-auto sm:h-auto sm:max-h-[min(80vh,42rem)] sm:max-w-xl sm:rounded-2xl"
 >
@@ -244,7 +280,7 @@ const prefix = isHome ? "" : "/";
         aria-live="polite"
         class="mt-3 px-1 text-xs text-[#69726b] dark:text-[#88928a]"
       >
-        Busca títulos y enlaces de esta página.
+        Busca proyectos, utilidades, recetas y secciones.
       </p>
       <ul
         id="site-search-results"
@@ -296,6 +332,21 @@ const prefix = isHome ? "" : "/";
 
     const collectSearchItems = () => {
       const items = new Map<string, { title: string; href: string; context: string }>();
+      const globalItems = searchDialog.dataset.globalSearchItems;
+      if (globalItems) {
+        try {
+          const parsedItems = JSON.parse(globalItems) as Array<{
+            title: string;
+            href: string;
+            context: string;
+          }>;
+          for (const item of parsedItems) {
+            items.set(`global:${item.href}|${item.title}`, item);
+          }
+        } catch {
+          // Keep local-page search available if the global index cannot be parsed.
+        }
+      }
       document.querySelectorAll<HTMLElement>("main h1, main h2, main h3").forEach((heading) => {
         const title = heading.textContent?.trim();
         const target = heading.id
@@ -326,7 +377,7 @@ const prefix = isHome ? "" : "/";
       const query = normalize(searchInput.value.trim());
       searchResults.replaceChildren();
       if (!query) {
-        searchStatus.textContent = "Busca títulos y enlaces de esta página.";
+        searchStatus.textContent = "Busca proyectos, utilidades, recetas y secciones.";
         return;
       }
 
