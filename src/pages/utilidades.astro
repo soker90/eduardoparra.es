@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { utilityProjects } from "../data/projects";
+import ProjectCard from "../components/ProjectCard.astro";
+import "../styles/global.css";
+---
+<BaseLayout title="Utilidades — Eduardo Parra" description="Pequeñas herramientas y automatizaciones gratuitas para resolver tareas concretas.">
+  <SiteHeader />
+  <main id="contenido" class="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+    <header class="mb-10 border-b border-[#e5e4dc] pb-8 dark:border-[#222b25]">
+      <a href="/" class="mb-5 inline-flex text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">← Volver a la portada</a>
+      <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2c4b3a] dark:text-[#6ec490]">HERRAMIENTAS PRÁCTICAS</p>
+      <h1 class="font-serif text-4xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3] sm:text-5xl">Utilidades</h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Pequeñas herramientas que me hacen la vida más fácil. Automatizaciones y recursos sencillos, gratuitos y pensados para resolver tareas concretas.</p>
+    </header>
+    <section aria-labelledby="tools-title">
+      <div class="mb-5 flex items-end justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Colección</p><h2 id="tools-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Herramientas y automatizaciones</h2></div><span class="text-sm text-[#636c65] dark:text-[#919c93]">{utilityProjects.length} recursos</span></div>
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">{utilityProjects.map((project) => <ProjectCard project={project} />)}</div>
+    </section>
+    <p class="mt-8 text-sm text-[#636c65] dark:text-[#919c93]">¿Buscas aplicaciones completas? <a href="/proyectos" class="font-semibold text-[#2d4b3b] underline dark:text-[#8bd4a7]">Explora los proyectos principales →</a></p>
+  </main>
+</BaseLayout>
