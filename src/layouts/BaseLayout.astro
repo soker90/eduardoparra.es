@@ -14,6 +14,27 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
+const siteStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": new URL("#website", Astro.site).href,
+      url: Astro.site?.href,
+      name: "Eduardo Parra",
+      description,
+      inLanguage: "es-ES",
+      publisher: { "@id": new URL("#person", Astro.site).href },
+    },
+    {
+      "@type": "Person",
+      "@id": new URL("#person", Astro.site).href,
+      name: "Eduardo Parra",
+      url: Astro.site?.href,
+      sameAs: ["https://github.com/soker90"],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -22,6 +43,7 @@ const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(siteStructuredData).replace(/</g, "\\u003c")}></script>
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Eduardo Parra" />
     <meta property="og:type" content={ogType} />
