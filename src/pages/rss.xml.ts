@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ site }) => {
   }, undefined);
 
   const items = entries.map((entry) => {
-    const url = new URL(`/notas/${entry.id.replace(/\\.md$/, "")}`, site).href;
+    const url = new URL(`/notas/${entry.id.replace(/\.md$/, "")}`, site).href;
     const updated = entry.data.updatedDate ?? entry.data.pubDate;
     return `<item><title>${escapeXml(entry.data.title)}</title><link>${url}</link><guid isPermaLink="true">${url}</guid><description>${escapeXml(entry.data.description)}</description><pubDate>${entry.data.pubDate.toUTCString()}</pubDate><atom:updated>${updated.toISOString()}</atom:updated>${entry.data.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join("")}</item>`;
   }).join("");
