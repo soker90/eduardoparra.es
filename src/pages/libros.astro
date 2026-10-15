@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+
+const books = [
+  { title: "El nombre del viento", author: "Patrick Rothfuss", cover: "https://covers.openlibrary.org/b/title/The%20Name%20of%20the%20Wind-M.jpg", note: "Fantasía épica, música y un narrador inolvidable." },
+  { title: "Dune", author: "Frank Herbert", cover: "https://covers.openlibrary.org/b/title/Dune-M.jpg", note: "Intriga política y ecología en un mundo inmenso." },
+  { title: "La Comunidad del Anillo", author: "J. R. R. Tolkien", cover: "https://covers.openlibrary.org/b/title/The%20Fellowship%20of%20the%20Ring-M.jpg", note: "Un clásico de la fantasía y el viaje." },
+  { title: "Project Hail Mary", author: "Andy Weir", cover: "https://covers.openlibrary.org/b/title/Project%20Hail%20Mary-M.jpg", note: "Ciencia ficción, ingenio y supervivencia." },
+  { title: "Mistborn", author: "Brandon Sanderson", cover: "https://covers.openlibrary.org/b/title/Mistborn-M.jpg", note: "Magia con reglas, conspiraciones y revolución." },
+];
+const archive = [
+  { title: "Sobre la fantasía y por qué me gusta", date: "12 mar 2023", href: "/notas" },
+  { title: "Mi experiencia con Arch Linux", date: "3 feb 2023", href: "/notas" },
+  { title: "Recomendaciones de series", date: "18 ene 2023", href: "/notas" },
+  { title: "Aprender a cocinar", date: "5 dic 2022", href: "https://recetas.eduardoparra.es" },
+];
+---
+<BaseLayout title="Libros y archivo — Eduardo Parra" description="Lecturas de fantasía y ciencia ficción, libros recomendados y archivo personal.">
+  <SiteHeader />
+  <main id="contenido" class="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+    <header class="mb-9 border-b border-[#e5e4dc] pb-8 dark:border-[#222b25]">
+      <a href="/" class="mb-5 inline-flex text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">← Volver a la portada</a>
+      <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2c4b3a] dark:text-[#6ec490]">LECTURAS Y MEMORIA</p>
+      <h1 class="font-serif text-4xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3] sm:text-5xl">Libros y archivo</h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Lo que leo, lo que he leído y mi viejo blog. Una selección personal de fantasía, ciencia ficción y otras lecturas que me han acompañado.</p>
+    </header>
+    <section aria-labelledby="books-title" class="mb-14">
+      <div class="mb-5 flex items-end justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">En la estantería</p><h2 id="books-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Lecturas destacadas</h2></div><span class="text-sm text-[#636c65] dark:text-[#919c93]">Selección personal</span></div>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">{books.map((book) => <article class="min-w-0"><div class="overflow-hidden rounded-xl border border-[#dedcd2] bg-[#edf0e7] dark:border-[#27342b] dark:bg-[#202e25]"><img src={book.cover} alt={`Portada de ${book.title}`} width="300" height="450" loading="lazy" class="aspect-[2/3] w-full object-cover" /></div><h3 class="mt-3 font-serif text-base font-bold leading-snug text-[#17231e] dark:text-[#f2f6f3]">{book.title}</h3><p class="mt-1 text-xs text-[#636c65] dark:text-[#919c93]">{book.author}</p><p class="mt-2 text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{book.note}</p></article>)}</div>
+    </section>
+    <section aria-labelledby="archive-title" class="rounded-2xl border border-[#dedcd2] bg-white/60 p-5 sm:p-7 dark:border-[#27342b] dark:bg-[#151d17]">
+      <div class="mb-4 flex items-end justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">De otros años</p><h2 id="archive-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Archivo del blog</h2></div><a href="/notas" class="text-sm font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">Ver notas actuales →</a></div>
+      <p class="mb-5 max-w-2xl text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">Artículos antiguos, ideas, reseñas y pensamientos. El archivo se irá completando con contenido recuperado del blog anterior.</p>
+      <ul class="divide-y divide-[#e5e4dc] dark:divide-[#27342b]">{archive.map((item) => <li><a href={item.href} class="flex flex-wrap items-center justify-between gap-3 py-4 text-sm hover:text-[#2d4b3b] dark:hover:text-[#8bd4a7]"><span class="font-medium">{item.title}</span><span class="text-xs text-[#636c65] dark:text-[#919c93]">{item.date} <span aria-hidden="true">→</span></span></a></li>)}</ul>
+    </section>
+  </main>
+</BaseLayout>
