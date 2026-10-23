@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+
+const recipes = [
+  { title: "Tarta de queso en taza", time: "5 min", category: "Postres", image: "/images/recipes/tarta-queso-taza.webp", href: "https://recetas.eduardoparra.es/blog/tarta-de-queso-en-taza", description: "Un postre rápido para preparar en el microondas." },
+  { title: "Pudins de dátiles y toffee", time: "1 h", category: "Postres", image: "/images/recipes/pudins-datiles-toffee.webp", href: "https://recetas.eduardoparra.es/blog/pudins-datiles-toffee", description: "Un dulce casero con dátiles y salsa de toffee." },
+  { title: "Tarta de queso de dinosaurios", time: "50 min", category: "Postres", image: "/images/recipes/cheesecake-dinosaurios-thumb.webp", href: "https://recetas.eduardoparra.es/blog/cheesecake-de-dinosaurios", description: "Una tarta divertida para compartir." },
+];
+---
+<BaseLayout title="Recetas — Eduardo Parra" description="Recetas de cocina casera, fáciles y ricas, con instrucciones claras y sin complicaciones.">
+  <SiteHeader />
+  <main id="contenido" class="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+    <header class="mb-8 border-b border-[#e5e4dc] pb-8 dark:border-[#222b25]">
+      <a href="/" class="mb-5 inline-flex text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">← Volver a la portada</a>
+      <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2c4b3a] dark:text-[#6ec490]">COCINA DE CASA</p>
+      <h1 class="font-serif text-4xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3] sm:text-5xl">Recetas</h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Cocina de casa, fácil y rica. Platos prácticos, trucos y alguna que otra indulgencia.</p>
+    </header>
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-[#555f58] dark:text-[#a8b2aa]">Una selección de recetas del blog.</p>
+      <a href="https://recetas.eduardoparra.es" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#284937] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1d3527]">Ver todas las recetas <span aria-hidden="true">→</span></a>
+    </div>
+    <section aria-label="Recetas destacadas" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {recipes.map((recipe) => <article class="group flex flex-col overflow-hidden rounded-2xl border border-[#dedcd2] bg-white/70 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#151d17] dark:hover:bg-[#1a241e]">
+        <a href={recipe.href} target="_blank" rel="noreferrer" aria-label={`Ver receta: ${recipe.title}`} class="overflow-hidden bg-[#e4e7df] dark:bg-[#1e2821]"><img src={recipe.image} alt="" width="640" height="360" loading="lazy" class="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" /></a>
+        <div class="flex flex-1 flex-col p-5"><div class="flex items-center justify-between gap-3 text-xs text-[#636c65] dark:text-[#919c93]"><span>{recipe.category}</span><span>{recipe.time}</span></div><h2 class="mt-3 font-serif text-xl font-bold text-[#17231e] dark:text-[#f0f5f1]"><a href={recipe.href} target="_blank" rel="noreferrer" class="hover:underline">{recipe.title}</a></h2><p class="mt-2 flex-1 text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{recipe.description}</p><a href={recipe.href} target="_blank" rel="noreferrer" class="mt-5 text-sm font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">Ver receta ↗</a></div>
+      </article>)}
+    </section>
+    <p class="mt-8 text-sm text-[#636c65] dark:text-[#919c93]">Las recetas completas y el buscador están en <a class="font-semibold text-[#2d4b3b] underline dark:text-[#8bd4a7]" href="https://recetas.eduardoparra.es">Cocinando con Edu</a>.</p>
+  </main>
+</BaseLayout>
