@@ -240,31 +240,51 @@ const globalSearchItems = [
     <nav class="flex flex-col gap-2 text-sm font-medium text-[#505a54] dark:text-[#9ea8a0]">
       <a
         href={isHome ? "#inicio" : "/"}
-        class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e] text-[#17231e] dark:text-white font-semibold"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          isHome && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={isHome ? "page" : undefined}
       >
         Inicio
       </a>
       <a
         href={isHome ? "#proyectos" : "/proyectos"}
-        class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          currentPath === "/proyectos" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={currentPath === "/proyectos" ? "page" : undefined}
       >
         Proyectos
       </a>
       <a
         href={isHome ? "#recetas" : "/recetas"}
-        class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          currentPath === "/recetas" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={currentPath === "/recetas" ? "page" : undefined}
       >
         Recetas
       </a>
       <a
         href={isHome ? "#utilidades" : "/utilidades"}
-        class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          currentPath === "/utilidades" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={currentPath === "/utilidades" ? "page" : undefined}
       >
         Utilidades
       </a>
       <a
         href={isHome ? "#notas" : "/notas"}
-        class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          currentPath === "/notas" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={currentPath === "/notas" ? "page" : undefined}
       >
         Notas
       </a>
@@ -274,8 +294,26 @@ const globalSearchItems = [
       >
         Sobre mí
       </a>
-      <a href="/libros" class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]">Libros</a>
-      <a href="/ahora" class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]">Ahora mismo</a>
+      <a
+        href="/libros"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          currentPath === "/libros" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={currentPath === "/libros" ? "page" : undefined}
+      >
+        Libros
+      </a>
+      <a
+        href="/ahora"
+        class:list={[
+          "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
+          currentPath === "/ahora" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+        ]}
+        aria-current={currentPath === "/ahora" ? "page" : undefined}
+      >
+        Ahora mismo
+      </a>
     </nav>
   </div>
 </header>
