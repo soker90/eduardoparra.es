@@ -1,5 +1,6 @@
 ---
 import { mainProjects, utilityProjects } from "../data/projects";
+import { books } from "../data/books";
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/" || pathname === "";
@@ -36,6 +37,36 @@ const globalSearchItems = [
     href: "/proyectos",
     context: "Catálogo",
   },
+  {
+    title: "Recetas de cocina",
+    href: "/recetas",
+    context: "Página",
+  },
+  {
+    title: "Utilidades y herramientas",
+    href: "/utilidades",
+    context: "Página",
+  },
+  {
+    title: "Notas y apuntes",
+    href: "/notas",
+    context: "Página",
+  },
+  {
+    title: "Entre lecturas",
+    href: "/libros",
+    context: "Página",
+  },
+  {
+    title: "Ahora mismo",
+    href: "/ahora",
+    context: "Página",
+  },
+  ...books.map((book) => ({
+    title: book.title,
+    href: "/libros",
+    context: "Libro · " + book.author,
+  })),
 ];
 ---
 
