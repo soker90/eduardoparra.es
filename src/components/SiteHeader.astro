@@ -543,7 +543,7 @@ const globalSearchItems = [
     .map((id) => document.getElementById(id))
     .filter((sec): sec is HTMLElement => sec !== null);
 
-  if (pathname === "/" && "IntersectionObserver" in window && sections.length > 0) {
+  if (window.location.pathname === "/" && "IntersectionObserver" in window && sections.length > 0) {
     const observer = new IntersectionObserver(
       (entries) => {
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
