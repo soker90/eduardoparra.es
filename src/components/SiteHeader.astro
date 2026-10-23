@@ -4,6 +4,7 @@ import { books } from "../data/books";
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/" || pathname === "";
+const currentPath = pathname.replace(/\/$/, "") || "/";
 
 const globalSearchItems = [
   ...mainProjects.map((project) => ({
@@ -100,26 +101,26 @@ const globalSearchItems = [
       </a>
       <a
         href={isHome ? "#proyectos" : "/proyectos"}
-        class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
-      >
+        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/proyectos" && "text-[#17231e] dark:text-white font-semibold"]}
+       aria-current={currentPath === "/proyectos" ? "page" : undefined}>
         Proyectos
       </a>
       <a
         href={isHome ? "#recetas" : "/recetas"}
-        class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
-      >
+        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/recetas" && "text-[#17231e] dark:text-white font-semibold"]}
+       aria-current={currentPath === "/recetas" ? "page" : undefined}>
         Recetas
       </a>
       <a
         href={isHome ? "#utilidades" : "/utilidades"}
-        class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
-      >
+        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/utilidades" && "text-[#17231e] dark:text-white font-semibold"]}
+       aria-current={currentPath === "/utilidades" ? "page" : undefined}>
         Utilidades
       </a>
       <a
         href={isHome ? "#notas" : "/notas"}
-        class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
-      >
+        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/notas" && "text-[#17231e] dark:text-white font-semibold"]}
+       aria-current={currentPath === "/notas" ? "page" : undefined}>
         Notas
       </a>
       <a
@@ -128,10 +129,10 @@ const globalSearchItems = [
       >
         Sobre mí
       </a>
-      <a href="/libros" class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1">
+      <a href="/libros" class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/libros" && "text-[#17231e] dark:text-white font-semibold"]} aria-current={currentPath === "/libros" ? "page" : undefined}>
         Libros
       </a>
-      <a href="/ahora" class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1">
+      <a href="/ahora" class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/ahora" && "text-[#17231e] dark:text-white font-semibold"]} aria-current={currentPath === "/ahora" ? "page" : undefined}>
         Ahora
       </a>
     </nav>
@@ -542,7 +543,7 @@ const globalSearchItems = [
     .map((id) => document.getElementById(id))
     .filter((sec): sec is HTMLElement => sec !== null);
 
-  if ("IntersectionObserver" in window && sections.length > 0) {
+  if (pathname === "/" && "IntersectionObserver" in window && sections.length > 0) {
     const observer = new IntersectionObserver(
       (entries) => {
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
