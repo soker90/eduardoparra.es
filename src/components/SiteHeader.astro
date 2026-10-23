@@ -4,7 +4,6 @@ import { books } from "../data/books";
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/" || pathname === "";
-const prefix = isHome ? "" : "/";
 
 const globalSearchItems = [
   ...mainProjects.map((project) => ({
@@ -100,31 +99,31 @@ const globalSearchItems = [
         Inicio
       </a>
       <a
-        href={`${prefix}#proyectos`}
+        href={isHome ? "#proyectos" : "/proyectos"}
         class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
       >
         Proyectos
       </a>
       <a
-        href={`${prefix}#recetas`}
+        href={isHome ? "#recetas" : "/recetas"}
         class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
       >
         Recetas
       </a>
       <a
-        href={`${prefix}#utilidades`}
+        href={isHome ? "#utilidades" : "/utilidades"}
         class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
       >
         Utilidades
       </a>
       <a
-        href={`${prefix}#notas`}
+        href={isHome ? "#notas" : "/notas"}
         class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
       >
         Notas
       </a>
       <a
-        href={`${prefix}#sobre-mi`}
+        href={isHome ? "#sobre-mi" : "/#sobre-mi"}
         class="nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"
       >
         Sobre mí
@@ -245,31 +244,31 @@ const globalSearchItems = [
         Inicio
       </a>
       <a
-        href={`${prefix}#proyectos`}
+        href={isHome ? "#proyectos" : "/proyectos"}
         class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
       >
         Proyectos
       </a>
       <a
-        href={`${prefix}#recetas`}
+        href={isHome ? "#recetas" : "/recetas"}
         class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
       >
         Recetas
       </a>
       <a
-        href={`${prefix}#utilidades`}
+        href={isHome ? "#utilidades" : "/utilidades"}
         class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
       >
         Utilidades
       </a>
       <a
-        href={`${prefix}#notas`}
+        href={isHome ? "#notas" : "/notas"}
         class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
       >
         Notas
       </a>
       <a
-        href={`${prefix}#sobre-mi`}
+        href={isHome ? "#sobre-mi" : "/#sobre-mi"}
         class="mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]"
       >
         Sobre mí
