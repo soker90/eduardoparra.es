@@ -435,7 +435,7 @@ const globalSearchItems = [
             context: string;
           }>;
           for (const item of parsedItems) {
-            items.set(`global:${item.href}|${item.title}`, item);
+            items.set(`${item.href}|${item.title}`, item);
           }
         } catch {
           // Keep local-page search available if the global index cannot be parsed.
