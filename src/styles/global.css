@@ -211,7 +211,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  html.scroll-smooth {
     scroll-behavior: auto;
   }
 }
