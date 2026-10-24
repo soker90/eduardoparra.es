@@ -216,6 +216,7 @@ const globalSearchItems = [
         type="button"
         class="md:hidden w-9 h-9 rounded-lg flex items-center justify-center text-[#505a54] dark:text-[#a0aaa2] hover:bg-[#eceee5] dark:hover:bg-[#1e2621] transition-colors"
         aria-label="Abrir menú"
+        aria-controls="mobile-menu"
         aria-expanded="false"
       >
         <svg
@@ -379,10 +380,22 @@ const globalSearchItems = [
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
   if (btn && menu) {
+    const setMobileMenuOpen = (isOpen: boolean) => {
+      btn.setAttribute("aria-expanded", String(isOpen));
+      btn.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+      menu.classList.toggle("hidden", !isOpen);
+    };
+
     btn.addEventListener("click", () => {
       const isExpanded = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", String(!isExpanded));
-      menu.classList.toggle("hidden");
+      setMobileMenuOpen(!isExpanded);
+    });
+
+    menu.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        btn.focus();
+      }
     });
   }
 
