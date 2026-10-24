@@ -73,6 +73,8 @@ export const mainProjects: Project[] = [
   },
   {
     name: "Arroyo ERP",
+    image: "/images/projects/arroyo-erp.svg",
+    imageAlt: "Ilustración de panel de gestión empresarial de Arroyo ERP",
     description:
       "Suite y backoffice modular para la gestión integral de pymes: clientes, facturación, proveedores y catálogo comercial.",
     tags: ["React", "Node.js", "GraphQL", "ERP"],
@@ -84,6 +86,8 @@ export const mainProjects: Project[] = [
   },
   {
     name: "Alameda de Cervera",
+    image: "/images/projects/alameda-cervera.svg",
+    imageAlt: "Ilustración de paisaje manchego para el sitio de Alameda de Cervera",
     description:
       "Sitio web informativo dedicado a la historia, eventos, noticias y patrimonio de Alameda de Cervera.",
     tags: ["Astro", "Tailwind CSS", "Comunidad"],
@@ -98,6 +102,8 @@ export const mainProjects: Project[] = [
 export const utilityProjects: Project[] = [
   {
     name: "Tarifas de la luz",
+    image: "/images/projects/tarifas-luz.svg",
+    imageAlt: "Gráfico de evolución de precios de la energía",
     description:
       "Script y generador automático de JSON que monitoriza y compara los precios de las tarifas eléctricas para optimizar el ahorro.",
     tags: ["TypeScript", "Automatización", "JSON API"],
@@ -113,6 +119,8 @@ export const utilityProjects: Project[] = [
   },
   {
     name: "Alerta Alimentos Bot",
+    image: "/images/projects/alerta-alimentos.svg",
+    imageAlt: "Ilustración de aviso de seguridad alimentaria",
     description:
       "Scraper y bot de Telegram que difunde alertas oficiales de seguridad alimentaria emitidas por la AESAN y Consumo.",
     tags: ["Node.js", "Telegram Bot", "Scraping"],
@@ -128,6 +136,8 @@ export const utilityProjects: Project[] = [
   },
   {
     name: "Precio de la gasolina",
+    image: "/images/projects/precio-gasolina.svg",
+    imageAlt: "Ilustración de surtidor y evolución del precio del combustible",
     description:
       "Bot notificador de Telegram que alerta cada vez que cambian los precios en estaciones de servicio seleccionadas.",
     tags: ["HTML", "JavaScript", "Telegram Bot"],
@@ -139,6 +149,8 @@ export const utilityProjects: Project[] = [
   },
   {
     name: "Issue Link",
+    image: "/images/projects/issue-link.svg",
+    imageAlt: "Ilustración de notas técnicas organizadas en un documento",
     description:
       "Herramienta web ágil para enlazar issues y notas técnicas organizadas directamente en archivos Markdown.",
     tags: ["Astro", "Markdown", "Productividad"],
@@ -150,6 +162,8 @@ export const utilityProjects: Project[] = [
   },
   {
     name: "Modelo 130",
+    image: "/images/projects/modelo-130.svg",
+    imageAlt: "Ilustración de calculadora para pagos fraccionados de autónomos",
     description:
       "Calculadora y asistente ágil para estimar pagos fraccionados trimestrales del IRPF para autónomos.",
     tags: ["TypeScript", "Finanzas", "Calculadora"],
@@ -158,6 +172,8 @@ export const utilityProjects: Project[] = [
   },
   {
     name: "Medicamentos Peligrosos NIOSH",
+    image: "/images/projects/medicamentos-niosh.svg",
+    imageAlt: "Ilustración de buscador de seguridad de medicamentos",
     description:
       "Buscador rápido para consultar la lista de medicamentos peligrosos según la clasificación técnica del NIOSH.",
     tags: ["JavaScript", "Buscador", "Salud"],
