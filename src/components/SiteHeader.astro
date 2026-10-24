@@ -503,6 +503,10 @@ const globalSearchItems = [
     };
 
     const openSearch = () => {
+      if (searchDialog.open) {
+        searchInput.focus();
+        return;
+      }
       searchItems = collectSearchItems();
       searchDialog.showModal();
       searchInput.value = "";
@@ -511,6 +515,7 @@ const globalSearchItems = [
     };
 
     searchOpen.addEventListener("click", openSearch);
+    searchDialog.addEventListener("close", () => searchOpen.focus());
     searchClose.addEventListener("click", () => searchDialog.close());
     searchInput.addEventListener("input", renderSearchResults);
     searchDialog.addEventListener("click", (event) => {
@@ -523,7 +528,8 @@ const globalSearchItems = [
       } else if (
         event.key === "/" &&
         !(event.target instanceof HTMLInputElement) &&
-        !(event.target instanceof HTMLTextAreaElement)
+        !(event.target instanceof HTMLTextAreaElement) &&
+        !(event.target instanceof HTMLElement && event.target.isContentEditable)
       ) {
         event.preventDefault();
         openSearch();
