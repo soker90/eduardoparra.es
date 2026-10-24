@@ -42,6 +42,18 @@
   }
 }
 
+@layer base {
+  header nav a:focus-visible {
+    outline: 2px solid #2d4b3b;
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+
+  .dark header nav a:focus-visible {
+    outline-color: #52a578;
+  }
+}
+
 @layer components {
   .note-content {
     color: #38443c;
