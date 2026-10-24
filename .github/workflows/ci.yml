@@ -25,5 +25,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Typecheck and validate Astro
         run: pnpm check
+      - name: Validate local image assets
+        run: pnpm check:images
       - name: Build
         run: pnpm build
