@@ -47,6 +47,6 @@ if (missing.size > 0) {
 }
 
 if (unreferenced.length > 0) {
-  console.warn("\\nImage files not referenced by literal paths in src (review manually; do not delete automatically):");
+  console.warn("\nImage files not referenced by literal paths in src (review manually; do not delete automatically):");
   for (const item of unreferenced) console.warn(`  - ${item}`);
 }
