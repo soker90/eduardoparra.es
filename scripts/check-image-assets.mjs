@@ -1,4 +1,4 @@
-import { readdir, access } from "node:fs/promises";
+import { readdir, readFile, access } from "node:fs/promises";
 import path from "node:path";
 
 const sourceExtensions = new Set([".astro", ".ts", ".tsx", ".js", ".jsx", ".md", ".mdx", ".css", ".html"]);
@@ -17,7 +17,7 @@ const sourceFiles = (await walk("src")).filter((file) => sourceExtensions.has(pa
 const missing = new Set();
 
 for (const file of sourceFiles) {
-  const content = await (await import("node:fs/promises")).readFile(file, "utf8");
+  const content = await readFile(file, "utf8");
   for (const match of content.matchAll(imageReference)) {
     const assetPath = path.join("public", match[1]);
     try {
