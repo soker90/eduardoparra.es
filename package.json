@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check:images": "node scripts/check-image-assets.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
