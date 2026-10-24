@@ -391,11 +391,15 @@ const globalSearchItems = [
       setMobileMenuOpen(!isExpanded);
     });
 
-    menu.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
         setMobileMenuOpen(false);
         btn.focus();
       }
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMobileMenuOpen(false));
     });
   }
 
