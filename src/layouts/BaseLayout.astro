@@ -9,11 +9,11 @@ interface Props {
 const {
   title = "Eduardo Parra — Tecnología, proyectos y otras curiosidades",
   description = "Aplicaciones, webs, recetas, utilidades y notas desde La Mancha. Linux, tecnología, buena comida y libros.",
-  ogImage,
+  ogImage = "/images/hero-desktop.webp",
   ogType = "website",
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
+const socialImage = new URL(ogImage, Astro.site);
 const siteStructuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -50,13 +50,11 @@ const siteStructuredData = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
-    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
+    <meta property="og:image" content={socialImage.href} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {socialImage && <>
-      <meta property="og:image" content={socialImage.href} />
-      <meta name="twitter:image" content={socialImage.href} />
-    </>}
+    <meta name="twitter:image" content={socialImage.href} />
     <link rel="alternate" type="application/rss+xml" title="Notas de Eduardo Parra" href="/rss.xml" />
     <meta name="theme-color" content="#fbf8f1" id="theme-color-meta" />
     <link rel="canonical" href={canonical} />
