@@ -60,6 +60,7 @@ import "../styles/global.css";
           </svg>
           <span>Ver todos en GitHub ({mainProjects.length + utilityProjects.length}+)</span>
           <span aria-hidden="true">↗</span>
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
         </a>
       </div>
     </header>
@@ -165,7 +166,7 @@ import "../styles/global.css";
           rel="noreferrer"
           class="hover:text-[#17231e] dark:hover:text-white transition-colors"
         >
-          GitHub
+          GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en una pestaña nueva)</span>
         </a>
         <a
           href="mailto:hola@eduardoparra.es"
