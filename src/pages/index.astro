@@ -4,6 +4,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import BookShelf from "../components/BookShelf.astro";
 import { projects } from "../data/projects";
+import { resources as recentNotes } from "../data/resources";
 import "../styles/global.css";
 
 const latestRecipes = [
@@ -51,26 +52,7 @@ const utilities = [
   },
 ];
 
-const recentNotes = [
-  {
-    title: "Issue Link: base de enlaces y recursos en Markdown",
-    date: "10 oct 2026",
-    image: "/images/projects/issue-link.svg",
-    href: "https://link.eduardoparra.es",
-  },
-  {
-    title: "Bot de Telegram para el precio de la gasolina",
-    date: "28 sept 2026",
-    image: "/images/projects/precio-gasolina.svg",
-    href: "https://github.com/soker90/precio-gasolina",
-  },
-  {
-    title: "Mantenimiento automatizado de paquetes AUR",
-    date: "15 sept 2026",
-    image: "/images/projects/aur-maintainer.webp",
-    href: "https://github.com/soker90/aur-maintainer",
-  },
-];
+
 ---
 
 <BaseLayout>
