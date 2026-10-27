@@ -6,10 +6,10 @@ import { execFileSync } from "node:child_process";
 import "../styles/global.css";
 
 const work = [
-  { name: "Alcázar Vive", description: "Mejoras de rendimiento, accesibilidad y experiencia de navegación.", status: "En progreso" },
-  { name: "aur-maintainer", description: "Automatización del mantenimiento de paquetes AUR, con una acción reutilizable.", status: "En progreso" },
-  { name: "Recetas", description: "Nuevas recetas caseras y mejoras en el diseño del blog.", status: "En progreso" },
-  { name: "Licitalcázar", description: "Seguimiento de contratos públicos y mejoras en los datos.", status: "Mantenimiento" },
+  { name: "Alcázar Vive", href: "https://www.alcazarvive.es", description: "Mejoras de rendimiento, accesibilidad y experiencia de navegación.", status: "En progreso" },
+  { name: "aur-maintainer", href: "https://github.com/soker90/aur-maintainer", description: "Automatización del mantenimiento de paquetes AUR, con una acción reutilizable.", status: "En progreso" },
+  { name: "Recetas", href: "https://recetas.eduardoparra.es", description: "Nuevas recetas caseras y mejoras en el diseño del blog.", status: "En progreso" },
+  { name: "Licitalcázar", href: "https://licitalcazar.vercel.app", description: "Seguimiento de contratos públicos y mejoras en los datos.", status: "Mantenimiento" },
 ];
 const updatedAt = (() => {
   try {
@@ -52,7 +52,7 @@ const learning = [
         <p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Entre manos</p>
         <h2 id="work-title" class="mt-2 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">En qué estoy trabajando</h2>
         <ul class="mt-6 divide-y divide-[#e5e4dc] dark:divide-[#27342b]">
-          {work.map((item) => <li class="flex gap-3 py-4 first:pt-0 last:pb-0"><span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#5c946b]" aria-hidden="true"></span><div class="min-w-0 flex-1"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-semibold text-[#17231e] dark:text-[#f2f6f3]">{item.name}</h3><span class="rounded-full bg-[#e8eee5] px-2.5 py-1 text-xs text-[#2d4b3b] dark:bg-[#203126] dark:text-[#a7d9b6]">{item.status}</span></div><p class="mt-1 text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{item.description}</p></div></li>)}
+          {work.map((item) => <li class="flex gap-3 py-4 first:pt-0 last:pb-0"><span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#5c946b]" aria-hidden="true"></span><div class="min-w-0 flex-1"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-semibold text-[#17231e] dark:text-[#f2f6f3]"><a href={item.href} class="hover:underline focus-visible:underline">{item.name}</a></h3><span class="rounded-full bg-[#e8eee5] px-2.5 py-1 text-xs text-[#2d4b3b] dark:bg-[#203126] dark:text-[#a7d9b6]">{item.status}</span></div><p class="mt-1 text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{item.description}</p></div></li>)}
         </ul>
       </section>
       <div class="space-y-6">
