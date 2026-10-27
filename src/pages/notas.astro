@@ -2,40 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { getCollection } from "astro:content";
+import { recentResources } from "../data/recent-resources";
 import "../styles/global.css";
 
 const posts = (await getCollection("notes", ({ data }) => !data.draft))
   .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const resources = [
-  {
-    title: "Issue Link: base de enlaces y recursos en Markdown",
-    date: "10 oct 2026",
-    dateTime: "2026-10-10",
-    image: "/images/projects/issue-link.svg",
-    description: "Una herramienta para organizar enlaces e ideas técnicas directamente en archivos Markdown.",
-    href: "https://link.eduardoparra.es",
-    kind: "Herramienta",
-  },
-  {
-    title: "Bot de Telegram para el precio de la gasolina",
-    date: "28 sept 2026",
-    dateTime: "2026-09-28",
-    image: "/images/projects/precio-gasolina.svg",
-    description: "Proyecto que avisa cuando cambian los precios de las estaciones de servicio seleccionadas.",
-    href: "https://github.com/soker90/precio-gasolina",
-    kind: "Automatización",
-  },
-  {
-    title: "Mantenimiento automatizado de paquetes AUR",
-    date: "15 sept 2026",
-    dateTime: "2026-09-15",
-    image: "/images/projects/aur-maintainer.webp",
-    description: "Una GitHub Action para automatizar actualizaciones de paquetes de Arch Linux.",
-    href: "https://github.com/soker90/aur-maintainer",
-    kind: "Código abierto",
-  },
-];
+
 const formatDate = (date: Date) => new Intl.DateTimeFormat("es-ES", { dateStyle: "medium" }).format(date);
 ---
 
@@ -82,7 +55,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("es-ES", { dateStyle:
       <p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Enlaces guardados</p>
       <h2 id="resources-title" class="mb-5 mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Recursos y proyectos</h2>
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {resources.map((resource) => (
+        {recentResources.map((resource) => (
           <article class="group flex flex-col overflow-hidden rounded-2xl border border-[#dedcd2] bg-white/70 dark:border-[#27342b] dark:bg-[#151d17]">
             <a href={resource.href} target="_blank" rel="noopener noreferrer" aria-label={`Abrir recurso: ${resource.title} (nueva pestaña)`} class="block aspect-[16/9] overflow-hidden bg-[#e4e7df] dark:bg-[#1e2821]">
               <img src={resource.image} alt="" width="640" height="360" loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
