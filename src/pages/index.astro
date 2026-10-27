@@ -5,31 +5,8 @@ import ProjectCard from "../components/ProjectCard.astro";
 import BookShelf from "../components/BookShelf.astro";
 import { projects } from "../data/projects";
 import { recentResources } from "../data/recent-resources";
+import { recipes as latestRecipes } from "../data/recipes";
 import "../styles/global.css";
-
-const latestRecipes = [
-  {
-    title: "Tarta de queso en taza",
-    time: "5 min",
-    difficulty: "Fácil",
-    image: "/images/recipes/tarta-queso-taza.webp",
-    href: "https://recetas.eduardoparra.es/blog/tarta-de-queso-en-taza",
-  },
-  {
-    title: "Pudins de dátiles y toffee",
-    time: "1 h",
-    difficulty: "Fácil",
-    image: "/images/recipes/pudins-datiles-toffee.webp",
-    href: "https://recetas.eduardoparra.es/blog/pudins-datiles-toffee",
-  },
-  {
-    title: "Tarta de queso de dinosaurios",
-    time: "50 min",
-    difficulty: "Fácil",
-    image: "/images/recipes/cheesecake-dinosaurios-thumb.webp",
-    href: "https://recetas.eduardoparra.es/blog/cheesecake-de-dinosaurios",
-  },
-];
 
 const utilities = [
   {
