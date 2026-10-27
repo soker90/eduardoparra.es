@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+// @ts-ignore -- Node.js types are not included in the project TypeScript configuration.
+import { execFileSync } from "node:child_process";
 import "../styles/global.css";
 
 const work = [
@@ -9,7 +11,19 @@ const work = [
   { name: "Recetas", description: "Nuevas recetas caseras y mejoras en el diseño del blog.", status: "En progreso" },
   { name: "Licitalcázar", description: "Seguimiento de contratos públicos y mejoras en los datos.", status: "Mantenimiento" },
 ];
-const updatedAt = new Intl.DateTimeFormat("es-ES", { month: "long", year: "numeric", timeZone: "Europe/Madrid" }).format(new Date());
+const updatedAt = (() => {
+  try {
+    const commitDate = execFileSync("git", ["log", "-1", "--format=%cI", "--", "src/pages/ahora.astro"], {
+      encoding: "utf8",
+    }).trim();
+    return new Intl.DateTimeFormat("es-ES", {
+      dateStyle: "long",
+      timeZone: "Europe/Madrid",
+    }).format(new Date(commitDate));
+  } catch {
+    return null;
+  }
+})();
 
 const learning = [
   { name: "Astro", description: "Arquitectura, contenido y rendimiento." },
