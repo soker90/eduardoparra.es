@@ -2,12 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
+import { recipes } from "../data/recipes";
 
-const recipes = [
-  { title: "Tarta de queso en taza", time: "5 min", category: "Postres", image: "/images/recipes/tarta-queso-taza.webp", href: "https://recetas.eduardoparra.es/blog/tarta-de-queso-en-taza", description: "Un postre rápido para preparar en el microondas." },
-  { title: "Pudins de dátiles y toffee", time: "1 h", category: "Postres", image: "/images/recipes/pudins-datiles-toffee.webp", href: "https://recetas.eduardoparra.es/blog/pudins-datiles-toffee", description: "Un dulce casero con dátiles y salsa de toffee." },
-  { title: "Tarta de queso de dinosaurios", time: "50 min", category: "Postres", image: "/images/recipes/cheesecake-dinosaurios-thumb.webp", href: "https://recetas.eduardoparra.es/blog/cheesecake-de-dinosaurios", description: "Una tarta divertida para compartir." },
-];
 ---
 <BaseLayout title="Recetas — Eduardo Parra" description="Recetas de cocina casera, fáciles y ricas, con instrucciones claras y sin complicaciones.">
   <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-[#17231e] focus:shadow-md focus:ring-2 focus:ring-[#2d4b3b] dark:focus:bg-[#1a241e] dark:focus:text-white">
