@@ -1,36 +1,101 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import { books } from "../data/books";
+import {
+  books,
+  currentlyReading,
+  recentReads,
+  recommendations,
+  bookIssueUrl,
+  formatBookDate,
+} from "../data/books";
 import "../styles/global.css";
 ---
-<BaseLayout title="Entre lecturas — Eduardo Parra" description="Libros que estoy leyendo, que me han marcado o que quiero leer.">
+<BaseLayout title="Entre lecturas — Eduardo Parra" description="Mis libros actuales, últimas lecturas y lista de libros pendientes.">
   <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-[#17231e] focus:shadow-md focus:ring-2 focus:ring-[#2d4b3b] dark:focus:bg-[#1a241e] dark:focus:text-white">
     Saltar al contenido
   </a>
   <SiteHeader />
   <main id="contenido" class="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-    <header class="mb-9 border-b border-[#e5e4dc] pb-8 dark:border-[#222b25]">
+    <header class="mb-10 border-b border-[#e5e4dc] pb-8 dark:border-[#222b25]">
       <a href="/" class="mb-5 inline-flex text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">← Volver a la portada</a>
       <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2c4b3a] dark:text-[#6ec490]">LECTURAS Y MEMORIA</p>
       <h1 class="font-serif text-4xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3] sm:text-5xl">Entre lecturas</h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Una pequeña estantería personal: libros que estoy leyendo, que me han marcado o que quiero leer. La lista se alimenta de la misma selección que aparece en la portada.</p>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Una estantería personal alimentada automáticamente con el registro de mis lecturas: lo que tengo entre manos, lo que he terminado y lo que me espera.</p>
+      <p class="mt-4 text-xs text-[#636c65] dark:text-[#95a097]">{books.length} libros en mi registro · <a class="font-semibold underline underline-offset-2" href="https://github.com/soker90/libros" target="_blank" rel="noopener noreferrer">Ver registro de lecturas ↗</a></p>
     </header>
-    <section aria-labelledby="books-title">
-      <div class="mb-5 flex items-end justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Mi estantería</p><h2 id="books-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Libros</h2></div><span class="text-sm text-[#636c65] dark:text-[#919c93]">{books.length} libros</span></div>
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {books.map((book) => <article class="group min-w-0 overflow-hidden rounded-2xl border border-[#dedcd2] bg-white/70 p-3 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#151d17] dark:hover:bg-[#1a241e]">
-          <div class="relative overflow-hidden rounded-xl border border-[#dedcd2] bg-[#edf0e7] dark:border-[#27342b] dark:bg-[#202e25]"><img src={book.cover} alt={book.coverAlt ?? `Portada de ${book.title}`} width="200" height="300" loading="lazy" decoding="async" class="aspect-[2/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
-            <span class:list={["absolute bottom-2 right-2 rounded-md px-2 py-1 text-[10px] font-bold shadow-sm backdrop-blur-sm", book.status === "Favorito" && "bg-white/95 text-[#9e3328] dark:bg-[#121914]/90 dark:text-[#f28b82]", book.status === "Leyendo" && "bg-white/95 text-[#1b5c34] dark:bg-[#121914]/90 dark:text-[#88c99e]", book.status === "Terminado" && "bg-white/95 text-[#1b5c34] dark:bg-[#121914]/90 dark:text-[#88c99e]", book.status === "Pendiente" && "bg-white/95 text-[#8f5a18] dark:bg-[#121914]/90 dark:text-[#fdd663]"]}>{book.status}</span>
-          </div>
-          <h3 class="mt-3 font-serif text-base font-bold leading-snug text-[#17231e] dark:text-[#f2f6f3]">{book.title}</h3>
-          <p class="mt-1 text-xs text-[#636c65] dark:text-[#919c93]">{book.author}</p>
-        </article>)}
-      </div>
-    </section>
-    <aside class="mt-10 rounded-2xl border border-[#dedcd2] bg-[#edf0e7] p-6 dark:border-[#27342b] dark:bg-[#202e25]">
-      <p class="font-serif text-xl italic leading-relaxed text-[#2d4b3b] dark:text-[#c8e5d0]">“Un buen libro siempre es una conversación con alguien más sabio.”</p>
-      <p class="mt-4 text-sm text-[#555f58] dark:text-[#a8b2aa]">También puedes explorar mis <a href="/notas" class="font-semibold underline underline-offset-4">notas</a> y los <a href="/proyectos" class="font-semibold underline underline-offset-4">proyectos</a> que voy construyendo.</p>
+
+    {currentlyReading.length > 0 && (
+      <section aria-labelledby="currently-reading-title" class="mb-12">
+        <div class="mb-5 flex items-end justify-between gap-4">
+          <div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Ahora</p><h2 id="currently-reading-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Estoy leyendo</h2></div>
+          <span class="text-sm text-[#636c65] dark:text-[#95a097]">{currentlyReading.length} {currentlyReading.length === 1 ? "libro" : "libros"}</span>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {currentlyReading.map((book) => (
+            <a href={bookIssueUrl(book)} target="_blank" rel="noopener noreferrer" class="group flex min-w-0 gap-4 rounded-2xl border border-[#dedcd2] bg-white/70 p-4 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#151d17] dark:hover:bg-[#1a241e]">
+              <div class="w-24 shrink-0 overflow-hidden rounded-xl bg-[#e4e7df] dark:bg-[#202a22] sm:w-28">
+                {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="200" height="300" loading="lazy" decoding="async" class="aspect-[2/3] h-full w-full object-cover" /> : <div class="flex aspect-[2/3] items-center justify-center p-2 text-center text-xs text-[#636c65]">Sin portada</div>}
+              </div>
+              <div class="min-w-0 py-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#2d7048] dark:text-[#88c99e]">En curso</span>
+                <h3 class="mt-1 font-serif text-lg font-bold leading-snug text-[#17231e] group-hover:underline dark:text-[#f0f5f1]">{book.title}</h3>
+                <p class="mt-1 text-sm text-[#636c65] dark:text-[#95a097]">{book.authors.join(", ")}</p>
+                {book.description && <p class="mt-3 line-clamp-3 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{book.description}</p>}
+                {book.progressPercent !== undefined && book.progressPercent > 0 && <div class="mt-3"><div class="mb-1 flex justify-between text-[11px] text-[#636c65] dark:text-[#95a097]"><span>Progreso</span><span>{book.progressPercent}%</span></div><div class="h-1.5 overflow-hidden rounded-full bg-[#dfe4da] dark:bg-[#2b3930]"><div class="h-full rounded-full bg-[#398357]" style={`width: ${Math.min(100, book.progressPercent)}%`}></div></div></div>}
+                {book.startedAt && <p class="mt-3 text-[11px] text-[#636c65] dark:text-[#95a097]">Empecé el {formatBookDate(book.startedAt)}</p>}
+                <span class="mt-3 inline-block text-xs font-semibold text-[#2d4b3b] dark:text-[#88c99e]">Ver seguimiento ↗</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {recentReads.length > 0 && (
+      <section aria-labelledby="recent-reads-title" class="mb-12">
+        <div class="mb-5 flex items-end justify-between gap-4">
+          <div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Terminados</p><h2 id="recent-reads-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Mis últimas lecturas</h2></div>
+          <span class="text-sm text-[#636c65] dark:text-[#95a097]">{recentReads.length} libros</span>
+        </div>
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {recentReads.map((book) => (
+            <a href={bookIssueUrl(book)} target="_blank" rel="noopener noreferrer" class="group min-w-0 overflow-hidden rounded-2xl border border-[#dedcd2] bg-white/70 p-3 transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-sm dark:border-[#27342b] dark:bg-[#151d17] dark:hover:bg-[#1a241e]">
+              <div class="mb-3 overflow-hidden rounded-xl bg-[#e4e7df] dark:bg-[#202a22]">
+                {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="200" height="300" loading="lazy" decoding="async" class="aspect-[2/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" /> : <div class="flex aspect-[2/3] items-center justify-center text-xs text-[#636c65]">Sin portada</div>}
+              </div>
+              <h3 class="line-clamp-2 font-serif text-sm font-bold leading-snug text-[#17231e] group-hover:underline dark:text-[#f0f5f1]">{book.title}</h3>
+              <p class="mt-1 line-clamp-2 text-xs text-[#636c65] dark:text-[#95a097]">{book.authors.join(", ")}</p>
+              {book.completedAt && <p class="mt-2 text-[10px] text-[#636c65] dark:text-[#95a097]">Terminado {formatBookDate(book.completedAt)}</p>}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {recommendations.length > 0 && (
+      <section id="recomendaciones" aria-labelledby="recommendations-title" class="mb-12">
+        <div class="mb-5 flex items-end justify-between gap-4">
+          <div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Próximos</p><h2 id="recommendations-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">En mi lista</h2><p class="mt-2 text-sm text-[#555f58] dark:text-[#a8b2aa]">Libros que tengo pendientes y que me gustaría leer.</p></div>
+          <span class="text-sm text-[#636c65] dark:text-[#95a097]">{recommendations.length} pendientes</span>
+        </div>
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {recommendations.map((book) => (
+            <a href={bookIssueUrl(book)} target="_blank" rel="noopener noreferrer" class="group min-w-0 overflow-hidden rounded-2xl border border-[#dedcd2] bg-white/70 p-3 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#151d17] dark:hover:bg-[#1a241e]">
+              <div class="mb-3 overflow-hidden rounded-xl bg-[#e4e7df] dark:bg-[#202a22]">
+                {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="200" height="300" loading="lazy" decoding="async" class="aspect-[2/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" /> : <div class="flex aspect-[2/3] items-center justify-center text-xs text-[#636c65]">Sin portada</div>}
+              </div>
+              <h3 class="line-clamp-2 font-serif text-sm font-bold leading-snug text-[#17231e] group-hover:underline dark:text-[#f0f5f1]">{book.title}</h3>
+              <p class="mt-1 line-clamp-2 text-xs text-[#636c65] dark:text-[#95a097]">{book.authors.join(", ")}</p>
+              <span class="mt-3 inline-block text-[10px] font-bold uppercase tracking-wider text-[#8f5a18] dark:text-[#fdd663]">Pendiente</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+    <aside class="rounded-2xl border border-[#dedcd2] bg-[#edf0e7] p-6 dark:border-[#27342b] dark:bg-[#202e25]">
+      <p class="font-serif text-xl italic leading-relaxed text-[#2d4b3b] dark:text-[#c8e5d0]">«Un buen libro siempre es una conversación con alguien más sabio.»</p>
+      <p class="mt-4 text-sm text-[#555f58] dark:text-[#a8b2aa]">El registro se mantiene en <a class="font-semibold underline underline-offset-4" href="https://github.com/soker90/libros" target="_blank" rel="noopener noreferrer">GitHub</a>, donde puedes consultar cada libro y su seguimiento.</p>
     </aside>
   </main>
 </BaseLayout>
