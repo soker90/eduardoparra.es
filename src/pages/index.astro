@@ -302,9 +302,8 @@ const utilities = [
                   {recipe.title}
                 </h3>
                 <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5 flex items-center gap-1">
-                  <span>⏱ {recipe.time}</span>
-                  <span>·</span>
-                  <span>{recipe.difficulty}</span>
+                  <span>{recipe.category}</span>
+                  {recipe.date && <><span>·</span><span>{recipe.date}</span></>}
                 </p>
               </div>
             </a>
