@@ -5,9 +5,6 @@ interface Props { book: Book; featured?: boolean }
 const { book, featured = false } = Astro.props;
 const issueUrl = bookIssueUrl(book);
 const year = formatPublishedYear(book.publishedDate);
-const externalReviewQuery = encodeURIComponent(`${book.title} ${book.authors.join(" ")}`);
-const nehemiasUrl = `https://labibliotecadenehemias.wordpress.com/?s=${externalReviewQuery}`;
-const delibrisUrl = `https://www.google.com/search?q=${encodeURIComponent(`site:delibris.org/es ${book.title} ${book.authors.join(" ")}`)}`;
 const metadata = [
   book.publisher ? ["Editorial", book.publisher] : null,
   year ? ["Año", year] : null,
@@ -33,6 +30,14 @@ const metadata = [
       <a href={nehemiasUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2d4b3b] underline underline-offset-2 hover:no-underline dark:text-[#88c99e]">Buscar en La Biblioteca de Nehemías ↗</a>
       <a href={delibrisUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2d4b3b] underline underline-offset-2 hover:no-underline dark:text-[#88c99e]">Buscar en Delibris ↗</a>
     </nav>
+    {book.issueNumber ? <details class="book-reviews mt-3 border-t border-[#e5e4dc] pt-3 dark:border-[#27342b]" data-issue-number={book.issueNumber} data-review-kind="external">
+      <summary class="cursor-pointer text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Reseñas externas</summary>
+      <div class="book-review-content mt-2 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]" aria-live="polite"><p>Al abrir, se consultarán los enlaces guardados en el issue.</p></div>
+      <p class="mt-2 text-[10px] text-[#737b75] dark:text-[#95a097]">Para añadir un enlace, comenta en el issue con el formato indicado abajo.</p>
+      <pre class="mt-2 overflow-x-auto rounded-lg bg-[#edf0e7] p-2 text-[10px] text-[#405548] dark:bg-[#202a22] dark:text-[#b7d9c1]">Reseña externa: La Biblioteca de Nehemías
+https://enlace-exacto-a-la-resena</pre>
+      <a href={issueUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex text-[11px] font-semibold text-[#2d4b3b] underline underline-offset-2 dark:text-[#88c99e]">Añadir enlace en GitHub ↗</a>
+    </details> : null}
     {book.issueNumber ? <details class="book-reviews mt-3 border-t border-[#e5e4dc] pt-3 dark:border-[#27342b]" data-issue-number={book.issueNumber}>
       <summary class="cursor-pointer text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Reseña personal</summary>
       <div class="book-review-content mt-2 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]" aria-live="polite"><p>Al abrir, se consultarán las reseñas del issue.</p></div>
@@ -48,28 +53,64 @@ const metadata = [
       const target = section.querySelector<HTMLElement>(".book-review-content");
       if (!issueNumber || !target) return;
       section.dataset.loading = "true";
-      target.textContent = "Cargando reseña…";
+      target.textContent = "Cargando…";
       try {
         const response = await fetch(`https://api.github.com/repos/soker90/libros/issues/${issueNumber}/comments?per_page=100`, { headers: { Accept: "application/vnd.github+json" } });
         if (!response.ok) throw new Error("GitHub API error");
         const comments: Array<{ body?: string; user?: { login?: string } }> = await response.json();
-        const reviews = comments.filter((comment) => comment.user?.login === "soker90" && /^\s*reseña\s*:/i.test(comment.body ?? ""));
+        const ownComments = comments.filter((comment) => comment.user?.login === "soker90");
         target.replaceChildren();
-        if (!reviews.length) {
-          const empty = document.createElement("p");
-          empty.textContent = "Aún no hay reseña. Añade un comentario en el issue de GitHub que empiece por «Reseña:» y aparecerá aquí.";
-          target.append(empty);
+
+        if (section.dataset.reviewKind === "external") {
+          const externalReviews = ownComments.flatMap((comment) => {
+            const match = (comment.body ?? "").match(/^\\s*reseña externa\\s*:\\s*(.+?)\\s*\\r?\\n(https:\\/\\/\\S+)/i);
+            if (!match) return [];
+            try {
+              const url = new URL(match[2]);
+              if (url.protocol !== "https:") return [];
+              return [{ site: match[1].trim(), url: url.href }];
+            } catch {
+              return [];
+            }
+          });
+          if (!externalReviews.length) {
+            const empty = document.createElement("p");
+            empty.textContent = "Aún no hay enlaces. Añade un comentario con «Reseña externa: Nombre de la web» en la primera línea y la URL https en la segunda.";
+            target.append(empty);
+          } else {
+            const list = document.createElement("ul");
+            list.className = "flex flex-col gap-2";
+            for (const review of externalReviews.toReversed()) {
+              const item = document.createElement("li");
+              const link = document.createElement("a");
+              link.href = review.url;
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.className = "font-semibold text-[#2d4b3b] underline underline-offset-2 dark:text-[#88c99e]";
+              link.textContent = `${review.site} ↗`;
+              item.append(link);
+              list.append(item);
+            }
+            target.append(list);
+          }
         } else {
-          for (const review of reviews.toReversed()) {
-            const paragraph = document.createElement("p");
-            paragraph.className = "mb-3 whitespace-pre-line";
-            paragraph.textContent = (review.body ?? "").replace(/^\s*reseña\s*:\s*/i, "").trim();
-            target.append(paragraph);
+          const reviews = ownComments.filter((comment) => /^\\s*reseña\\s*:/i.test(comment.body ?? ""));
+          if (!reviews.length) {
+            const empty = document.createElement("p");
+            empty.textContent = "Aún no hay reseña. Añade un comentario en el issue de GitHub que empiece por «Reseña:» y aparecerá aquí.";
+            target.append(empty);
+          } else {
+            for (const review of reviews.toReversed()) {
+              const paragraph = document.createElement("p");
+              paragraph.className = "mb-3 whitespace-pre-line";
+              paragraph.textContent = (review.body ?? "").replace(/^\\s*reseña\\s*:\\s*/i, "").trim();
+              target.append(paragraph);
+            }
           }
         }
         section.dataset.loaded = "true";
       } catch {
-        target.textContent = "No se ha podido cargar la reseña. Puedes consultarla directamente en GitHub.";
+        target.textContent = "No se ha podido cargar la información. Puedes consultarla directamente en GitHub.";
       } finally {
         delete section.dataset.loading;
       }
