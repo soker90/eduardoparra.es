@@ -63,7 +63,7 @@ https://enlace-exacto-a-la-resena</pre>
 
         if (section.dataset.reviewKind === "external") {
           const externalReviews = ownComments.flatMap((comment) => {
-            const match = (comment.body ?? "").match(/^\\s*reseña externa\\s*:\\s*(.+?)\\s*\\r?\\n(https:\\/\\/\\S+)/i);
+            const match = (comment.body ?? "").match(/^\s*reseña externa\s*:\s*(.+?)\s*\r?\n(https:\/\/\S+)/i);
             if (!match) return [];
             try {
               const url = new URL(match[2]);
@@ -94,7 +94,7 @@ https://enlace-exacto-a-la-resena</pre>
             target.append(list);
           }
         } else {
-          const reviews = ownComments.filter((comment) => /^\\s*reseña\\s*:/i.test(comment.body ?? ""));
+          const reviews = ownComments.filter((comment) => /^\s*reseña\s*:/i.test(comment.body ?? ""));
           if (!reviews.length) {
             const empty = document.createElement("p");
             empty.textContent = "Aún no hay reseña. Añade un comentario en el issue de GitHub que empiece por «Reseña:» y aparecerá aquí.";
@@ -103,7 +103,7 @@ https://enlace-exacto-a-la-resena</pre>
             for (const review of reviews.toReversed()) {
               const paragraph = document.createElement("p");
               paragraph.className = "mb-3 whitespace-pre-line";
-              paragraph.textContent = (review.body ?? "").replace(/^\\s*reseña\\s*:\\s*/i, "").trim();
+              paragraph.textContent = (review.body ?? "").replace(/^\s*reseña\s*:\s*/i, "").trim();
               target.append(paragraph);
             }
           }
