@@ -9,11 +9,20 @@ export type Book = {
   image: string;
   description: string;
   state: ReadingState;
+  publisher?: string;
+  publishedDate?: string;
+  language?: string;
+  averageRating?: number;
+  ratingsCount?: number;
+  categories?: string[];
+  pageCount?: number;
+  isbn10?: string;
+  isbn13?: string;
   progressPercent?: number;
   startedAt?: string;
   completedAt?: string;
   issueNumber?: number;
-  isbn13?: string;
+  timeToCompleteFormatted?: string;
   googleBooks?: { preview?: string; info?: string; canonical?: string };
 };
 
@@ -31,7 +40,13 @@ const fallbackBooks: Book[] = [
     image: "https://www.planetadelibros.com/usuaris/libros/fotos/405/original/portada_ciclo-pendragon-n-0206-merlin_stephen-r-lawhead_202505280841.jpg",
     description: "Merlín deberá hacer realidad el Reino del Verano.",
     state: "reading",
+    publisher: "Minotauro",
+    publishedDate: "2025-07-02",
+    categories: ["Fantasía"],
+    pageCount: 480,
+    isbn13: "9788445018910",
     issueNumber: 54,
+    progressPercent: 0,
     startedAt: "2026-10-27T15:33:06.000Z",
   },
 ];
@@ -62,8 +77,8 @@ async function loadBooks(): Promise<Book[]> {
     const payload: unknown = await response.json();
     if (!Array.isArray(payload)) throw new Error("Books API did not return an array");
 
-    const books = payload.map((book) => normalizeBook(book as ApiBook)).filter((book): book is Book => book !== null);
-    return books.length > 0 ? books : fallbackBooks;
+    const loadedBooks = payload.map((book) => normalizeBook(book as ApiBook)).filter((book): book is Book => book !== null);
+    return loadedBooks.length > 0 ? loadedBooks : fallbackBooks;
   } catch (error) {
     console.warn("[books] Could not load the reading API; using fallback data.", error);
     return fallbackBooks;
@@ -96,3 +111,9 @@ export const formatBookDate = (date?: string) =>
         timeZone: "Europe/Madrid",
       }).format(new Date(date))
     : "";
+
+export const formatPublishedYear = (date?: string) => {
+  if (!date) return "";
+  const match = date.match(/^\d{4}/);
+  return match?.[0] ?? "";
+};
