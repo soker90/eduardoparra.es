@@ -65,7 +65,7 @@ const globalSearchItems = [
   ...books.map((book) => ({
     title: book.title,
     href: "/libros",
-    context: "Libro · " + book.author,
+    context: "Libro · " + book.authors.join(", "),
   })),
 ];
 ---
