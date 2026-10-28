@@ -5,6 +5,9 @@ interface Props { book: Book; featured?: boolean }
 const { book, featured = false } = Astro.props;
 const issueUrl = bookIssueUrl(book);
 const year = formatPublishedYear(book.publishedDate);
+const externalReviewQuery = encodeURIComponent(`${book.title} ${book.authors.join(" ")}`);
+const nehemiasUrl = `https://labibliotecadenehemias.wordpress.com/?s=${externalReviewQuery}`;
+const delibrisUrl = `https://www.google.com/search?q=${encodeURIComponent(`site:delibris.org/es ${book.title} ${book.authors.join(" ")}`)}`;
 const metadata = [
   book.publisher ? ["Editorial", book.publisher] : null,
   year ? ["Año", year] : null,
@@ -26,6 +29,10 @@ const metadata = [
     {book.progressPercent !== undefined && book.state === "reading" ? <div class="mt-3"><div class="mb-1 flex justify-between text-[10px] text-[#636c65] dark:text-[#95a097]"><span>Progreso</span><span>{book.progressPercent}%</span></div><div class="h-1.5 overflow-hidden rounded-full bg-[#dfe4da] dark:bg-[#2b3930]"><div class="h-full rounded-full bg-[#398357]" style={`width: ${Math.min(100, Math.max(0, book.progressPercent))}%`}></div></div></div> : null}
     <div class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-[#636c65] dark:text-[#95a097]">{metadata.slice(0, featured ? 5 : 2).map(([label, value]) => <span><strong>{label}:</strong> {value}</span>)}{book.startedAt && book.state === "reading" ? <span>Desde {formatBookDate(book.startedAt)}</span> : null}{book.completedAt ? <span>Terminado {formatBookDate(book.completedAt)}</span> : null}</div>
     {book.description && !featured ? <details class="mt-3 text-xs text-[#555f58] dark:text-[#a8b2aa]"><summary class="cursor-pointer font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Ver sinopsis y todos los datos</summary><p class="mt-2 leading-relaxed">{book.description}</p><dl class="mt-3 grid grid-cols-2 gap-2">{metadata.slice(2).map(([label, value]) => <div><dt class="text-[10px] text-[#737b75]">{label}</dt><dd class="break-words font-medium">{value}</dd></div>)}</dl></details> : null}
+    <nav aria-label={`Reseñas externas de ${book.title}`} class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+      <a href={nehemiasUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2d4b3b] underline underline-offset-2 hover:no-underline dark:text-[#88c99e]">Buscar en La Biblioteca de Nehemías ↗</a>
+      <a href={delibrisUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2d4b3b] underline underline-offset-2 hover:no-underline dark:text-[#88c99e]">Buscar en Delibris ↗</a>
+    </nav>
     {book.issueNumber ? <details class="book-reviews mt-3 border-t border-[#e5e4dc] pt-3 dark:border-[#27342b]" data-issue-number={book.issueNumber}>
       <summary class="cursor-pointer text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Reseña personal</summary>
       <div class="book-review-content mt-2 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]" aria-live="polite"><p>Al abrir, se consultarán las reseñas del issue.</p></div>
