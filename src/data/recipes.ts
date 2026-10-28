@@ -84,7 +84,8 @@ const parseRecipes = (xml: string): Recipe[] =>
         date: date ? new Date(date).toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }) : "",
       };
     })
-    .filter((recipe): recipe is Recipe => recipe !== null);
+    .filter((recipe): recipe is Recipe => recipe !== null)
+    .slice(0, 6);
 
 async function loadRecipes(): Promise<Recipe[]> {
   try {
