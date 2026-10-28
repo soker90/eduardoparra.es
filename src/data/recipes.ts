@@ -84,8 +84,7 @@ const parseRecipes = (xml: string): Recipe[] =>
         date: date ? new Date(date).toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }) : "",
       };
     })
-    .filter((recipe): recipe is Recipe => recipe !== null && Boolean(recipe.image))
-    .slice(0, 6);
+    .filter((recipe): recipe is Recipe => recipe !== null);
 
 async function loadRecipes(): Promise<Recipe[]> {
   try {
