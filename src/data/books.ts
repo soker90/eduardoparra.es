@@ -1,6 +1,4 @@
 const BOOKS_API_URL = "https://soker90.github.io/libros/api.json";
-const BOOKS_REPOSITORY_URL = "https://github.com/soker90/libros";
-
 export type ReadingState = "reading" | "completed" | "want-to-read";
 
 export type Book = {
@@ -110,9 +108,6 @@ export const recentReads = books
 export const recommendations = books
   .filter((book) => book.state === "want-to-read")
   .toSorted((a, b) => byNewest(a.startedAt, b.startedAt));
-
-export const bookIssueUrl = (book: Book) =>
-  book.issueNumber ? `${BOOKS_REPOSITORY_URL}/issues/${book.issueNumber}` : BOOKS_REPOSITORY_URL;
 
 export const bookDetailUrl = (book: Book) =>
   `/libros/${book.issueNumber ?? slugifyBookTitle(book.title)}`;
