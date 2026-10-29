@@ -42,7 +42,7 @@ const externalReviews = book.externalReviews ?? [];
       <div class="grid gap-8 p-5 sm:p-8 md:grid-cols-[minmax(0,260px)_1fr] md:gap-10">
         <div class="mx-auto w-full max-w-[260px] self-start">
           {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="520" height="780" decoding="async" fetchpriority="high" class="block h-auto w-full rounded-2xl object-contain shadow-sm" onerror="this.hidden=true; this.nextElementSibling.hidden=false" /> : null}
-          <div hidden class="flex aspect-[2/3] w-full items-center justify-center rounded-2xl border border-dashed border-[#c8cec4] bg-[#f5f4ed] p-5 text-center text-sm text-[#636c65] dark:border-[#35453a] dark:bg-[#202a22] dark:text-[#a8b2aa]">
+          <div hidden={Boolean(book.image)} class="flex aspect-[2/3] w-full items-center justify-center rounded-2xl border border-dashed border-[#c8cec4] bg-[#f5f4ed] p-5 text-center text-sm text-[#636c65] dark:border-[#35453a] dark:bg-[#202a22] dark:text-[#a8b2aa]">
             <span><span class="mb-3 block text-4xl" aria-hidden="true">▤</span>Portada no disponible</span>
           </div>
         </div>
