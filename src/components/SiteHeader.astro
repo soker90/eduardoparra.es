@@ -117,8 +117,8 @@ const globalSearchItems = [
       <a
         href="https://link.eduardoparra.es" target="_blank" rel="noopener noreferrer"
         class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"]}
-       aria-current={currentPath === "/utilidades" ? "page" : undefined}>
-        Utilidades
+      >
+        Issue Link
       </a>
       <a
         href={isHome ? "#notas" : "/notas"}
@@ -276,7 +276,6 @@ const globalSearchItems = [
         href="https://link.eduardoparra.es" target="_blank" rel="noopener noreferrer"
         class:list={[
           "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
-          currentPath === "/utilidades" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
         ]}
       >
         Issue Link
@@ -566,7 +565,7 @@ const globalSearchItems = [
   }
 
   // --- Scroll Spy & Active Nav Highlighting ---
-  const sectionIds = ["inicio", "proyectos", "recetas", "utilidades", "notas", "sobre-mi"];
+  const sectionIds = ["inicio", "proyectos", "recetas", "notas", "sobre-mi"];
   const desktopLinks = document.querySelectorAll<HTMLAnchorElement>("#desktop-nav a.nav-link");
   const mobileLinks = document.querySelectorAll<HTMLAnchorElement>(
     "#mobile-menu a.mobile-nav-link",
