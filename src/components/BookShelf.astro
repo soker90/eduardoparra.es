@@ -3,7 +3,7 @@ import {
   currentlyReading,
   recentReads,
   recommendations,
-  bookIssueUrl,
+  bookDetailUrl,
   formatBookDate,
 } from "../data/books";
 ---
@@ -30,7 +30,7 @@ import {
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         {currentlyReading.map((book) => (
-          <a href={bookIssueUrl(book)} target="_blank" rel="noopener noreferrer" class="group flex min-w-0 gap-4 rounded-xl border border-[#dedcd2] bg-white/80 p-3 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#131a15] dark:hover:bg-[#1a241e]">
+          <a href={bookDetailUrl(book)} target="_blank" rel="noopener noreferrer" class="group flex min-w-0 gap-4 rounded-xl border border-[#dedcd2] bg-white/80 p-3 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#131a15] dark:hover:bg-[#1a241e]">
             <div class="w-20 shrink-0 overflow-hidden rounded-lg bg-[#e4e7df] dark:bg-[#202a22] sm:w-24">
               {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="160" height="240" loading="lazy" decoding="async" class="aspect-[2/3] h-full w-full object-cover" /> : <div class="flex aspect-[2/3] items-center justify-center p-2 text-center text-xs text-[#636c65]">Sin portada</div>}
             </div>
@@ -55,7 +55,7 @@ import {
       </div>
       <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {recentReads.slice(0, 3).map((book) => (
-          <a href={bookIssueUrl(book)} target="_blank" rel="noopener noreferrer" class="group min-w-0 rounded-xl border border-[#dedcd2] bg-white/70 p-3 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#131a15] dark:hover:bg-[#1a241e]">
+          <a href={bookDetailUrl(book)} target="_blank" rel="noopener noreferrer" class="group min-w-0 rounded-xl border border-[#dedcd2] bg-white/70 p-3 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#131a15] dark:hover:bg-[#1a241e]">
             <div class="mx-auto mb-3 w-full max-w-[132px] overflow-hidden rounded-lg bg-[#e4e7df] dark:bg-[#202a22]">
               {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="200" height="300" loading="lazy" decoding="async" class="aspect-[2/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" /> : <div class="flex aspect-[2/3] items-center justify-center text-xs text-[#636c65]">Sin portada</div>}
             </div>
@@ -79,7 +79,7 @@ import {
       </div>
       <div class="flex gap-3 overflow-x-auto pb-2">
         {recommendations.slice(0, 4).map((book) => (
-          <a href={bookIssueUrl(book)} target="_blank" rel="noopener noreferrer" class="group flex w-40 shrink-0 gap-3 rounded-xl border border-[#dedcd2] bg-white/60 p-2 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#131a15] dark:hover:bg-[#1a241e]">
+          <a href={bookDetailUrl(book)} target="_blank" rel="noopener noreferrer" class="group flex w-40 shrink-0 gap-3 rounded-xl border border-[#dedcd2] bg-white/60 p-2 transition-colors hover:bg-white dark:border-[#27342b] dark:bg-[#131a15] dark:hover:bg-[#1a241e]">
             <div class="w-12 shrink-0 overflow-hidden rounded-md bg-[#e4e7df] dark:bg-[#202a22]">
               {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="96" height="144" loading="lazy" decoding="async" class="aspect-[2/3] h-full w-full object-cover" /> : <div class="flex aspect-[2/3] items-center justify-center text-[9px] text-[#636c65]">Sin portada</div>}
             </div>
