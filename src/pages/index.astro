@@ -324,13 +324,13 @@ const utilities = await getIssueLinkUtilities(3);
         <div class="divide-y divide-[#e5e6dd] dark:divide-[#243027]">
           {utilities.map((item) => (
             <a
-              href={item.href}
+              href={item.links[0]?.href ?? "https://link.eduardoparra.es"}
               target="_blank"
               rel="noreferrer"
               class="group py-3 flex items-center gap-3.5 hover:bg-white/50 dark:hover:bg-[#1a231d]/60 px-1 rounded-lg transition-colors"
             >
               <span class="w-9 h-9 rounded-full bg-[#dbe5da] dark:bg-[#1d2c22] text-[#234b35] dark:text-[#88c99e] flex items-center justify-center shrink-0">
-                {false && item.icon === "lightning" && (
+                {false && item.name === "__unused_lightning_icon" && (
                   <svg
                     class="w-4 h-4"
                     fill="none"
@@ -345,7 +345,7 @@ const utilities = await getIssueLinkUtilities(3);
                     />
                   </svg>
                 )}
-                {false && item.icon === "wrench" && (
+                {false && item.name === "__unused_wrench_icon" && (
                   <svg
                     class="w-4 h-4"
                     fill="none"
@@ -361,7 +361,7 @@ const utilities = await getIssueLinkUtilities(3);
                     <circle cx="12" cy="12" r="3" />
                   </svg>
                 )}
-                {false && item.icon === "book" && (
+                {false && item.name === "__unused_book_icon" && (
                   <svg
                     class="w-4 h-4"
                     fill="none"
