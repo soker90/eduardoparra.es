@@ -27,7 +27,7 @@ export async function getIssueLinkUtilities(limit = 100): Promise<Project[]> {
 
     const xml = await response.text();
     return [...xml.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/gi)]
-      .map(([, item]) => {
+      .map(([, item]): Project | null => {
         const name = readTag(item, "title");
         const href = readTag(item, "link");
         const description = readTag(item, "description") || "Recurso guardado en Issue Link.";
