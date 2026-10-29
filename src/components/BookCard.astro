@@ -1,9 +1,9 @@
 ---
 import type { Book } from "../data/books";
-import { bookIssueUrl, formatBookDate, formatPublishedYear } from "../data/books";
+import { bookDetailUrl, formatBookDate, formatPublishedYear } from "../data/books";
 interface Props { book: Book; featured?: boolean }
 const { book, featured = false } = Astro.props;
-const issueUrl = bookIssueUrl(book);
+const detailUrl = bookDetailUrl(book);
 const year = formatPublishedYear(book.publishedDate);
 const metadata = [
   book.publisher ? ["Editorial", book.publisher] : null,
@@ -14,11 +14,11 @@ const metadata = [
 ].filter((item): item is string[] => item !== null);
 ---
 <article class:list={["group min-w-0 rounded-2xl border border-[#dedcd2] bg-white/75 p-3 dark:border-[#27342b] dark:bg-[#151d17]", featured && "sm:flex sm:gap-5 sm:p-4"]}>
-  <a href={issueUrl} target="_blank" rel="noopener noreferrer" class:list={["mb-3 block overflow-hidden rounded-xl bg-[#e4e7df] dark:bg-[#202a22]", featured && "sm:mb-0 sm:w-36 sm:shrink-0"]} aria-label={`Ver ${book.title} en GitHub`}>
+  <a href={detailUrl} class:list={["mb-3 block overflow-hidden rounded-xl bg-[#e4e7df] dark:bg-[#202a22]", featured && "sm:mb-0 sm:w-36 sm:shrink-0"]} aria-label={`Ver la ficha de ${book.title}`}>
     {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="240" height="360" loading="lazy" decoding="async" class:list={["aspect-[2/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]", featured && "sm:h-full"]} /> : <div class="flex aspect-[2/3] items-center justify-center p-3 text-center text-xs text-[#636c65]">Portada no disponible</div>}
   </a>
   <div class="min-w-0 flex-1">
-    <h3 class:list={["font-serif font-bold leading-snug text-[#17231e] dark:text-[#f0f5f1]", featured ? "text-lg" : "text-sm"]}><a href={issueUrl} target="_blank" rel="noopener noreferrer" class="hover:underline">{book.title}</a></h3>
+    <h3 class:list={["font-serif font-bold leading-snug text-[#17231e] dark:text-[#f0f5f1]", featured ? "text-lg" : "text-sm"]}><a href={detailUrl} class="hover:underline">{book.title}</a></h3>
     <p class="mt-1 text-xs text-[#636c65] dark:text-[#95a097]">{book.authors.join(", ")}</p>
     {book.categories?.length ? <p class="mt-2 flex flex-wrap gap-1.5">{book.categories.slice(0, 3).map((category) => <span class="rounded-full bg-[#edf0e7] px-2 py-0.5 text-[10px] text-[#405548] dark:bg-[#26372c] dark:text-[#b7d9c1]">{category}</span>)}</p> : null}
     {book.personalRating && book.personalRating > 0 ? <p class="mt-2 text-xs text-[#80591d] dark:text-[#f2cf82]" aria-label={`Mi valoración: ${book.personalRating} sobre 5`}>★ {book.personalRating.toLocaleString("es-ES", { maximumFractionDigits: 1 })}/5 <span class="text-[#777] dark:text-[#a9b3aa]">· Goodreads</span></p> : book.goodreadsRating && book.goodreadsRating > 0 ? <p class="mt-2 text-xs text-[#80591d] dark:text-[#f2cf82]" aria-label={`Valoración de Goodreads: ${book.goodreadsRating} sobre 5`}>★ {book.goodreadsRating.toLocaleString("es-ES", { maximumFractionDigits: 1 })}/5 <span class="text-[#777] dark:text-[#a9b3aa]">· Goodreads</span></p> : null}
