@@ -19,7 +19,7 @@ import "../styles/global.css";
       <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2c4b3a] dark:text-[#6ec490]">LECTURAS Y MEMORIA</p>
       <h1 class="font-serif text-4xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3] sm:text-5xl">Entre lecturas</h1>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Una estantería personal alimentada por mi registro de lecturas: libros en curso, lecturas terminadas y títulos pendientes, con sus datos bibliográficos y mis reseñas.</p>
-      <p class="mt-4 text-xs text-[#636c65] dark:text-[#95a097]">{books.length} libros en mi registro · <a class="font-semibold underline underline-offset-2" href="https://github.com/soker90/libros" target="_blank" rel="noopener noreferrer">Ver registro y añadir libros en GitHub ↗</a></p>
+      <p class="mt-4 text-xs text-[#636c65] dark:text-[#95a097]">{books.length} libros en mi registro</p>
     </header>
 
     {currentlyReading.length > 0 && <section aria-labelledby="currently-reading-title" class="mb-12">
@@ -39,7 +39,7 @@ import "../styles/global.css";
 
     <aside class="rounded-2xl border border-[#dedcd2] bg-[#edf0e7] p-6 dark:border-[#27342b] dark:bg-[#202e25]">
       <p class="font-serif text-xl italic leading-relaxed text-[#2d4b3b] dark:text-[#c8e5d0]">«Un buen libro siempre es una conversación con alguien más sabio.»</p>
-      <p class="mt-4 text-sm text-[#555f58] dark:text-[#a8b2aa]">Para publicar una reseña, abre el issue del libro en GitHub y añade un comentario que empiece por <strong>Reseña:</strong>. Al desplegar «Reseña personal» aparecerá en esta página.</p>
+      <p class="mt-4 text-sm text-[#555f58] dark:text-[#a8b2aa]">Cada ficha reúne los datos bibliográficos disponibles, la sinopsis, las reseñas externas y otros libros relacionados.</p>
     </aside>
   </main>
 </BaseLayout>
