@@ -65,7 +65,7 @@ function normalizeBook(book: ApiBook): Book | null {
     ...book,
     title: book.title,
     authors: book.authors,
-    image: book.image && !/placehold\.co|no[ -]?cover/i.test(book.image) ? book.image.replace(/^http:\/\//i, "https://") : "",
+    image: book.image && !/placehold\\.co|no[ -]?cover/i.test(book.image) ? book.image.replace(/^http:\\/\\//i, "https://") : (book.isbn13 || book.isbn10) ? `https://covers.openlibrary.org/b/isbn/${book.isbn13 || book.isbn10}-L.jpg?default=false` : "",
     description: book.description ?? "",
     longDescription: book.longDescription ?? "",
     externalReviews: Array.isArray(book.externalReviews) ? book.externalReviews.filter((review) => review && typeof review.url === "string" && /^https?:\/\//i.test(review.url)) : [],
