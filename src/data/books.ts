@@ -104,6 +104,13 @@ export const recommendations = books
 export const bookIssueUrl = (book: Book) =>
   book.issueNumber ? `${BOOKS_REPOSITORY_URL}/issues/${book.issueNumber}` : BOOKS_REPOSITORY_URL;
 
+export const bookDetailUrl = (book: Book) =>
+  `/libros/${book.issueNumber ?? slugifyBookTitle(book.title)}`;
+
+export const slugifyBookTitle = (title: string) =>
+  title.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export const formatBookDate = (date?: string) =>
   date
     ? new Intl.DateTimeFormat("es-ES", {
