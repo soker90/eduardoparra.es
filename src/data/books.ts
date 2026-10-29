@@ -12,8 +12,10 @@ export type Book = {
   publisher?: string;
   publishedDate?: string;
   language?: string;
-  averageRating?: number;
-  ratingsCount?: number;
+  /** Personal rating recorded in the book issue, on a 0–5 scale. */
+  personalRating?: number;
+  /** Rating imported from Goodreads, on a 0–5 scale. */
+  goodreadsRating?: number;
   categories?: string[];
   pageCount?: number;
   isbn10?: string;
