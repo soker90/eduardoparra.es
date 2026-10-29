@@ -14,7 +14,7 @@ export function getStaticPaths() {
 
 const { book } = Astro.props;
 const year = formatPublishedYear(book.publishedDate);
-const synopsis = book.longDescription?.trim() || book.description?.trim();
+const synopsis = [book.longDescription, book.description].map((value) => value?.trim() ?? "").filter(Boolean).toSorted((a, b) => b.length - a.length)[0] ?? "";
 const metadata = [
   book.publisher ? ["Editorial", book.publisher] : null,
   year ? ["Año de publicación", year] : null,
@@ -27,12 +27,46 @@ const metadata = [
 const rating = book.personalRating && book.personalRating > 0 ? book.personalRating : book.goodreadsRating;
 const statusLabel = book.state === "reading" ? "Leyendo" : book.state === "completed" ? "Leído" : "Pendiente";
 const otherBooks = books.filter((other) => other.title !== book.title);
-const byAuthor = otherBooks.filter((other) => other.authors.some((author) => book.authors.includes(author))).slice(0, 6);
+const byAuthor = otherBooks.filter((other) => other.authors.some((author) => book.authors.includes(author)));
 const collections = book.collections ?? [];
-const byCollection = collections.length
-  ? otherBooks.filter((other) => other.collections?.some((collection) => collections.includes(collection))).slice(0, 6)
-  : [];
-const externalReviews = book.externalReviews ?? [];
+const seriesNames = [book.series, ...collections].filter((value): value is string => Boolean(value));
+const byCollection = seriesNames.length ? otherBooks.filter((other) =>
+  (other.series && seriesNames.includes(other.series)) || other.collections?.some((collection) => seriesNames.includes(collection)),
+) : [];
+const genreMatchers = [
+  { label: "Fantasía", pattern: /fantasy|fantasía/i },
+  { label: "Ciencia ficción", pattern: /science fiction|ciencia ficción|sci-fi/i },
+  { label: "Romance", pattern: /romance|romántica/i },
+  { label: "Misterio y thriller", pattern: /mystery|thriller|crime fiction|suspense|policíaca/i },
+  { label: "Ficción histórica", pattern: /historical fiction|ficción histórica/i },
+  { label: "Terror", pattern: /horror|terror/i },
+  { label: "Religión y espiritualidad", pattern: /religion|theology|christian|catholic|católica|cristianismo/i },
+  { label: "Desarrollo personal", pattern: /self-help|self help|personal development|autoayuda/i },
+  { label: "Infantil y juvenil", pattern: /juvenile fiction|children.?s fiction|young adult|juvenil|infantil/i },
+  { label: "Cómic y novela gráfica", pattern: /graphic novel|comics|cómic|novela gráfica/i },
+  { label: "Poesía", pattern: /poetry|poesía/i },
+  { label: "Aventura", pattern: /adventure fiction|aventura/i },
+];
+const genresFor = (candidate: typeof book) => genreMatchers.filter(({ pattern }) => candidate.categories?.some((category) => pattern.test(category)));
+const bookGenres = genresFor(book);
+const byGenre = bookGenres.length ? otherBooks.filter((other) =>
+  genresFor(other).some((genre) => bookGenres.some((own) => own.label === genre.label)),
+).slice(0, 5) : [];
+const allowedReviewSources = new Set(["Biblioteca de Nehemías", "De libros", "El Club del Lector", "Aceprensa", "Hacer Familia", "Delibris", "DeLibris"]);
+const reviewDomains: Record<string, string> = {
+  "Biblioteca de Nehemías": "labibliotecadenehemias.com",
+  "De libros": "delibros.com",
+  "El Club del Lector": "clubdellector.com",
+  Aceprensa: "aceprensa.com",
+  "Hacer Familia": "hacerfamilia.com",
+  Delibris: "delibris.org",
+  DeLibris: "delibris.org",
+};
+const reviewLogo = (source: string) => {
+  const domain = reviewDomains[source];
+  return domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : "";
+};
+const externalReviews = (book.externalReviews ?? []).filter((review) => allowedReviewSources.has(review.source) && /^https:\/\//i.test(review.url));
 ---
 <BaseLayout title={`${book.title} — Entre lecturas`} description={synopsis || `Ficha de ${book.title}, de ${book.authors.join(", ")}.`} ogImage={book.image || undefined} ogType="article">
   <SiteHeader />
@@ -41,9 +75,11 @@ const externalReviews = book.externalReviews ?? [];
     <article class="mt-6 overflow-hidden rounded-3xl border border-[#dedcd2] bg-white/80 dark:border-[#27342b] dark:bg-[#151d17]">
       <div class="grid gap-8 p-5 sm:p-8 md:grid-cols-[minmax(0,260px)_1fr] md:gap-10">
         <div class="mx-auto w-full max-w-[260px] self-start">
-          {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="520" height="780" decoding="async" fetchpriority="high" class="block h-auto w-full rounded-2xl object-contain shadow-sm" onerror="this.hidden=true; this.nextElementSibling.hidden=false" /> : null}
-          <div hidden={Boolean(book.image)} class="flex aspect-[2/3] w-full items-center justify-center rounded-2xl border border-dashed border-[#c8cec4] bg-[#f5f4ed] p-5 text-center text-sm text-[#636c65] dark:border-[#35453a] dark:bg-[#202a22] dark:text-[#a8b2aa]">
-            <span><span class="mb-3 block text-4xl" aria-hidden="true">▤</span>Portada no disponible</span>
+          <div class="relative mx-auto aspect-[2/3] w-full max-h-[390px] overflow-hidden rounded-2xl bg-[#f5f4ed] shadow-sm dark:bg-[#202a22]">
+            {book.image ? <img src={book.image} alt={`Portada de ${book.title}`} width="520" height="780" decoding="async" fetchpriority="high" class="absolute inset-0 h-full w-full object-contain" onerror="this.hidden=true; this.parentElement.querySelector('[data-cover-fallback]').hidden=false" /> : null}
+            <div data-cover-fallback hidden={Boolean(book.image)} class="absolute inset-0 flex flex-col items-center justify-center border border-dashed border-[#c8cec4] p-5 text-center text-sm text-[#636c65] dark:border-[#35453a] dark:text-[#a8b2aa]">
+              <span class="mb-3 block text-4xl" aria-hidden="true">▤</span><span>Portada no disponible</span>
+            </div>
           </div>
         </div>
         <div class="min-w-0">
@@ -64,8 +100,8 @@ const externalReviews = book.externalReviews ?? [];
     </article>
 
     {externalReviews.length > 0 && <section class="mt-10" aria-labelledby="external-reviews-title">
-      <div class="mb-4"><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Opiniones externas</p><h2 id="external-reviews-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Reseñas del libro</h2></div>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{externalReviews.map((review) => <a href={review.url} target="_blank" rel="noopener noreferrer" class="group flex min-h-36 flex-col rounded-2xl border border-[#dedcd2] bg-white/80 p-5 transition hover:-translate-y-0.5 hover:border-[#9eaf9f] hover:shadow-sm dark:border-[#27342b] dark:bg-[#151d17] dark:hover:border-[#496b53]"><span class="text-xs font-bold uppercase tracking-wider text-[#52735d] dark:text-[#8bd4a7]">{review.source}</span><span class="mt-2 font-serif text-lg font-bold text-[#17231e] group-hover:underline dark:text-[#f2f6f3]">{review.title || `Reseña en ${review.source}`}</span>{review.description ? <span class="mt-2 text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{review.description}</span> : null}<span class="mt-auto pt-4 text-sm font-semibold text-[#2d4b3b] dark:text-[#8bd4a7]">Leer reseña ↗</span></a>)}</div>
+      <div class="mb-4"><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Opiniones externas · {externalReviews.length} {externalReviews.length === 1 ? "reseña externa" : "reseñas externas"}</p><h2 id="external-reviews-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Reseñas del libro</h2></div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{externalReviews.map((review) => <a href={review.url} target="_blank" rel="noopener noreferrer" class="group flex min-h-36 flex-col rounded-2xl border border-[#dedcd2] bg-white/80 p-5 transition hover:-translate-y-0.5 hover:border-[#9eaf9f] hover:shadow-sm dark:border-[#27342b] dark:bg-[#151d17] dark:hover:border-[#496b53]"><span class="flex items-center gap-3">{reviewLogo(review.source) ? <img src={reviewLogo(review.source)} alt="" width="32" height="32" loading="lazy" decoding="async" class="h-8 w-8 rounded-lg object-contain" /> : null}<span class="text-xs font-bold uppercase tracking-wider text-[#52735d] dark:text-[#8bd4a7]">{review.source}</span></span><span class="mt-3 font-serif text-lg font-bold text-[#17231e] group-hover:underline dark:text-[#f2f6f3]">{review.title || `Reseña en ${review.source}`}</span>{review.description ? <span class="mt-2 text-sm leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{review.description}</span> : null}<span class="mt-auto pt-4 text-sm font-semibold text-[#2d4b3b] dark:text-[#8bd4a7]">Leer reseña ↗</span></a>)}</div>
     </section>}
 
     {byAuthor.length > 0 && <section class="mt-10" aria-labelledby="same-author-title">
@@ -76,6 +112,11 @@ const externalReviews = book.externalReviews ?? [];
     {byCollection.length > 0 && <section class="mt-10" aria-labelledby="same-collection-title">
       <div class="mb-4"><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Continúa leyendo</p><h2 id="same-collection-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">De la misma colección</h2></div>
       <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">{byCollection.map((related) => <BookCard book={related} />)}</div>
+    </section>}
+
+    {byGenre.length > 0 && <section class="mt-10" aria-labelledby="same-genre-title">
+      <div class="mb-4"><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">{bookGenres.map((genre) => genre.label).join(" · ")}</p><h2 id="same-genre-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Más libros del mismo género</h2></div>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">{byGenre.map((related) => <BookCard book={related} />)}</div>
     </section>}
 
     <div class="mt-10"><a href="/libros" class="inline-flex items-center rounded-full border border-[#d5d9d0] px-4 py-2.5 text-sm font-semibold text-[#2d4b3b] hover:bg-[#edf0e7] dark:border-[#35453a] dark:text-[#8bd4a7] dark:hover:bg-[#202a22]">← Todas mis lecturas</a></div>
