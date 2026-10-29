@@ -1,13 +1,16 @@
 ---
-import { mainProjects, utilityProjects } from "../data/projects";
+import { ownProjects } from "../data/projects";
+import { getIssueLinkUtilities } from "../data/issue-link";
 import { books } from "../data/books";
+
+const utilityProjects = await getIssueLinkUtilities(100);
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/" || pathname === "";
 const currentPath = pathname.replace(/\/$/, "") || "/";
 
 const globalSearchItems = [
-  ...mainProjects.map((project) => ({
+  ...ownProjects.map((project) => ({
     title: project.name,
     href: project.links[0]?.href ?? "/proyectos",
     context: "Proyecto",
