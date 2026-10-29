@@ -1,6 +1,4 @@
 const BOOKS_API_URL = "https://soker90.github.io/libros/api.json";
-const BOOKS_REPOSITORY_URL = "https://github.com/soker90/libros";
-
 export type ReadingState = "reading" | "completed" | "want-to-read";
 
 export type Book = {
@@ -8,6 +6,10 @@ export type Book = {
   authors: string[];
   image: string;
   description: string;
+  longDescription?: string;
+  externalReviews?: ExternalReview[];
+  collections?: string[];
+  series?: string;
   state: ReadingState;
   publisher?: string;
   publishedDate?: string;
@@ -27,6 +29,8 @@ export type Book = {
   timeToCompleteFormatted?: string;
   googleBooks?: { preview?: string; info?: string; canonical?: string };
 };
+
+export type ExternalReview = { source: string; title?: string; url: string; description?: string };
 
 type ApiBook = Partial<Book> & {
   title?: string;
@@ -61,8 +65,12 @@ function normalizeBook(book: ApiBook): Book | null {
     ...book,
     title: book.title,
     authors: book.authors,
-    image: book.image?.replace(/^http:\/\//i, "https://") ?? "",
+    image: book.image && !/placehold\.co|no[ -]?cover/i.test(book.image) ? book.image.replace(/^http:\/\//i, "https://") : "",
     description: book.description ?? "",
+    longDescription: book.longDescription ?? "",
+    externalReviews: Array.isArray(book.externalReviews) ? book.externalReviews.filter((review) => review && typeof review.url === "string" && /^https?:\/\//i.test(review.url)) : [],
+    collections: Array.isArray(book.collections) ? book.collections : [],
+    series: book.series,
     state: book.state as ReadingState,
     issueNumber: typeof book.issueNumber === "number" ? book.issueNumber : undefined,
   };
@@ -100,9 +108,6 @@ export const recentReads = books
 export const recommendations = books
   .filter((book) => book.state === "want-to-read")
   .toSorted((a, b) => byNewest(a.startedAt, b.startedAt));
-
-export const bookIssueUrl = (book: Book) =>
-  book.issueNumber ? `${BOOKS_REPOSITORY_URL}/issues/${book.issueNumber}` : BOOKS_REPOSITORY_URL;
 
 export const bookDetailUrl = (book: Book) =>
   `/libros/${book.issueNumber ?? slugifyBookTitle(book.title)}`;
