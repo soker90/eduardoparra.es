@@ -193,6 +193,8 @@ export const utilityProjects: Project[] = [
   },
 ];
 
+export const ownProjects: Project[] = [...mainProjects, ...utilityProjects];
+
 // Proyectos destacados de la portada; el catálogo completo conserva el resto.
 const featuredProjectNames = new Set([
   "Finper",
