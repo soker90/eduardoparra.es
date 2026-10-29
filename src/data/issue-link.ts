@@ -30,7 +30,7 @@ export async function getIssueLinkUtilities(limit = 100): Promise<Project[]> {
       .map(([, item]): Project | null => {
         const name = readTag(item, "title");
         const href = readTag(item, "link");
-        const description = readTag(item, "description") || "Recurso guardado en Issue Link.";
+        const description = readTag(item, "description");
         const pubDate = readTag(item, "pubDate");
         if (!name || !href) return null;
         return {
