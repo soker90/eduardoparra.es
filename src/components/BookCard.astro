@@ -21,96 +21,10 @@ const metadata = [
     <h3 class:list={["font-serif font-bold leading-snug text-[#17231e] dark:text-[#f0f5f1]", featured ? "text-lg" : "text-sm"]}><a href={issueUrl} target="_blank" rel="noopener noreferrer" class="hover:underline">{book.title}</a></h3>
     <p class="mt-1 text-xs text-[#636c65] dark:text-[#95a097]">{book.authors.join(", ")}</p>
     {book.categories?.length ? <p class="mt-2 flex flex-wrap gap-1.5">{book.categories.slice(0, 3).map((category) => <span class="rounded-full bg-[#edf0e7] px-2 py-0.5 text-[10px] text-[#405548] dark:bg-[#26372c] dark:text-[#b7d9c1]">{category}</span>)}</p> : null}
-    {book.personalRating && book.personalRating > 0 ? <p class="mt-2 text-xs text-[#80591d] dark:text-[#f2cf82]" aria-label={`Mi valoración: ${book.personalRating} sobre 5`}>★ {book.personalRating.toLocaleString("es-ES", { maximumFractionDigits: 1 })}/5 <span class="text-[#777] dark:text-[#a9b3aa]">· Mi valoración</span></p> : book.goodreadsRating && book.goodreadsRating > 0 ? <p class="mt-2 text-xs text-[#80591d] dark:text-[#f2cf82]" aria-label={`Valoración de Goodreads: ${book.goodreadsRating} sobre 5`}>★ {book.goodreadsRating.toLocaleString("es-ES", { maximumFractionDigits: 1 })}/5 <span class="text-[#777] dark:text-[#a9b3aa]">· Goodreads</span></p> : null}
+    {book.personalRating && book.personalRating > 0 ? <p class="mt-2 text-xs text-[#80591d] dark:text-[#f2cf82]" aria-label={`Mi valoración: ${book.personalRating} sobre 5`}>★ {book.personalRating.toLocaleString("es-ES", { maximumFractionDigits: 1 })}/5 <span class="text-[#777] dark:text-[#a9b3aa]">· Goodreads</span></p> : book.goodreadsRating && book.goodreadsRating > 0 ? <p class="mt-2 text-xs text-[#80591d] dark:text-[#f2cf82]" aria-label={`Valoración de Goodreads: ${book.goodreadsRating} sobre 5`}>★ {book.goodreadsRating.toLocaleString("es-ES", { maximumFractionDigits: 1 })}/5 <span class="text-[#777] dark:text-[#a9b3aa]">· Goodreads</span></p> : null}
     {featured && book.description ? <p class="mt-3 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]">{book.description}</p> : null}
     {book.progressPercent !== undefined && book.state === "reading" ? <div class="mt-3"><div class="mb-1 flex justify-between text-[10px] text-[#636c65] dark:text-[#95a097]"><span>Progreso</span><span>{book.progressPercent}%</span></div><div class="h-1.5 overflow-hidden rounded-full bg-[#dfe4da] dark:bg-[#2b3930]"><div class="h-full rounded-full bg-[#398357]" style={`width: ${Math.min(100, Math.max(0, book.progressPercent))}%`}></div></div></div> : null}
     <div class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-[#636c65] dark:text-[#95a097]">{metadata.slice(0, featured ? 5 : 2).map(([label, value]) => <span><strong>{label}:</strong> {value}</span>)}{book.startedAt && book.state === "reading" ? <span>Desde {formatBookDate(book.startedAt)}</span> : null}{book.completedAt ? <span>Terminado {formatBookDate(book.completedAt)}</span> : null}</div>
     {book.description && !featured ? <details class="mt-3 text-xs text-[#555f58] dark:text-[#a8b2aa]"><summary class="cursor-pointer font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Ver sinopsis y todos los datos</summary><p class="mt-2 leading-relaxed">{book.description}</p><dl class="mt-3 grid grid-cols-2 gap-2">{metadata.slice(2).map(([label, value]) => <div><dt class="text-[10px] text-[#737b75]">{label}</dt><dd class="break-words font-medium">{value}</dd></div>)}</dl></details> : null}
-    {book.issueNumber ? <details class="book-reviews mt-3 border-t border-[#e5e4dc] pt-3 dark:border-[#27342b]" data-issue-number={book.issueNumber} data-review-kind="external">
-      <summary class="cursor-pointer text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Reseñas externas</summary>
-      <div class="book-review-content mt-2 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]" aria-live="polite"><p>Al abrir, se consultarán los enlaces guardados en el issue.</p></div>
-      <p class="mt-2 text-[10px] text-[#737b75] dark:text-[#95a097]">Para añadir un enlace, comenta en el issue con el formato indicado abajo.</p>
-      <pre class="mt-2 overflow-x-auto rounded-lg bg-[#edf0e7] p-2 text-[10px] text-[#405548] dark:bg-[#202a22] dark:text-[#b7d9c1]">Reseña externa: La Biblioteca de Nehemías
-https://enlace-exacto-a-la-resena</pre>
-      <a href={issueUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex text-[11px] font-semibold text-[#2d4b3b] underline underline-offset-2 dark:text-[#88c99e]">Añadir enlace en GitHub ↗</a>
-    </details> : null}
-    {book.issueNumber ? <details class="book-reviews mt-3 border-t border-[#e5e4dc] pt-3 dark:border-[#27342b]" data-issue-number={book.issueNumber}>
-      <summary class="cursor-pointer text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#88c99e]">Reseña personal</summary>
-      <div class="book-review-content mt-2 text-xs leading-relaxed text-[#555f58] dark:text-[#a8b2aa]" aria-live="polite"><p>Al abrir, se consultarán las reseñas del issue.</p></div>
-      <a href={issueUrl} target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex text-[11px] font-semibold text-[#2d4b3b] underline underline-offset-2 dark:text-[#88c99e]">Escribir reseña en GitHub ↗</a>
-    </details> : null}
   </div>
 </article>
-<script>
-  document.querySelectorAll<HTMLDetailsElement>(".book-reviews[data-issue-number]").forEach((section) => {
-    section.addEventListener("toggle", async () => {
-      if (!section.open || section.dataset.loaded === "true" || section.dataset.loading === "true") return;
-      const issueNumber = section.dataset.issueNumber;
-      const target = section.querySelector<HTMLElement>(".book-review-content");
-      if (!issueNumber || !target) return;
-      section.dataset.loading = "true";
-      target.textContent = "Cargando…";
-      try {
-        const response = await fetch(`https://api.github.com/repos/soker90/libros/issues/${issueNumber}/comments?per_page=100`, { headers: { Accept: "application/vnd.github+json" } });
-        if (!response.ok) throw new Error("GitHub API error");
-        const comments: Array<{ body?: string; user?: { login?: string } }> = await response.json();
-        const ownComments = comments.filter((comment) => comment.user?.login === "soker90");
-        target.replaceChildren();
-
-        if (section.dataset.reviewKind === "external") {
-          const externalReviews = ownComments.flatMap((comment) => {
-            const [heading, rawUrl] = (comment.body ?? "").trim().split(/\r?\n/);
-            const prefix = heading?.match(/^reseña externa\s*:\s*(.+)$/i);
-            if (!prefix || !rawUrl?.trim()) return [];
-            try {
-              const url = new URL(rawUrl.trim());
-              if (url.protocol !== "https:") return [];
-              return [{ site: prefix[1].trim(), url: url.href }];
-            } catch {
-              return [];
-            }
-          });
-          if (!externalReviews.length) {
-            const empty = document.createElement("p");
-            empty.textContent = "Aún no hay enlaces. Añade un comentario con «Reseña externa: Nombre de la web» en la primera línea y la URL https en la segunda.";
-            target.append(empty);
-          } else {
-            const list = document.createElement("ul");
-            list.className = "flex flex-col gap-2";
-            for (const review of externalReviews.toReversed()) {
-              const item = document.createElement("li");
-              const link = document.createElement("a");
-              link.href = review.url;
-              link.target = "_blank";
-              link.rel = "noopener noreferrer";
-              link.className = "font-semibold text-[#2d4b3b] underline underline-offset-2 dark:text-[#88c99e]";
-              link.textContent = `${review.site} ↗`;
-              item.append(link);
-              list.append(item);
-            }
-            target.append(list);
-          }
-        } else {
-          const reviews = ownComments.filter((comment) => /^\s*reseña\s*:/i.test(comment.body ?? ""));
-          if (!reviews.length) {
-            const empty = document.createElement("p");
-            empty.textContent = "Aún no hay reseña. Añade un comentario en el issue de GitHub que empiece por «Reseña:» y aparecerá aquí.";
-            target.append(empty);
-          } else {
-            for (const review of reviews.toReversed()) {
-              const paragraph = document.createElement("p");
-              paragraph.className = "mb-3 whitespace-pre-line";
-              paragraph.textContent = (review.body ?? "").replace(/^\s*reseña\s*:\s*/i, "").trim();
-              target.append(paragraph);
-            }
-          }
-        }
-        section.dataset.loaded = "true";
-      } catch {
-        target.textContent = "No se ha podido cargar la información. Puedes consultarla directamente en GitHub.";
-      } finally {
-        delete section.dataset.loading;
-      }
-    });
-  });
-</script>
