@@ -2,13 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import { mainProjects, utilityProjects } from "../data/projects";
+import { ownProjects } from "../data/projects";
 import "../styles/global.css";
 ---
 
 <BaseLayout
   title="Proyectos y Utilidades — Eduardo Parra"
-  description="Colección completa de proyectos, aplicaciones web, bots y utilidades de código abierto desarrollados por Eduardo Parra."
+  description="Repositorios y desarrollos propios de Eduardo Parra."
 >
   <!-- Accessible Skip Link -->
   <a
@@ -41,11 +41,10 @@ import "../styles/global.css";
             CATÁLOGO DE DESARROLLO
           </p>
           <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3]">
-            Proyectos y utilidades
+            Proyectos
           </h1>
           <p class="text-base text-[#555f58] dark:text-[#9ea9a1] leading-relaxed mt-3">
-            Aplicaciones web, proyectos de código abierto, bots de automatización y pequeñas
-            herramientas desarrolladas para resolver problemas reales en el día a día.
+            Repositorios y desarrollos propios: aplicaciones, webs, automatizaciones y herramientas de código abierto.
           </p>
         </div>
 
@@ -58,14 +57,14 @@ import "../styles/global.css";
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
           </svg>
-          <span>Ver todos en GitHub ({mainProjects.length + utilityProjects.length}+)</span>
+          <span>Ver todos en GitHub ({ownProjects.length}+)</span>
           <span aria-hidden="true">↗</span>
           <span class="sr-only">(se abre en una pestaña nueva)</span>
         </a>
       </div>
     </header>
 
-    <!-- SECTION 1: PROYECTOS PRINCIPALES -->
+    <!-- Repositorios y desarrollos propios -->
     <section aria-labelledby="section-main-projects">
       <div class="flex items-center gap-2 mb-3">
         <svg
@@ -86,59 +85,20 @@ import "../styles/global.css";
           id="section-main-projects"
           class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]"
         >
-          Proyectos principales
+          Mis proyectos
         </h2>
       </div>
       <p class="text-xs sm:text-sm text-[#5a645d] dark:text-[#9ea9a1] mb-6 max-w-2xl">
-        Aplicaciones completas, plataformas web y proyectos con arquitecturas frontend y backend
-        integradas.
+        Todos los repositorios y desarrollos propios, independientemente de su tamaño o tecnología.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mainProjects.map((project) => (
+        {ownProjects.map((project) => (
           <ProjectCard project={project} />
         ))}
       </div>
     </section>
 
-    <!-- SECTION 2: UTILIDADES Y HERRAMIENTAS -->
-    <section
-      aria-labelledby="section-utilities"
-      class="border-t border-[#e5e4dc] dark:border-[#222b25] pt-12"
-    >
-      <div class="flex items-center gap-2 mb-3">
-        <svg
-          class="w-5 h-5 text-[#2d4b3b] dark:text-[#52a578]"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-          />
-        </svg>
-        <h2
-          id="section-utilities"
-          class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]"
-        >
-          Utilidades y herramientas
-        </h2>
-      </div>
-      <p class="text-xs sm:text-sm text-[#5a645d] dark:text-[#9ea9a1] mb-6 max-w-2xl">
-        Bots, scripts de automatización, APIs abiertas y herramientas especializadas pensadas para
-        ejecutarse con ligereza.
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {utilityProjects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
-    </section>
   </main>
 
   <!-- Site Footer -->
