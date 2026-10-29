@@ -2,9 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { getIssueLinkUtilities } from "../data/issue-link";
-
-const utilityProjects = await getIssueLinkUtilities();
 import ProjectCard from "../components/ProjectCard.astro";
+
+const utilityProjects = await getIssueLinkUtilities(12);
 import "../styles/global.css";
 ---
 <BaseLayout title="Utilidades — Eduardo Parra" description="Enlaces y recursos guardados en Issue Link, actualizados automáticamente.">
@@ -17,7 +17,8 @@ import "../styles/global.css";
       <a href="/" class="mb-5 inline-flex text-xs font-semibold text-[#2d4b3b] hover:underline dark:text-[#8bd4a7]">← Volver a la portada</a>
       <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2c4b3a] dark:text-[#6ec490]">HERRAMIENTAS PRÁCTICAS</p>
       <h1 class="font-serif text-4xl font-bold tracking-tight text-[#17231e] dark:text-[#f2f6f3] sm:text-5xl">Utilidades</h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Enlaces que guardo en Issue Link. Se muestran aquí automáticamente, sin importar el tipo de recurso.</p>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#555f58] dark:text-[#9ea9a1] sm:text-lg">Una selección de los recursos que voy guardando en Issue Link, actualizada automáticamente. El catálogo completo está disponible en Issue Link.</p>
+      <a href="https://link.eduardoparra.es" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 rounded-full bg-[#2d4b3b] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#20392b] focus:outline-none focus:ring-2 focus:ring-[#2d4b3b] focus:ring-offset-2 dark:bg-[#8bd4a7] dark:text-[#17231e] dark:hover:bg-[#a3e3b9]">Ver todos los recursos en Issue Link <span aria-hidden="true">↗</span></a>
     </header>
     <section aria-labelledby="tools-title">
       <div class="mb-5 flex items-end justify-between gap-4"><div><p class="text-xs font-bold uppercase tracking-widest text-[#2d4b3b] dark:text-[#6ec490]">Colección</p><h2 id="tools-title" class="mt-1 font-serif text-2xl font-bold text-[#17231e] dark:text-[#f2f6f3]">Últimos recursos de Issue Link</h2></div><span class="text-sm text-[#636c65] dark:text-[#919c93]">{utilityProjects.length} recursos</span></div>
