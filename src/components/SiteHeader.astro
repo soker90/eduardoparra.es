@@ -1,13 +1,16 @@
 ---
-import { mainProjects, utilityProjects } from "../data/projects";
+import { ownProjects } from "../data/projects";
+import { getIssueLinkUtilities } from "../data/issue-link";
 import { books } from "../data/books";
+
+const utilityProjects = await getIssueLinkUtilities(100);
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/" || pathname === "";
 const currentPath = pathname.replace(/\/$/, "") || "/";
 
 const globalSearchItems = [
-  ...mainProjects.map((project) => ({
+  ...ownProjects.map((project) => ({
     title: project.name,
     href: project.links[0]?.href ?? "/proyectos",
     context: "Proyecto",
@@ -33,7 +36,7 @@ const globalSearchItems = [
     context: "Receta",
   },
   {
-    title: "Proyectos y utilidades",
+    title: "Mis proyectos",
     href: "/proyectos",
     context: "Catálogo",
   },
@@ -43,9 +46,9 @@ const globalSearchItems = [
     context: "Página",
   },
   {
-    title: "Utilidades y herramientas",
-    href: "/utilidades",
-    context: "Página",
+    title: "Catálogo de utilidades en Issue Link",
+    href: "https://link.eduardoparra.es",
+    context: "Catálogo",
   },
   {
     title: "Notas y apuntes",
@@ -112,10 +115,10 @@ const globalSearchItems = [
         Recetas
       </a>
       <a
-        href={isHome ? "#utilidades" : "/utilidades"}
-        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/utilidades" && "text-[#17231e] dark:text-white font-semibold"]}
-       aria-current={currentPath === "/utilidades" ? "page" : undefined}>
-        Utilidades
+        href="https://link.eduardoparra.es" target="_blank" rel="noopener noreferrer"
+        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1"]}
+      >
+        Issue Link
       </a>
       <a
         href={isHome ? "#notas" : "/notas"}
@@ -270,14 +273,12 @@ const globalSearchItems = [
         Recetas
       </a>
       <a
-        href={isHome ? "#utilidades" : "/utilidades"}
+        href="https://link.eduardoparra.es" target="_blank" rel="noopener noreferrer"
         class:list={[
           "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
-          currentPath === "/utilidades" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
         ]}
-        aria-current={currentPath === "/utilidades" ? "page" : undefined}
       >
-        Utilidades
+        Issue Link
       </a>
       <a
         href={isHome ? "#notas" : "/notas"}
@@ -564,7 +565,7 @@ const globalSearchItems = [
   }
 
   // --- Scroll Spy & Active Nav Highlighting ---
-  const sectionIds = ["inicio", "proyectos", "recetas", "utilidades", "notas", "sobre-mi"];
+  const sectionIds = ["inicio", "proyectos", "recetas", "notas", "sobre-mi"];
   const desktopLinks = document.querySelectorAll<HTMLAnchorElement>("#desktop-nav a.nav-link");
   const mobileLinks = document.querySelectorAll<HTMLAnchorElement>(
     "#mobile-menu a.mobile-nav-link",
