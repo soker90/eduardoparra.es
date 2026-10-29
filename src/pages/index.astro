@@ -4,31 +4,12 @@ import SiteHeader from "../components/SiteHeader.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import BookShelf from "../components/BookShelf.astro";
 import { projects } from "../data/projects";
+import { getIssueLinkUtilities } from "../data/issue-link";
 import { recentResources } from "../data/recent-resources";
 import { recipes as latestRecipes } from "../data/recipes";
 import "../styles/global.css";
 
-const utilities = [
-  {
-    title: "Tarifas de la luz",
-    description: "Generador de JSON y comparador con las mejores tarifas eléctricas.",
-    icon: "lightning",
-    href: "https://github.com/soker90/tarifas-luz",
-  },
-  {
-    title: "Alerta Alimentos Bot",
-    description: "Bot de Telegram para alertas de seguridad alimentaria de la AESAN.",
-    icon: "wrench",
-    href: "https://t.me/alertas_aesan",
-  },
-  {
-    title: "AUR Maintainer",
-    description: "GitHub Action para mantener paquetes de Arch Linux actualizados.",
-    icon: "book",
-    href: "https://github.com/soker90/aur-maintainer",
-  },
-];
-
+const utilities = await getIssueLinkUtilities(3);
 
 ---
 
@@ -349,7 +330,7 @@ const utilities = [
               class="group py-3 flex items-center gap-3.5 hover:bg-white/50 dark:hover:bg-[#1a231d]/60 px-1 rounded-lg transition-colors"
             >
               <span class="w-9 h-9 rounded-full bg-[#dbe5da] dark:bg-[#1d2c22] text-[#234b35] dark:text-[#88c99e] flex items-center justify-center shrink-0">
-                {item.icon === "lightning" && (
+                {false && item.icon === "lightning" && (
                   <svg
                     class="w-4 h-4"
                     fill="none"
@@ -364,7 +345,7 @@ const utilities = [
                     />
                   </svg>
                 )}
-                {item.icon === "wrench" && (
+                {false && item.icon === "wrench" && (
                   <svg
                     class="w-4 h-4"
                     fill="none"
@@ -380,7 +361,7 @@ const utilities = [
                     <circle cx="12" cy="12" r="3" />
                   </svg>
                 )}
-                {item.icon === "book" && (
+                {false && item.icon === "book" && (
                   <svg
                     class="w-4 h-4"
                     fill="none"
@@ -398,7 +379,7 @@ const utilities = [
               </span>
               <div class="min-w-0 flex-1">
                 <h3 class="font-serif font-bold text-xs text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2a4d38] dark:group-hover:text-[#52a578] transition-colors truncate">
-                  {item.title}
+                  {item.name}
                 </h3>
                 <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5 leading-snug line-clamp-1">
                   {item.description}
