@@ -32,7 +32,7 @@ const collections = book.collections ?? [];
 const seriesNames = [book.series, ...collections].filter((value): value is string => Boolean(value));
 const byCollection = seriesNames.length ? otherBooks.filter((other) =>
   (other.series && seriesNames.includes(other.series)) || other.collections?.some((collection) => seriesNames.includes(collection)),
-) : [];
+).slice(0, 6) : [];
 const genreMatchers = [
   { label: "Fantasía", pattern: /fantasy|fantasía/i },
   { label: "Ciencia ficción", pattern: /science fiction|ciencia ficción|sci-fi/i },
