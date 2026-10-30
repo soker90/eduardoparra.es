@@ -49,7 +49,7 @@ const recentPosts = (await getCollection("notes", ({ data }) => !data.draft))
             Tecnología, proyectos y otras curiosidades.
           </h1>
           <p class="text-base sm:text-lg text-[#555f58] dark:text-[#9ea9a1] font-normal leading-relaxed mt-4 max-w-xl">
-            Aplicaciones, webs, recetas, utilidades y notas desde La Mancha. Linux, tecnología,
+            Aplicaciones, webs, recetas, utilidades y blog desde La Mancha. Linux, tecnología,
             buena comida y libros.
           </p>
 
@@ -184,7 +184,7 @@ const recentPosts = (await getCollection("notes", ({ data }) => !data.draft))
         </a>
 
         <!-- Blog (~75% on the right side) -->
-        <a href="#notas" class="group flex items-center gap-3 text-inherit no-underline">
+        <a href="#blog" class="group flex items-center gap-3 text-inherit no-underline">
           <svg
             class="w-5 h-5 text-[#2b4c3b] dark:text-[#52a578] shrink-0 group-hover:scale-110 transition-transform"
             fill="none"
@@ -356,7 +356,7 @@ const recentPosts = (await getCollection("notes", ({ data }) => !data.draft))
       </article>
 
       <!-- Columna 3: Artículos recientes -->
-      <article class="flex flex-col" id="notas">
+      <article class="flex flex-col" id="blog">
         <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5] dark:border-[#27332b]">
           <div class="flex items-center gap-2">
             <svg
@@ -373,7 +373,7 @@ const recentPosts = (await getCollection("notes", ({ data }) => !data.draft))
               />
             </svg>
             <h2 class="font-serif text-xl font-bold tracking-tight text-[#17231e] dark:text-[#f0f5f1]">
-              Notas recientes
+              Blog recientes
             </h2>
           </div>
           <a
@@ -505,7 +505,7 @@ const recentPosts = (await getCollection("notes", ({ data }) => !data.draft))
           Eduardo Parra
         </a>
         <p class="text-xs text-[#636c66] dark:text-[#8d9890] mt-0.5">
-          Programador · Proyectos · Recetas · Utilidades · Notas
+          Programador · Proyectos · Recetas · Utilidades · Blog
         </p>
       </div>
 
