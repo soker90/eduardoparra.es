@@ -5,11 +5,14 @@ import ProjectCard from "../components/ProjectCard.astro";
 import BookShelf from "../components/BookShelf.astro";
 import { projects } from "../data/projects";
 import { getIssueLinkUtilities } from "../data/issue-link";
-import { recentResources } from "../data/recent-resources";
+import { getCollection } from "astro:content";
 import { recipes as latestRecipes } from "../data/recipes";
 import "../styles/global.css";
 
 const utilities = await getIssueLinkUtilities(3);
+const recentPosts = (await getCollection("notes", ({ data }) => !data.draft))
+  .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 ---
 
@@ -180,7 +183,7 @@ const utilities = await getIssueLinkUtilities(3);
           </div>
         </a>
 
-        <!-- Notas (~75% on the right side) -->
+        <!-- Blog (~75% on the right side) -->
         <a href="#notas" class="group flex items-center gap-3 text-inherit no-underline">
           <svg
             class="w-5 h-5 text-[#2b4c3b] dark:text-[#52a578] shrink-0 group-hover:scale-110 transition-transform"
@@ -197,10 +200,10 @@ const utilities = await getIssueLinkUtilities(3);
           </svg>
           <div>
             <strong class="block text-xs font-bold text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2b4c3b] dark:group-hover:text-[#52a578] transition-colors">
-              Notas
+              Blog
             </strong>
             <small class="block text-[11px] text-[#69726b] dark:text-[#8d9890] leading-tight mt-0.5">
-              Ideas y aprendizajes
+              Artículos y tutoriales
             </small>
           </div>
         </a>
@@ -231,7 +234,7 @@ const utilities = await getIssueLinkUtilities(3);
       </div>
     </section>
 
-    <!-- Section 3 Columns: Últimas recetas | Últimas utilidades | Notas recientes -->
+    <!-- Section 3 Columns: Últimas recetas | Últimas utilidades | Últimos artículos -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2" aria-label="Contenido reciente">
       <!-- Columna 1: Últimas recetas -->
       <article class="flex flex-col" id="recetas">
@@ -352,7 +355,7 @@ const utilities = await getIssueLinkUtilities(3);
         </div>
       </article>
 
-      <!-- Columna 3: Notas recientes -->
+      <!-- Columna 3: Artículos recientes -->
       <article class="flex flex-col" id="notas">
         <div class="flex items-center justify-between pb-3 border-b border-[#dedfd5] dark:border-[#27332b]">
           <div class="flex items-center gap-2">
@@ -374,7 +377,7 @@ const utilities = await getIssueLinkUtilities(3);
             </h2>
           </div>
           <a
-            href="/notas"
+            href="/blog"
             class="text-xs font-semibold text-[#48534b] dark:text-[#88c99e] hover:text-[#233d2e] dark:hover:text-[#b0e8c2] inline-flex items-center gap-1"
           >
             Ver todas <span>→</span>
@@ -382,16 +385,14 @@ const utilities = await getIssueLinkUtilities(3);
         </div>
 
         <div class="divide-y divide-[#e5e6dd] dark:divide-[#243027]">
-          {recentResources.map((note) => (
+          {recentPosts.map((post) => (
             <a
-              href={note.href}
-              target="_blank"
-              rel="noreferrer"
+              href={`/blog/${post.id.replace(/\.md$/, "")}`}
               class="group py-3 flex items-center gap-3.5 hover:bg-white/50 dark:hover:bg-[#1a231d]/60 px-1 rounded-lg transition-colors"
             >
               <img
-                src={note.image}
-                alt={note.title}
+                src={post.data.image ?? "/images/hero-desktop.webp"}
+                alt=""
                 width="66"
                 height="38"
                 loading="lazy"
@@ -399,9 +400,9 @@ const utilities = await getIssueLinkUtilities(3);
               />
               <div class="min-w-0 flex-1">
                 <h3 class="font-serif font-bold text-xs text-[#17231e] dark:text-[#f0f5f1] group-hover:text-[#2a4d38] dark:group-hover:text-[#52a578] transition-colors line-clamp-1">
-                  {note.title}
+                  {post.data.title}
                 </h3>
-                <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5">{note.date}</p>
+                <p class="text-[11px] text-[#636c65] dark:text-[#919c93] mt-0.5">{new Intl.DateTimeFormat("es-ES", { dateStyle: "medium" }).format(post.data.pubDate)}</p>
               </div>
             </a>
           ))}
