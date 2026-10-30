@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ site }) => {
   });
 
   const articleUrls = entries.map((entry) => {
-    const url = new URL(`/notas/${entry.id.replace(/\.md$/, "")}`, site).href;
+    const url = new URL(`/blog/${entry.id.replace(/\.md$/, "")}`, site).href;
     const lastmod = (entry.data.updatedDate ?? entry.data.pubDate).toISOString();
     return `<url><loc>${escapeXml(url)}</loc><lastmod>${lastmod}</lastmod></url>`;
   });
