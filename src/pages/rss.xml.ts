@@ -23,12 +23,12 @@ export const GET: APIRoute = async ({ site }) => {
   }, undefined);
 
   const items = entries.map((entry) => {
-    const url = new URL(`/notas/${entry.id.replace(/\.md$/, "")}`, site).href;
+    const url = new URL(`/blog/${entry.id.replace(/\.md$/, "")}`, site).href;
     const updated = entry.data.updatedDate ?? entry.data.pubDate;
     return `<item><title>${escapeXml(entry.data.title)}</title><link>${url}</link><guid isPermaLink="true">${url}</guid><description>${escapeXml(entry.data.description)}</description><pubDate>${entry.data.pubDate.toUTCString()}</pubDate><atom:updated>${updated.toISOString()}</atom:updated>${entry.data.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join("")}</item>`;
   }).join("");
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notas de Eduardo Parra</title><link>${escapeXml(site.href)}</link><atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml"/><description>Notas personales sobre tecnología, proyectos y aprendizaje.</description><language>es-es</language>${latestUpdate ? `<lastBuildDate>${latestUpdate.toUTCString()}</lastBuildDate>` : ""}${items}</channel></rss>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog de Eduardo Parra</title><link>${escapeXml(site.href)}</link><atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml"/><description>Artículos y tutoriales sobre tecnología, proyectos y aprendizaje.</description><language>es-es</language>${latestUpdate ? `<lastBuildDate>${latestUpdate.toUTCString()}</lastBuildDate>` : ""}${items}</channel></rss>`;
   return new Response(xml, {
     headers: {
       "Content-Type": "application/rss+xml; charset=utf-8",

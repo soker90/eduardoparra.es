@@ -51,8 +51,8 @@ const globalSearchItems = [
     context: "Catálogo",
   },
   {
-    title: "Notas y apuntes",
-    href: "/notas",
+    title: "Blog",
+    href: "/blog",
     context: "Página",
   },
   {
@@ -121,10 +121,10 @@ const globalSearchItems = [
         Issue Link
       </a>
       <a
-        href={isHome ? "#notas" : "/notas"}
-        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/notas" && "text-[#17231e] dark:text-white font-semibold"]}
-       aria-current={currentPath === "/notas" ? "page" : undefined}>
-        Notas
+        href={isHome ? "#blog" : "/blog"}
+        class:list={["nav-link hover:text-[#2d4b3b] dark:hover:text-[#52a578] transition-colors py-1", currentPath === "/blog" && "text-[#17231e] dark:text-white font-semibold"]}
+       aria-current={currentPath === "/blog" ? "page" : undefined}>
+        Blog
       </a>
       <a
         href={isHome ? "#sobre-mi" : "/#sobre-mi"}
@@ -281,14 +281,14 @@ const globalSearchItems = [
         Issue Link
       </a>
       <a
-        href={isHome ? "#notas" : "/notas"}
+        href={isHome ? "#blog" : "/blog"}
         class:list={[
           "mobile-nav-link px-2 py-1.5 rounded-md hover:bg-[#eceee5] dark:hover:bg-[#1b241e]",
-          currentPath === "/notas" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
+          currentPath === "/blog" && "text-[#17231e] dark:text-white font-semibold bg-[#edf0eb]/60 dark:bg-[#1b241e]/70",
         ]}
-        aria-current={currentPath === "/notas" ? "page" : undefined}
+        aria-current={currentPath === "/blog" ? "page" : undefined}
       >
-        Notas
+        Blog
       </a>
       <a
         href={isHome ? "#sobre-mi" : "/#sobre-mi"}
@@ -344,7 +344,7 @@ const globalSearchItems = [
     </div>
     <div class="p-4">
       <label for="site-search-input" class="sr-only">
-        Buscar proyectos, recetas, notas y secciones
+        Buscar proyectos, recetas, artículos y secciones
       </label>
       <input
         id="site-search-input"
@@ -359,7 +359,7 @@ const globalSearchItems = [
         aria-live="polite"
         class="mt-3 px-1 text-xs text-[#69726b] dark:text-[#88928a]"
       >
-        Busca proyectos, utilidades, recetas y secciones.
+        Busca proyectos, utilidades, recetas y artículos.
       </p>
       <ul
         id="site-search-results"
@@ -472,7 +472,7 @@ const globalSearchItems = [
       const query = normalize(searchInput.value.trim());
       searchResults.replaceChildren();
       if (!query) {
-        searchStatus.textContent = "Busca proyectos, utilidades, recetas y secciones.";
+        searchStatus.textContent = "Busca proyectos, utilidades, recetas y artículos.";
         return;
       }
 
