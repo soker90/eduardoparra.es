@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = "Eduardo Parra — Tecnología, proyectos y otras curiosidades",
-  description = "Aplicaciones, webs, recetas, utilidades y notas desde La Mancha. Linux, tecnología, buena comida y libros.",
+  description = "Aplicaciones, webs, recetas, utilidades y artículos desde La Mancha. Linux, tecnología, buena comida y libros.",
   ogImage = "/images/hero-desktop.webp",
   ogType = "website",
 } = Astro.props;
@@ -55,7 +55,7 @@ const siteStructuredData = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage.href} />
-    <link rel="alternate" type="application/rss+xml" title="Notas de Eduardo Parra" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Blog de Eduardo Parra" href="/rss.xml" />
     <meta name="theme-color" content="#fbf8f1" id="theme-color-meta" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
