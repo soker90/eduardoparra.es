@@ -1,6 +1,6 @@
 # eduardoparra.es
 
-Web personal de Eduardo Parra: proyectos, recetas, utilidades, notas y lecturas.
+Web personal de Eduardo Parra: proyectos, recetas, utilidades, blog y lecturas.
 
 ## Stack
 
@@ -26,7 +26,7 @@ pnpm build
 pnpm format:check
 ```
 
-## Escribir notas y artículos
+## Escribir artículos del blog
 
 Los artículos propios se guardan en `src/content/notes/` como archivos Markdown (`.md`). Puedes duplicar `primera-nota.md` como plantilla y editar sus metadatos:
 
@@ -50,7 +50,7 @@ draft: true
 - Las imágenes propias pueden guardarse en `public/images/notes/` y enlazarse con una ruta que empiece por `/`.
 - El identificador del archivo Markdown determina la URL del artículo; usa nombres de archivo claros y estables, por ejemplo `astro-content-collections.md`.
 
-Los artículos publicados aparecen en `/notas`, tienen una página individual en `/notas/<nombre-del-archivo>` y se incluyen en el feed `/rss.xml`. Los borradores se excluyen de las tres superficies públicas. Los recursos externos de la sección se mantienen separados de los artículos propios.
+Los artículos publicados aparecen en `/blog`, tienen una página individual en `/blog/<nombre-del-archivo>` y se incluyen en el feed `/rss.xml`. Los borradores se excluyen de las tres superficies públicas. Los recursos externos de la sección se mantienen separados de los artículos propios.
 
 ## Principios
 
