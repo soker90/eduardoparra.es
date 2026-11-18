@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { books, bookDetailUrl } from "../data/books";
 
 const escapeXml = (value: string) =>
   value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
@@ -37,7 +38,12 @@ export const GET: APIRoute = async ({ site }) => {
     return `<url><loc>${escapeXml(url)}</loc><lastmod>${lastmod}</lastmod></url>`;
   });
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...staticUrls, ...articleUrls].join("")}</urlset>`;
+  const bookUrls = books.map((book) => {
+    const url = new URL(bookDetailUrl(book), site).href;
+    return `<url><loc>${escapeXml(url)}</loc></url>`;
+  });
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...staticUrls, ...articleUrls, ...bookUrls].join("")}</urlset>`;
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
