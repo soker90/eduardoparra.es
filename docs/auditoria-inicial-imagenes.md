@@ -79,6 +79,14 @@ Estas seis imágenes son candidatas a conservar si son fotografías propias y co
 6. **Rendimiento:** conservar formatos modernos y dimensiones razonables; evitar descargar imágenes remotas de terceros en cada visita cuando exista permiso para alojar una copia optimizada.
 7. **Accesibilidad:** texto alternativo descriptivo cuando la imagen aporte información; `alt=""` cuando sea puramente decorativa.
 
+## Fuentes concretas localizadas
+
+- **Alameda de Cervera:** la página de [Pueblo / Turismo de la web local](https://alamedadecervera.com/pueblo/) muestra fotografías identificadas del Puente del Gran Prior, la parroquia de San Lorenzo, Vado Lancero y otros lugares. Es una fuente temática muy pertinente, pero antes de copiar sus imágenes hay que confirmar quién posee los derechos y solicitar permiso si no se ofrece una licencia explícita. También hay material histórico en la [Tesela 43 del Ayuntamiento de Alcázar de San Juan](https://turismoycultura.alcazardesanjuan.es/wp-content/uploads/2022/12/TESELA43_CompressPdf.pdf); el documento identifica algunas fotografías como cedidas, por lo que no se deben extraer y reutilizar sin autorización.
+- **Alerta Alimentos:** la [página oficial de alertas de AESAN](https://www.aesan.gob.es/alertas/alertas-alimentarias) es la fuente primaria para el contenido. Para la imagen de la tarjeta del proyecto, es preferible una captura real del bot/canal o de la interfaz propia con datos públicos, no copiar una imagen de una alerta concreta como si fuera la identidad del proyecto.
+- **Capturas de software:** las imágenes de Finper, AUR Maintainer, Cacotas, Arroyo ERP, Issue Link, Modelo 130, Precio de la gasolina, Tarifas de la luz y NIOSH deben salir de las propias aplicaciones o repositorios. En ellas la fuente más fiable es la interfaz real del producto; no una ilustración o una captura simulada.
+
+Las páginas oficiales y locales sirven para localizar posibles imágenes, pero su publicación no concede por sí sola permiso de reutilización. No se ha incorporado ninguna fotografía externa en esta PR.
+
 ## Orden propuesto
 
 1. Proyectos de la portada: revisar Finper, AUR Maintainer, Cocinando con Edu y Arroyo ERP.
